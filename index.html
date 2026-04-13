@@ -4,314 +4,724 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>IonVe — Electrochemical Reactors</title>
-  <meta name="description" content="IonVe — Electrochemical Reactors: redox‑flow cells & stacks. What we do, Team, Company, Contact." />
+  <meta name="description" content="IonVe — Next-generation Redox Flow Battery systems for industrial long-duration energy storage." />
   <meta name="color-scheme" content="light dark">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
   <style>
-    :root{ --bg:#0b1220; --card:#11192b; --muted:#8ea2ba; --text:#e6edf7; --line:rgba(255,255,255,.14); --accent1:#7C5CFF; --accent2:#00D2FF; --radius:18px; --shadow:0 10px 30px rgba(0,0,0,.35); }
-    [data-theme="light"]{ --bg:#f6f8fc; --card:#ffffff; --muted:#55657a; --text:#0b1220; --line:rgba(0,0,0,.10); --shadow:0 8px 24px rgba(0,0,0,.08); }
-
-    *{box-sizing:border-box} html,body{margin:0}
-    body{font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Noto Sans", sans-serif; background:var(--bg); color:var(--text)}
-    a{color:inherit} .container{width:min(1200px,92%); margin-inline:auto} .muted{color:var(--muted)}
-
-    header{position:sticky; top:0; z-index:60; border-bottom:1px solid var(--line); background:rgba(11,18,32,.0); backdrop-filter:saturate(150%) blur(8px); transition:background .25s ease}
-    header.compact{background:rgba(11,18,32,.65)}
-
-    .head{display:grid; grid-template-columns:1fr; place-items:center; padding:18px 0 14px; transition:all .25s ease}
-    header.compact .head{grid-template-columns:auto 1fr auto; place-items:center; padding:10px 0}
-
-    .brand{display:flex; align-items:center; gap:18px; transition:transform .25s ease}
-    .brand .logo img{height:90px; transition:height .25s ease; display:block}
-    .brand .wordmark img{height:130px; transition:height .25s ease, opacity .25s ease}
+    /* ── Tokens ─────────────────────────────────── */
+    :root{
+      --bg:#0b1220;--card:#11192b;--card2:#0e1627;
+      --muted:#8ea2ba;--text:#e6edf7;
+      --line:rgba(255,255,255,.12);
+      --accent1:#7C5CFF;--accent2:#00D2FF;
+      --radius:18px;--shadow:0 10px 32px rgba(0,0,0,.4);
+    }
+    [data-theme="light"]{
+      --bg:#f4f6fb;--card:#fff;--card2:#eef1f8;
+      --muted:#556070;--text:#0b1220;
+      --line:rgba(0,0,0,.09);--shadow:0 8px 24px rgba(0,0,0,.07);
+    }
+    /* ── Base ───────────────────────────────────── */
+    *{box-sizing:border-box}html,body{margin:0}
+    body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:15px;line-height:1.65}
+    h1,h2,h3,h4{font-family:'Syne',sans-serif;line-height:1.1}
+    a{color:inherit}.container{width:min(1200px,92%);margin-inline:auto}.muted{color:var(--muted)}
+    /* ── Header ─────────────────────────────────── */
+    header{position:sticky;top:0;z-index:60;border-bottom:1px solid var(--line);background:transparent;backdrop-filter:saturate(160%) blur(12px);transition:background .3s}
+    header.compact{background:rgba(11,18,32,.78)}
+    [data-theme="light"] header.compact{background:rgba(244,246,251,.9)}
+    .head{display:grid;grid-template-columns:1fr;place-items:center;padding:18px 0 14px;transition:all .3s}
+    header.compact .head{grid-template-columns:auto 1fr auto;padding:9px 0}
+    .brand{display:flex;align-items:center;gap:16px}
+    .brand .logo img{height:88px;transition:height .3s;display:block}
+    .brand .wordmark img{height:126px;transition:height .3s,opacity .3s}
     header.compact .brand{justify-self:flex-start}
-    header.compact .brand .logo img{height:36px}
-    header.compact .brand .wordmark img{height:50px; opacity:.75}
-
-    .tagline{color:var(--muted); font-size:16px; text-align:center}
-    header.compact .tagline{order:2; text-align:center}
-
-    .actions{position:static; justify-self:end; display:flex; gap:8px}
-
-    .btn-sm{appearance:none; border:1px solid var(--line); background:var(--card); color:var(--text); padding:8px 10px; border-radius:10px; cursor:pointer}
-    .btn-sm[aria-pressed="true"]{outline:2px solid transparent; box-shadow:0 0 0 2px var(--line) inset}
-
-    .hero{padding:36px 0 24px}
-    h1{font-size:clamp(36px,6vw,60px); line-height:1.06; margin:.2em 0}
-    .lead{color:var(--muted); max-width:72ch}
-
-    .tabs{margin-top:28px; border-bottom:1px solid var(--line); display:flex; gap:8px; flex-wrap:wrap}
-    .tab{appearance:none; background:transparent; border:none; color:var(--text); padding:12px 16px; border-radius:12px 12px 0 0; cursor:pointer; font-weight:600; position:relative}
-    .tab[aria-selected="true" ]{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));}
-    .tab[aria-selected="true" ]::after{content:""; position:absolute; left:10px; right:10px; bottom:-1px; height:3px; background:linear-gradient(90deg,var(--accent1),var(--accent2)); border-radius:6px}
-
-    main{padding:24px 0 64px}
-    .panel{display:none; animation:fade .25s ease}
+    header.compact .brand .logo img{height:33px}
+    header.compact .brand .wordmark img{height:46px;opacity:.8}
+    .tagline{color:var(--muted);font-size:15px;text-align:center}
+    header.compact .tagline{order:2;text-align:center}
+    .actions{justify-self:end;display:flex;gap:8px}
+    .btn-sm{appearance:none;border:1px solid var(--line);background:var(--card);color:var(--text);padding:7px 11px;border-radius:10px;cursor:pointer;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500}
+    .btn-sm[aria-pressed="true"]{box-shadow:0 0 0 2px var(--accent1) inset}
+    /* ── Hero ───────────────────────────────────── */
+    .hero{padding:40px 0 0}
+    h1{font-size:clamp(32px,5.2vw,56px);letter-spacing:-.02em;margin:.2em 0 .5em}
+    .lead{color:var(--muted);max-width:68ch;font-size:16px}
+    .stage-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(124,92,255,.1);border:1px solid rgba(124,92,255,.28);border-radius:30px;padding:6px 14px;font-size:13px;color:var(--accent1);margin-bottom:16px;font-weight:500}
+    .stage-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);animation:pulse 1.8s ease-in-out infinite}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
+    /* ── KPI bar ────────────────────────────────── */
+    .kpi-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:28px 0 0}
+    .kpi{background:var(--card2);padding:18px 14px 15px;text-align:center;transition:background .2s}
+    .kpi:hover{background:var(--card)}
+    .kpi-val{display:block;font-family:'Syne',sans-serif;font-size:clamp(16px,2vw,24px);font-weight:800;background:linear-gradient(135deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.1;margin-bottom:5px}
+    .kpi-lbl{font-size:11px;color:var(--muted);line-height:1.35;font-weight:500}
+    /* ── Tabs ───────────────────────────────────── */
+    .tabs{margin-top:28px;border-bottom:1px solid var(--line);display:flex;gap:4px;flex-wrap:wrap}
+    .tab{appearance:none;background:transparent;border:none;color:var(--muted);padding:11px 15px;border-radius:12px 12px 0 0;cursor:pointer;font-family:'Syne',sans-serif;font-weight:700;font-size:13.5px;position:relative;transition:color .2s}
+    .tab:hover{color:var(--text)}
+    .tab[aria-selected="true"]{color:var(--text);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02))}
+    .tab[aria-selected="true"]::after{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:2px;background:linear-gradient(90deg,var(--accent1),var(--accent2));border-radius:4px}
+    /* ── Panels ─────────────────────────────────── */
+    main{padding:28px 0 72px}
+    .panel{display:none;animation:fade .25s ease}
     .panel.active{display:block}
-    @keyframes fade{from{opacity:.3; transform:translateY(6px)} to{opacity:1; transform:none}}
-
-    .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:18px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03)); border:1px solid var(--line); border-radius:var(--radius); padding:26px; box-shadow:var(--shadow)}
+    @keyframes fade{from{opacity:.2;transform:translateY(7px)}to{opacity:1;transform:none}}
+    /* ── Cards ──────────────────────────────────── */
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .card{background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.025));border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
     [data-theme="light"] .card{background:#fff}
-    .card h3{margin:6px 0 10px}
-
-    /* APPLICATION mega-card */
-    .mega h3{font-size:clamp(22px,2.8vw,28px)}
-    .mega .intro{font-size:16px}
-    .mega .two{display:grid; grid-template-columns:1.1fr 1fr; gap:18px; margin-top:12px}
-    .why{background:rgba(255,255,255,.02); border:1px solid var(--line); border-radius:14px; padding:16px}
-    .why h4{margin:0 0 6px 0}
-
-    /* ADVANTAGE card (with image) */
-    .adv-grid{display:grid; grid-template-columns:1.15fr 1fr; gap:24px; align-items:center}
-    .adv-list{display:grid; gap:14px}
-    .adv-point{display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:flex-start}
-    .adv-point .icon{width:28px; height:28px; border-radius:9px; background:linear-gradient(135deg,var(--accent1),var(--accent2)); display:grid; place-items:center; color:#0b1220; font-weight:800}
-    .media img{max-width:100%; height:auto; border-radius:14px; display:block; box-shadow:0 10px 28px rgba(0,0,0,.35)}
-
-    /* KPI gains */
-    .gains{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:6px}
-    .gain{padding:14px; border-radius:14px; background:#0d1526; border:1px solid rgba(255,255,255,.08); text-align:center}
-    [data-theme="light"] .gain{background:#f3f6fb; border-color:rgba(0,0,0,.06)}
-    .gain strong{display:block; font-size:22px}
-    .gain span{font-size:12px; color:var(--muted)}
-
-    .placeholder{height:180px; border:1px dashed var(--line); border-radius:14px; display:grid; place-items:center; color:var(--muted)}
-
-    /* Stage status badge */
-    .stage-badge{display:inline-flex; align-items:center; gap:8px; background:rgba(124,92,255,.12); border:1px solid rgba(124,92,255,.30); border-radius:30px; padding:6px 14px; font-size:13px; color:var(--accent1); margin-bottom:14px}
-    .stage-badge .dot{width:7px; height:7px; border-radius:50%; background:var(--accent2); animation:pulse 1.8s ease-in-out infinite}
-    @keyframes pulse{0%,100%{opacity:1; transform:scale(1)} 50%{opacity:.5; transform:scale(.8)}}
-
-    /* TEAM */
-    .member{display:flex; gap:18px; align-items:center}
-    .portrait{width:140px; height:140px; border-radius:24px; object-fit:cover; box-shadow:0 6px 20px rgba(0,0,0,.25)}
-
-    form{display:grid; gap:10px}
-    input, textarea{width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.18); background:#0e1627; color:var(--text)}
-    [data-theme="light"] input, [data-theme="light"] textarea{background:#fff; border-color:rgba(0,0,0,.14)}
-    .btn{display:inline-block; padding:12px 16px; border-radius:12px; border:none; font-weight:700; cursor:pointer; background:linear-gradient(135deg,var(--accent1),var(--accent2)); color:#0b1220}
-
-    footer{border-top:1px solid var(--line); padding:22px 0 60px; color:var(--muted); font-size:14px}
-    footer .row{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap}
-
-    @media (max-width:1100px){ .adv-grid{grid-template-columns:1fr} .mega .two{grid-template-columns:1fr} }
-    @media (max-width:900px){ .grid-2{grid-template-columns:1fr} }
+    .card h3{margin:6px 0 12px;font-size:clamp(16px,2vw,21px)}
+    .card+.card{margin-top:18px}
+    /* ── Context ────────────────────────────────── */
+    .context-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+    .ctx-card{background:var(--card2);border:1px solid var(--line);border-radius:16px;padding:20px 18px}
+    .ctx-num{font-family:'Syne',sans-serif;font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--accent1);margin-bottom:8px}
+    .ctx-card h4{margin:0 0 8px;font-size:14.5px}
+    .ctx-card p{margin:0;font-size:13px;color:var(--muted);line-height:1.55}
+    /* ── TCO bars ───────────────────────────────── */
+    .tco-block{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-top:0}
+    .tco-title{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--muted);margin-bottom:14px}
+    .tco-row{display:flex;align-items:center;gap:10px;margin-bottom:9px;font-size:13px}
+    .tco-row:last-child{margin-bottom:0}
+    .tco-label{width:230px;flex-shrink:0;color:var(--muted)}
+    .tco-bar-wrap{flex:1;background:rgba(255,255,255,.07);border-radius:6px;height:10px;overflow:hidden}
+    [data-theme="light"] .tco-bar-wrap{background:rgba(0,0,0,.07)}
+    .tco-bar{height:100%;border-radius:6px}
+    .tco-bar.ionve{background:linear-gradient(90deg,var(--accent1),var(--accent2))}
+    .tco-bar.vrfb{background:#4a6080}
+    .tco-bar.liion{background:#c14a3a}
+    .tco-val{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;white-space:nowrap}
+    /* ── Mega card ──────────────────────────────── */
+    .mega h3{font-size:clamp(19px,2.2vw,24px)}
+    .mega .two{display:grid;grid-template-columns:1.1fr 1fr;gap:18px;margin-top:14px}
+    .why{background:rgba(255,255,255,.025);border:1px solid var(--line);border-radius:14px;padding:16px}
+    .why h4{margin:0 0 8px}
+    /* ── Innovations ────────────────────────────── */
+    .adv-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:start}
+    .adv-list{display:grid;gap:14px}
+    .adv-point{display:grid;grid-template-columns:32px 1fr;gap:12px;align-items:flex-start}
+    .adv-point .icon{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:grid;place-items:center;font-size:15px;flex-shrink:0}
+    .media img{max-width:100%;height:auto;border-radius:14px;display:block;box-shadow:0 10px 28px rgba(0,0,0,.4)}
+    .img-ph{aspect-ratio:16/10;border:1px dashed var(--line);border-radius:14px;display:grid;place-items:center;color:var(--muted);font-size:12px;text-align:center;padding:20px}
+    /* ── Gains ──────────────────────────────────── */
+    .gains{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+    .gain{padding:13px 10px;border-radius:14px;background:var(--card2);border:1px solid var(--line);text-align:center}
+    .gain strong{display:block;font-family:'Syne',sans-serif;font-size:clamp(14px,1.7vw,19px);background:linear-gradient(135deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .gain span{font-size:11px;color:var(--muted);display:block;margin-top:3px;line-height:1.3}
+    /* ── Roadmap ────────────────────────────────── */
+    .roadmap{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:6px}
+    .rmap-phase{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:16px 14px}
+    .rmap-phase.now{border-color:rgba(124,92,255,.5);background:rgba(124,92,255,.07)}
+    .rmap-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--muted);margin-bottom:4px}
+    .rmap-phase.now .rmap-lbl{color:var(--accent2)}
+    .rmap-title{font-family:'Syne',sans-serif;font-weight:700;font-size:14px;margin-bottom:6px}
+    .rmap-trl{display:inline-block;font-size:11px;font-weight:700;background:rgba(124,92,255,.18);color:var(--accent1);border-radius:6px;padding:2px 7px;margin-bottom:8px}
+    .rmap-phase.now .rmap-trl{background:rgba(0,210,255,.15);color:var(--accent2)}
+    .rmap-items{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+    .rmap-items li{font-size:12px;color:var(--muted);display:flex;gap:6px}
+    .rmap-items li::before{content:"○";flex-shrink:0}
+    .rmap-phase.now .rmap-items li::before{content:"●";color:var(--accent2)}
+    .here{font-size:10px;font-weight:700;color:var(--accent2);margin-bottom:6px}
+    .here::before{content:"↑ "}
+    /* ── Products ───────────────────────────────── */
+    .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:18px 0}
+    .prod-card{background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.025));border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:14px}
+    .prod-card.star{border-color:rgba(124,92,255,.5);background:linear-gradient(160deg,rgba(124,92,255,.1),rgba(0,210,255,.04))}
+    [data-theme="light"] .prod-card{background:#fff}
+    [data-theme="light"] .prod-card.star{background:linear-gradient(160deg,rgba(124,92,255,.06),rgba(0,210,255,.02))}
+    .prod-tier{font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--muted)}
+    .prod-card.star .prod-tier{color:var(--accent1)}
+    .prod-name{font-family:'Syne',sans-serif;font-size:clamp(24px,2.8vw,34px);font-weight:800;margin:2px 0;background:linear-gradient(135deg,var(--text),var(--muted));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .prod-card.star .prod-name{background:linear-gradient(135deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .prod-spec{font-size:12.5px;color:var(--muted);margin:0}
+    .prod-desc{font-size:13px;color:var(--muted);margin:0;line-height:1.5}
+    .prod-kpis{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+    .prod-kpi{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+    .prod-kpi strong{display:block;font-family:'Syne',sans-serif;font-size:15px;font-weight:800}
+    .prod-kpi span{font-size:11px;color:var(--muted)}
+    .prod-img{aspect-ratio:16/9;border:1px dashed var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;overflow:hidden;color:var(--muted);font-size:12px;text-align:center}
+    .prod-img img{width:100%;height:100%;object-fit:cover;display:block}
+    .dev-notice{background:rgba(255,200,0,.06);border:1px solid rgba(255,200,0,.22);border-radius:12px;padding:12px 16px;font-size:13px;color:#b89600;display:flex;gap:8px}
+    [data-theme="light"] .dev-notice{background:rgba(200,160,0,.07);color:#7a5e00}
+    /* ── Collaborate ────────────────────────────── */
+    .collab-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+    .collab-card{background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.025));border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+    [data-theme="light"] .collab-card{background:#fff}
+    .collab-num{font-family:'Syne',sans-serif;font-size:30px;font-weight:800;background:linear-gradient(135deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;margin-bottom:4px}
+    .collab-tag{font-size:10px;font-weight:700;letter-spacing:.12em;color:var(--muted);margin-bottom:10px}
+    .collab-card h4{margin:0 0 8px;font-size:16px}
+    .collab-card p{margin:0 0 12px;font-size:13.5px;color:var(--muted);line-height:1.55}
+    .collab-cta{font-size:12px;font-weight:700;color:var(--accent2);text-decoration:none;display:inline-flex;align-items:center;gap:5px}
+    .collab-cta::after{content:"→"}
+    /* ── Team / form / footer ───────────────────── */
+    .member{display:flex;gap:20px;align-items:flex-start}
+    .portrait{width:140px;height:140px;border-radius:20px;object-fit:cover;flex-shrink:0;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+    form{display:grid;gap:10px}
+    input,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:#0e1627;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px}
+    [data-theme="light"] input,[data-theme="light"] textarea{background:#fff;border-color:rgba(0,0,0,.13)}
+    .btn{display:inline-block;padding:12px 20px;border-radius:12px;border:none;font-family:'Syne',sans-serif;font-weight:700;font-size:14px;cursor:pointer;background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#0b1220}
+    footer{border-top:1px solid var(--line);padding:22px 0 56px;color:var(--muted);font-size:13px}
+    footer .row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+    /* ── Responsive ─────────────────────────────── */
+    @media(max-width:1100px){.adv-grid{grid-template-columns:1fr}.mega .two{grid-template-columns:1fr}.roadmap{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:900px){.grid-2,.context-grid,.products-grid,.collab-grid{grid-template-columns:1fr}.kpi-bar{grid-template-columns:repeat(3,1fr)}.gains{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:540px){.kpi-bar{grid-template-columns:repeat(2,1fr)}.roadmap{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
-  <header id="site-header">
-    <div class="container head">
-      <div class="brand">
-        <div class="logo" aria-label="IonVe">
-          <img src="assets/img/IonveLogo.svg" alt="IonVe logo (I–V curve)" />
-        </div>
-        <div class="wordmark" aria-label="IonVe wordmark">
-          <img src="assets/img/IonveText.svg" alt="IonVe wordmark" />
-        </div>
+
+<!-- HEADER -->
+<header id="site-header">
+  <div class="container head">
+    <div class="brand">
+      <div class="logo"><img src="assets/img/IonveLogo.svg" alt="IonVe logo"/></div>
+      <div class="wordmark"><img src="assets/img/IonveText.svg" alt="IonVe"/></div>
+    </div>
+    <div class="tagline" data-i18n="header.tagline">From ion transport to voltage efficiency.</div>
+    <div class="actions">
+      <button id="langEn" class="btn-sm" aria-pressed="true">EN</button>
+      <button id="langIt" class="btn-sm" aria-pressed="false">IT</button>
+      <button id="themeToggle" class="btn-sm" title="Theme">🌗</button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="container hero">
+  <div class="stage-badge"><span class="dot"></span><span data-i18n="hero.stage">Pre-incorporation · MK1 in testing · PoC target: June 2026</span></div>
+  <h1 data-i18n="hero.title">Electrochemical reactors for <span style="background:linear-gradient(135deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent">redox&#8209;flow</span> systems</h1>
+  <p class="lead" data-i18n="hero.lead">Design, prototyping and validation of high&#8209;performance cells and stacks: low ohmic resistance, optimized hydraulics and advanced materials integration.</p>
+
+  <!-- KPI bar -->
+  <div class="kpi-bar">
+    <div class="kpi"><span class="kpi-val">297 €/kWh</span><span class="kpi-lbl" data-i18n="kpi.capex">Target installed cost (6 h)</span></div>
+    <div class="kpi"><span class="kpi-val">−40%</span><span class="kpi-lbl" data-i18n="kpi.cost">vs. current VRFB systems</span></div>
+    <div class="kpi"><span class="kpi-val">3.4×</span><span class="kpi-lbl" data-i18n="kpi.stacks">fewer stacks at 500 kW</span></div>
+    <div class="kpi"><span class="kpi-val">600 mA/cm²</span><span class="kpi-lbl" data-i18n="kpi.density">target power density</span></div>
+    <div class="kpi"><span class="kpi-val">&gt;30 yr</span><span class="kpi-lbl" data-i18n="kpi.life">operating life, no degradation</span></div>
+  </div>
+
+  <!-- Tabs -->
+  <nav class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true"  data-target="what"     data-i18n="tabs.what">What we do</button>
+    <button class="tab" role="tab" aria-selected="false" data-target="products" data-i18n="tabs.products">Products</button>
+    <button class="tab" role="tab" aria-selected="false" data-target="collab"   data-i18n="tabs.collab">Collaborate</button>
+    <button class="tab" role="tab" aria-selected="false" data-target="team"     data-i18n="tabs.team">Team</button>
+    <button class="tab" role="tab" aria-selected="false" data-target="company"  data-i18n="tabs.company">Company</button>
+    <button class="tab" role="tab" aria-selected="false" data-target="contact"  data-i18n="tabs.contact">Contact</button>
+  </nav>
+</section>
+
+<main class="container">
+
+  <!-- ══ WHAT WE DO ══════════════════════════════════════════════ -->
+  <section id="panel-what" class="panel active">
+
+    <!-- Context 01/02/03 -->
+    <div class="context-grid">
+      <div class="ctx-card">
+        <div class="ctx-num">01</div>
+        <h4 data-i18n="ctx.t1">Long-duration storage is economically viable for industry today</h4>
+        <p data-i18n="ctx.b1">Industrial sites with high demand charges and time-of-use contracts already generate a positive business case for 4–12 hour storage. The barrier is not economics — it is the absence of an affordable, reliable product.</p>
       </div>
-      <div class="tagline" data-i18n="header.tagline">From ion transport to voltage efficiency.</div>
-      <div class="actions">
-        <button id="langEn" class="btn-sm" aria-pressed="true">EN</button>
-        <button id="langIt" class="btn-sm" aria-pressed="false">IT</button>
-        <button id="themeToggle" class="btn-sm" aria-pressed="false" title="Theme">🌗</button>
+      <div class="ctx-card">
+        <div class="ctx-num">02</div>
+        <h4 data-i18n="ctx.t2">Li-ion is not cost-effective beyond 4–6 hours</h4>
+        <p data-i18n="ctx.b2">At durations of 6 hours or more, the 30-year total cost of ownership of Li-ion is significantly higher than VRFB, due to battery replacements every 10–12 years.</p>
+      </div>
+      <div class="ctx-card">
+        <div class="ctx-num">03</div>
+        <h4 data-i18n="ctx.t3">Existing RFB systems remain too expensive</h4>
+        <p data-i18n="ctx.b3">Current products are priced at €450–600/kWh installed — a result of an outdated stack architecture: high component count, machined graphite parts, and custom engineering for every installation.</p>
       </div>
     </div>
-  </header>
 
-  <section class="container hero">
-    <div class="stage-badge"><span class="dot"></span><span data-i18n="hero.stage">Pre-incorporation · MK1 in testing · PoC target: June 2026</span></div>
-    <h1 data-i18n="hero.title">Electrochemical reactors for <span style="background:linear-gradient(135deg,var(--accent1),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent">redox‑flow</span> systems</h1>
-    <p class="lead" data-i18n="hero.lead">Design, prototyping and validation of high‑performance cells and stacks: low ohmic resistance, optimized hydraulics and advanced materials integration.</p>
+    <!-- TCO comparison -->
+    <div class="tco-block" style="margin-bottom:18px">
+      <div class="tco-title" data-i18n="tco.title">30-YEAR TCO COMPARISON — 500 kW / 3 MWh (MODEL OUTPUT AT DESIGN-TARGET PERFORMANCE)</div>
+      <div class="tco-row">
+        <span class="tco-label">IonVe <span style="color:var(--accent1)">(target)</span></span>
+        <div class="tco-bar-wrap"><div class="tco-bar ionve" style="width:59%"></div></div>
+        <span class="tco-val" style="color:var(--accent2)">€975k</span>
+      </div>
+      <div class="tco-row">
+        <span class="tco-label" data-i18n="tco.vrfb">VRFB — current state of the art</span>
+        <div class="tco-bar-wrap"><div class="tco-bar vrfb" style="width:91%"></div></div>
+        <span class="tco-val">~€1.5M</span>
+      </div>
+      <div class="tco-row">
+        <span class="tco-label" data-i18n="tco.liion">Li-ion (incl. 2× replacements, 30 yr)</span>
+        <div class="tco-bar-wrap"><div class="tco-bar liion" style="width:100%"></div></div>
+        <span class="tco-val">€1.65M</span>
+      </div>
+    </div>
 
-    <nav class="tabs" role="tablist" aria-label="Site sections">
-      <button class="tab" role="tab" aria-selected="true" aria-controls="panel-what" id="tab-what" data-target="what" data-i18n="tabs.what">What we do</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-team" id="tab-team" data-target="team" data-i18n="tabs.team">Team</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-company" id="tab-company" data-target="company" data-i18n="tabs.company">Company</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="panel-contact" id="tab-contact" data-target="contact" data-i18n="tabs.contact">Contact</button>
-    </nav>
+    <!-- Applications + Why RFB -->
+    <div class="card mega">
+      <h3 data-i18n="apps.title">Where storage matters now</h3>
+      <p class="muted" style="font-size:15px" data-i18n="apps.intro">Variable renewables dominate new generation. The next bottlenecks are flexibility, safety and life&#8209;cycle cost. Long&#8209;duration, safe storage smooths variability, avoids curtailment and unlocks new business models.</p>
+      <div class="two">
+        <div>
+          <h4 data-i18n="apps.usecases">Application areas for redox&#8209;flow storage</h4>
+          <ul>
+            <li data-i18n="apps.btm">PV self&#8209;consumption (BTM): store daytime solar, dispatch later to cut grid purchases and flatten peaks.</li>
+            <li data-i18n="apps.arb">Price arbitrage &amp; congestion: shift energy to high&#8209;value hours and ride through grid constraints with cycle&#8209;tolerant storage.</li>
+            <li data-i18n="apps.co">Co&#8209;location with wind &amp; solar: on&#8209;site storage minimizes transport losses and scales modularly.</li>
+            <li data-i18n="apps.grid">Utility support: peak shaving, ramp&#8209;rate control and capacity firming at grid bottlenecks.</li>
+          </ul>
+        </div>
+        <div class="why">
+          <h4 data-i18n="why.title">Why redox flow batteries?</h4>
+          <p class="muted" data-i18n="why.body">RFBs circulate liquid electrolytes through electrochemical cells. <em>Energy</em> (tank volume) and <em>power</em> (cell area/stack count) are decoupled, enabling tailored duration at constant stack design. Aqueous chemistry, deep cycling and easy refurbishment deliver long life, high safety and stable performance.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 innovations -->
+    <div class="card" style="margin-top:18px">
+      <h3 data-i18n="adv.title">4 Architecture Innovations — engineered for cost, efficiency &amp; scale</h3>
+      <div class="adv-grid">
+        <div class="adv-list">
+          <div class="adv-point"><div class="icon">🧩</div><div data-i18n="adv.b1"><strong>Conductive Polymer Frames</strong> — a single mouldable part integrates structural, electrical and sealing functions, replacing bipolar plate + flow frame + gasket. Enables injection &amp; compression moulding at industrial volume.</div></div>
+          <div class="adv-point"><div class="icon">⚡</div><div data-i18n="adv.b2"><strong>High Power Microstack — Modular Architecture</strong> — standardised 10-cell modules (ministacks) with defined hydraulic &amp; electrical interfaces. Hot-swap maintenance, automatable assembly. Target: 32–35% stack cost reduction, 3.4× fewer units at equivalent power.</div></div>
+          <div class="adv-point"><div class="icon">💧</div><div data-i18n="adv.b3"><strong>Selective Hydraulic Distribution</strong> — per-module manifolding eliminates shared electrolyte paths, suppressing parasitic shunt currents and reducing pressure drop. Estimated: +5 pp round-trip efficiency.</div></div>
+          <div class="adv-point"><div class="icon">🏭</div><div data-i18n="adv.b4"><strong>IonVe VRFB System Platform</strong> — all innovations integrated into a single, repeatable industrial product: cell design, stack architecture, hydraulics, electronics and control in one co-designed system.</div></div>
+          <div class="gains">
+            <div class="gain"><strong>−40%</strong><span data-i18n="g.capex">installed cost*</span></div>
+            <div class="gain"><strong>+10–15 pp</strong><span data-i18n="g.eta">round-trip efficiency*</span></div>
+            <div class="gain"><strong>3.4×</strong><span data-i18n="g.parts">fewer stacks at 500 kW*</span></div>
+            <div class="gain"><strong>&lt;100 $/MWh</strong><span data-i18n="g.rel">LCOS at 6–8 h*</span></div>
+          </div>
+          <p class="muted" style="font-size:11.5px;margin:6px 0 0" data-i18n="adv.note">*Model-derived targets vs. published state-of-art (Poli et al., 2024; Noack et al., 2016). Experimental validation in progress through the structured PoC programme.</p>
+        </div>
+        <div class="media">
+          <img src="assets/img/Module_render.png" alt="IonVe module render" loading="lazy"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='grid'">
+          <div class="img-ph" style="display:none" data-i18n="img.ph">Add Module_render.png to assets/img/</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Roadmap -->
+    <div class="card" style="margin-top:18px">
+      <h3 data-i18n="roadmap.title">Development Roadmap</h3>
+      <div class="roadmap">
+        <div class="rmap-phase now">
+          <div class="here" data-i18n="roadmap.here">We are here</div>
+          <div class="rmap-lbl">Jan–Jun 2026</div>
+          <div class="rmap-title" data-i18n="roadmap.p1">Proof of Concept</div>
+          <div class="rmap-trl">TRL 3→5</div>
+          <ul class="rmap-items">
+            <li data-i18n="roadmap.p1i1">MK1/2: hydraulic &amp; electrochemical tests</li>
+            <li data-i18n="roadmap.p1i2">PoC: 3 go/no-go criteria validated</li>
+            <li data-i18n="roadmap.p1i3">Patent filings (3 applications)</li>
+            <li data-i18n="roadmap.p1i4">Company incorporation</li>
+          </ul>
+        </div>
+        <div class="rmap-phase">
+          <div class="rmap-lbl">Jul–Dec 2026</div>
+          <div class="rmap-title" data-i18n="roadmap.p2">Functional Prototypes</div>
+          <div class="rmap-trl">TRL 5→6</div>
+          <ul class="rmap-items">
+            <li data-i18n="roadmap.p2i1">2–3 functional prototypes</li>
+            <li data-i18n="roadmap.p2i2">250–500 cycle endurance testing</li>
+            <li data-i18n="roadmap.p2i3">Independent external lab validation</li>
+            <li data-i18n="roadmap.p2i4">First pilot partner signed</li>
+          </ul>
+        </div>
+        <div class="rmap-phase">
+          <div class="rmap-lbl">2027</div>
+          <div class="rmap-title" data-i18n="roadmap.p3">Industrial Pilot</div>
+          <div class="rmap-trl">TRL 6→7</div>
+          <ul class="rmap-items">
+            <li data-i18n="roadmap.p3i1">2–3 co-development pilots</li>
+            <li data-i18n="roadmap.p3i2">Independent performance data</li>
+            <li data-i18n="roadmap.p3i3">Supply-chain qualification</li>
+            <li data-i18n="roadmap.p3i4">Series A fundraise</li>
+          </ul>
+        </div>
+        <div class="rmap-phase">
+          <div class="rmap-lbl">2028–2030</div>
+          <div class="rmap-title" data-i18n="roadmap.p4">Commercial Scale</div>
+          <div class="rmap-trl">TRL 7→9</div>
+          <ul class="rmap-items">
+            <li data-i18n="roadmap.p4i1">15–30 systems/yr, 5 countries</li>
+            <li data-i18n="roadmap.p4i2">EPC channel partnerships</li>
+            <li data-i18n="roadmap.p4i3">LTSA recurring revenue</li>
+            <li data-i18n="roadmap.p4i4">Energy-as-a-Service model</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vision -->
+    <div class="card" style="margin-top:18px">
+      <h3 data-i18n="vision.title">Vision</h3>
+      <p class="muted" data-i18n="vision.body">We merge deep theory with industrial and market awareness to tune and optimize electrochemical systems—turning I–V curves into reliable, scalable products. We prototype optimized electrochemical reactors for each application (focus on flow batteries), ready for integration into the energy&#8209;storage market.</p>
+    </div>
   </section>
 
-  <main class="container" id="main">
-    <!-- WHAT WE DO (mega-card + advantage + vision) -->
-    <section id="panel-what" class="panel active" role="tabpanel" aria-labelledby="tab-what">
-      <!-- MEGA CARD: Context + Why RFB -->
-      <div class="card mega">
-        <h3 data-i18n="apps.title">Where storage matters now</h3>
-        <p class="intro muted" data-i18n="apps.intro">Variable renewables dominate new generation. The next bottlenecks are flexibility, safety and life‑cycle cost. Long‑duration, safe storage smooths variability, avoids curtailment and unlocks new business models.</p>
-        <div class="two">
-          <div>
-            <h4 data-i18n="apps.usecases">Application areas for redox‑flow storage</h4>
-            <ul>
-              <li data-i18n="apps.btm">PV self‑consumption (BTM): store daytime solar, dispatch later to cut grid purchases and flatten peaks.</li>
-              <li data-i18n="apps.arb">Price arbitrage & congestion: shift energy to high‑value hours and ride through grid constraints with cycle‑tolerant storage.</li>
-              <li data-i18n="apps.co">Co‑location with wind & solar: on‑site storage minimizes transport losses and scales modularly.</li>
-              <li data-i18n="apps.grid">Utility support: peak shaving, ramp‑rate control and capacity firming at grid bottlenecks.</li>
-            </ul>
-          </div>
-          <div class="why">
-            <h4 data-i18n="why.title">Why redox flow batteries?</h4>
-            <p class="muted" data-i18n="why.body">RFBs circulate liquid electrolytes through electrochemical cells. <em>Energy</em> (tank volume) and <em>power</em> (cell area/stack count) are decoupled, enabling tailored duration at constant stack design. Aqueous chemistry, deep cycling and easy refurbishment deliver long life, high safety and stable performance.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4 INNOVATIONS (architecture-level, from pitch) -->
-      <div class="card">
-        <h3 data-i18n="adv.title">4 Architecture Innovations — engineered for cost, efficiency &amp; scale</h3>
-        <div class="adv-grid">
-          <div class="adv-list">
-            <div class="adv-point"><div class="icon" aria-hidden="true">🧩</div><div data-i18n="adv.b1"><strong>Conductive Polymer Frames</strong> — a single mouldable part integrates structural, electrical and sealing functions, replacing bipolar plate + flow frame + gasket. Enables injection &amp; compression moulding at industrial volume.</div></div>
-            <div class="adv-point"><div class="icon" aria-hidden="true">⚡</div><div data-i18n="adv.b2"><strong>High Power Microstack — Modular Architecture</strong> — standardised 10-cell modules (ministacks) with defined hydraulic &amp; electrical interfaces. Hot-swap maintenance, automatable assembly. Target: 32–35% stack cost reduction, 3.4× fewer units at equivalent power.</div></div>
-            <div class="adv-point"><div class="icon" aria-hidden="true">💧</div><div data-i18n="adv.b3"><strong>Selective Hydraulic Distribution</strong> — per-module manifolding eliminates shared electrolyte paths, suppressing parasitic shunt currents and reducing pressure drop. Estimated: +5 pp round-trip efficiency.</div></div>
-            <div class="adv-point"><div class="icon" aria-hidden="true">🏭</div><div data-i18n="adv.b4"><strong>IonVe VRFB System Platform</strong> — all three innovations integrated into a single, repeatable industrial product: cell design, stack architecture, hydraulics, electronics and control in one optimised system.</div></div>
-            <div class="gains">
-              <div class="gain"><strong>−40%</strong><span data-i18n="g.capex">installed cost*</span></div>
-              <div class="gain"><strong>+10–15 pp</strong><span data-i18n="g.eta">round-trip efficiency*</span></div>
-              <div class="gain"><strong>3.4×</strong><span data-i18n="g.parts">fewer stacks at 500 kW*</span></div>
-              <div class="gain"><strong>&lt;100 $/MWh</strong><span data-i18n="g.rel">LCOS at 6–8 h*</span></div>
-            </div>
-            <p class="muted" style="font-size:12px; margin:6px 0 0" data-i18n="adv.note">*Model-derived targets vs. published state-of-art (Poli et al., 2024; Noack et al., 2016). Experimental validation in progress through the structured PoC programme.</p>
-          </div>
-          <div class="media"><img src="assets/img/Module_render.png" alt="Exploded view of IonVe electrochemical module" loading="lazy" width="1600" height="900"></div>
-        </div>
-      </div>
-
-      <!-- VISION (serious, standalone) -->
-      <div class="card">
-        <h3 data-i18n="vision.title">Vision</h3>
-        <p class="muted" data-i18n="vision.body">We merge deep theory with industrial and market awareness to tune and optimize electrochemical systems—turning I–V curves into reliable, scalable products. We prototype optimized electrochemical reactors for each application (focus on flow batteries), ready for integration into the energy‑storage market.</p>
-      </div>
-    </section>
-
-    <!-- TEAM -->
-    <section id="panel-team" class="panel" role="tabpanel" aria-labelledby="tab-team">
-      <div class="card">
-        <div class="member">
-          <img class="portrait" src="assets/img/team-davide.png" alt="Davide Bordignon">
-          <div>
-            <h3>Davide Bordignon — Co-Founder &amp; CTO</h3>
-            <p class="muted" data-i18n="team.bio.short">Electrochemical engineer specialised in numerical modelling of advanced systems. Graduated summa cum laude from Università di Padova (thesis: VRFB stack modelling with COMSOL). Experience at E‑Storage (UniPD spin‑off) and in Antoni Forner‑Cuenca’s group (TU/e, Eindhoven) on multiscale electrode models and engineered flow distribution. Since June 2025, PhD researcher at TU Delft (Process &amp; Energy) on CFD modelling of electrochemical reactors — two peer‑reviewed publications in Year 1. <strong>Ermenegildo Zegna Scholar.</strong> Leads electrochemical design, simulation programme and IP development. Bridges deep physics with manufacturability to turn I–V curves into scalable, reliable products.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- COMPANY (startup info) -->
-    <section id="panel-company" class="panel" role="tabpanel" aria-labelledby="tab-company">
-      <div class="card">
-        <h3 data-i18n="company.title">Company profile (startup)</h3>
-        <p class="muted" data-i18n="company.lead">Key regulatory & transparency items. We keep this page updated as we incorporate; for documents we will link to the Chamber of Commerce/Registry or publish PDFs.</p>
-        <ul>
-          <li data-i18n="company.i1"><strong>Incorporation</strong>: date & place — notary name/address (TBD).</li>
-          <li data-i18n="company.i2"><strong>Registered office</strong>: HQ (EU · NL/IT) and any secondary offices (TBD).</li>
-          <li data-i18n="company.i3"><strong>Corporate purpose</strong>: design & prototyping of electrochemical reactors for flow batteries and related systems; model‑driven optimization; materials and manufacturing development.</li>
-          <li data-i18n="company.i4"><strong>R&D spend (year 1)</strong>: detailed plan (TBD).</li>
-          <li data-i18n="company.i5"><strong>Shareholders (equity)</strong>: founding team — Davide Bordignon, Co-Founder &amp; CTO (TBD %). No fiduciaries/holdings (TBD).</li>
-          <li data-i18n="company.i6"><strong>Participations</strong>: none at this stage.</li>
-          <li data-i18n="company.i7"><strong>Degrees & qualifications</strong>: see Team.</li>
-          <li data-i18n="company.i8"><strong>Relations</strong>: universities, incubators, institutional investors (TBD).</li>
-          <li data-i18n="company.i9"><strong>Annual accounts (XBRL)</strong>: link after first filing (TBD).</li>
-          <li data-i18n="company.i10"><strong>IP</strong>: industrial and intellectual property portfolio (TBD).</li>
-        </ul>
-        <p class="muted" style="font-size:12px" data-i18n="company.note">For official filings we will reference the relevant registry pages or attach signed PDFs.</p>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section id="panel-contact" class="panel" role="tabpanel" aria-labelledby="tab-contact">
-      <div class="grid-2">
-        <div class="card">
-          <h3 data-i18n="contact.title">Get in touch</h3>
-          <p class="muted" data-i18n="contact.lead">For collaborations, prototypes or technical requests.</p>
-          <form onsubmit="event.preventDefault(); const name=this.querySelector('[name=name]').value; const email=this.querySelector('[name=email]').value; const msg=this.querySelector('[name=message]').value; const subject=encodeURIComponent('Request from IonVe site'); const body=encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${msg}`); window.location.href=`mailto:davide.brdgn@gmail.com?subject=${subject}&body=${body}`;">
-            <div class="grid-2" style="gap:10px">
-              <label><span data-i18n="contact.name">Name</span><br/><input name="name" placeholder="Your name" required></label>
-              <label><span data-i18n="contact.email">Email</span><br/><input type="email" name="email" placeholder="you@company.com" required></label>
-            </div>
-            <label><span data-i18n="contact.msg">Message</span><br/><textarea name="message" rows="5" placeholder="How can we help?" required></textarea></label>
-            <button class="btn" data-i18n="contact.send">Send</button>
-          </form>
-        </div>
-        <div class="card">
-          <h3 data-i18n="info.title">Information</h3>
-          <p class="muted">Email: <a href="mailto:davide.brdgn@gmail.com">davide.brdgn@gmail.com</a><br/>Phone: <a href="tel:+393451724876">+39 345 172 4876</a><br/><span data-i18n="info.loc">HQ: EU · NL / IT</span></p>
-          <p class="muted" style="font-size:14px" data-i18n="info.notes">For legal, NDAs and industrial partnerships please reach us by email. Online and on‑site meetings available.</p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <div class="container row">
-      <div>© <span id="y"></span> IonVe — Electrochemical Reactors</div>
-      <div><a href="#" class="muted" data-i18n="footer.terms">Terms</a> · <a href="#" class="muted" data-i18n="footer.privacy">Privacy</a> · <a href="#" class="muted" data-i18n="footer.cookie">Cookie</a></div>
+  <!-- ══ PRODUCTS ════════════════════════════════════════════════ -->
+  <section id="panel-products" class="panel">
+    <div class="dev-notice">
+      <span>⚠</span>
+      <span data-i18n="prod.notice">IonVe is at development stage. No systems are currently available for sale. The configurations below are reference cases used in our techno-economic screening model, optimised for the target operating points of the architecture.</span>
     </div>
-  </footer>
+    <div class="products-grid">
+      <!-- IonVe 100 -->
+      <div class="prod-card">
+        <div>
+          <div class="prod-tier" data-i18n="prod.100.tier">ENTRY</div>
+          <div class="prod-name">IonVe 100</div>
+          <div class="prod-spec">100 kW · 600 kWh · 6 h</div>
+        </div>
+        <div class="prod-img">
+          <img src="assets/img/ionve100_render.png" alt="IonVe 100"
+               onerror="this.outerHTML='<div class=\'prod-img\' data-i18n=\'prod.img.ph\' style=\'display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px\'>add ionve100_render.png</div>'">
+        </div>
+        <p class="prod-desc" data-i18n="prod.100.desc">Mid-size industrial sites and pilot installations. Entry point for new customers and co-development partners.</p>
+        <div class="prod-kpis">
+          <div class="prod-kpi"><strong>100 kW</strong><span data-i18n="prod.power">Power</span></div>
+          <div class="prod-kpi"><strong>600 kWh</strong><span data-i18n="prod.energy">Energy (6 h)</span></div>
+        </div>
+      </div>
+      <!-- IonVe 500 — featured -->
+      <div class="prod-card star">
+        <div>
+          <div class="prod-tier" data-i18n="prod.500.tier">STANDARD · PRIMARY TARGET</div>
+          <div class="prod-name">IonVe 500</div>
+          <div class="prod-spec">500 kW · 3 MWh · 6 h</div>
+        </div>
+        <div class="prod-img">
+          <img src="assets/img/Module_render.png" alt="IonVe 500"
+               onerror="this.outerHTML='<div class=\'prod-img\' style=\'display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px\'>add ionve500_render.png</div>'">
+        </div>
+        <p class="prod-desc" data-i18n="prod.500.desc">Primary commercial target. Foundries, die-casting plants, cold chain, data centres. Reference case for all techno-economic modelling.</p>
+        <div class="prod-kpis">
+          <div class="prod-kpi"><strong>500 kW</strong><span data-i18n="prod.power">Power</span></div>
+          <div class="prod-kpi"><strong>3 MWh</strong><span data-i18n="prod.energy">Energy (6 h)</span></div>
+          <div class="prod-kpi"><strong>~€470k/yr</strong><span data-i18n="prod.savings">modelled savings*</span></div>
+          <div class="prod-kpi"><strong>~5 yr</strong><span data-i18n="prod.payback">simple payback*</span></div>
+        </div>
+      </div>
+      <!-- IonVe 1000 -->
+      <div class="prod-card">
+        <div>
+          <div class="prod-tier" data-i18n="prod.1000.tier">INDUSTRIAL</div>
+          <div class="prod-name">IonVe 1000</div>
+          <div class="prod-spec">1 MW · 6 MWh · 6 h</div>
+        </div>
+        <div class="prod-img">
+          <img src="assets/img/ionve1000_render.png" alt="IonVe 1000"
+               onerror="this.outerHTML='<div class=\'prod-img\' style=\'display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px\'>add ionve1000_render.png</div>'">
+        </div>
+        <p class="prod-desc" data-i18n="prod.1000.desc">Heavy industry: steel, metalworking, cement, recycling. Same stack design, no re-engineering. Power range extends to 50 MW.</p>
+        <div class="prod-kpis">
+          <div class="prod-kpi"><strong>1 MW</strong><span data-i18n="prod.power">Power</span></div>
+          <div class="prod-kpi"><strong>6 MWh</strong><span data-i18n="prod.energy">Energy (6 h)</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h3 data-i18n="prod.ltsa.title">Service &amp; Support</h3>
+      <p class="muted" data-i18n="prod.ltsa.body">All systems include long-term service agreements (LTSA): remote monitoring, preventive maintenance, electrolyte management. IonVe can act as electrolyte procurement agent — the vanadium electrolyte is a permanent asset, never consumed.</p>
+      <p class="muted" style="font-size:11.5px;margin-top:8px" data-i18n="prod.note">*Savings figures are model outputs at design-target performance for a foundry reference case (500 kW / 3 MWh). Site-specific validation pending. IonVe recommends Li-ion for durations below 4 hours.</p>
+    </div>
+  </section>
 
-  <script>
-    const $ = (s)=>document.querySelector(s);
-    const tabs = document.querySelectorAll('.tab');
-    const panels = { 'what': $('#panel-what'), 'team': $('#panel-team'), 'company': $('#panel-company'), 'contact': $('#panel-contact') };
-    function activate(key){ Object.values(panels).forEach(p=>p.classList.remove('active')); (panels[key]||panels['what']).classList.add('active'); tabs.forEach(b=> b.setAttribute('aria-selected', String(b.dataset.target===key)) ); }
-    function fromHash(){ const raw = (location.hash.replace('#','')||'what').toLowerCase(); const map = { 'cosa':'what', 'contatti':'contact', 'azienda':'company' }; const key = ['what','team','company','contact'].includes(raw) ? raw : (map[raw]||'what'); activate(key); }
-    function safeNavigate(key){ const hash='#'+key; try{ if (String(location.href).startsWith('about:')) location.hash = hash; else if (history && typeof history.pushState==='function') history.pushState(null,'',hash); else location.hash = hash; }catch(e){ location.hash = hash; } activate(key); window.scrollTo({top:0, behavior:'smooth'}); }
-    tabs.forEach(b=> b.addEventListener('click',()=> safeNavigate(b.dataset.target)) ); addEventListener('hashchange', fromHash); fromHash();
+  <!-- ══ COLLABORATE ════════════════════════════════════════════ -->
+  <section id="panel-collab" class="panel">
+    <div class="card" style="margin-bottom:18px">
+      <h3 data-i18n="collab.intro.title">How we work with partners</h3>
+      <p class="muted" data-i18n="collab.intro.body">IonVe is at development stage. We engage with industrial partners, EPCs, investors and research institutions at four levels — each matched to the current state of the technology and our validation programme.</p>
+    </div>
+    <div class="collab-grid">
+      <div class="collab-card">
+        <div class="collab-num">01</div>
+        <div class="collab-tag" data-i18n="collab.1.tag">NO COST · NO OBLIGATION · NDA</div>
+        <h4 data-i18n="collab.1.title">Site-Specific Screening</h4>
+        <p data-i18n="collab.1.body">We model annual savings from your 15-minute interval load data and electricity contract terms. Output: site-specific NPV, payback, and sensitivity report within 2 weeks of data receipt.</p>
+        <a href="mailto:davide.brdgn@gmail.com?subject=Site%20Screening%20Request" class="collab-cta" data-i18n="collab.1.cta">Request site screening report</a>
+      </div>
+      <div class="collab-card">
+        <div class="collab-num">02</div>
+        <div class="collab-tag" data-i18n="collab.2.tag">ON REQUEST · UNDER NDA</div>
+        <h4 data-i18n="collab.2.title">Access to Test Data</h4>
+        <p data-i18n="collab.2.body">We share electrochemical test results and stack performance data as milestones are completed: MK1 hydraulics (done), electrochemical characterisation (in progress), MK2 results.</p>
+        <a href="mailto:davide.brdgn@gmail.com?subject=Technical%20Data%20Package%20Request" class="collab-cta" data-i18n="collab.2.cta">Request technical data package</a>
+      </div>
+      <div class="collab-card">
+        <div class="collab-num">03</div>
+        <div class="collab-tag" data-i18n="collab.3.tag">POST-PoC · Q3 2026 ONWARDS</div>
+        <h4 data-i18n="collab.3.title">Co-Development Pilot</h4>
+        <p data-i18n="collab.3.body">2–3 pilot installations at cost-plus pricing in exchange for real operating data. Independently verified performance and cost accounting. Right of first negotiation on commercial supply.</p>
+        <a href="mailto:davide.brdgn@gmail.com?subject=Co-Development%20Pilot%20Interest" class="collab-cta" data-i18n="collab.3.cta">Discuss pilot term sheet</a>
+      </div>
+      <div class="collab-card">
+        <div class="collab-num">04</div>
+        <div class="collab-tag" data-i18n="collab.4.tag">OPEN · NO PREREQUISITES</div>
+        <h4 data-i18n="collab.4.title">EPC &amp; Integrator Briefings</h4>
+        <p data-i18n="collab.4.body">Structured technology briefing for project developers and EPC contractors evaluating VRFB for their pipeline. Open to licensing and component supply discussions with parties at scale.</p>
+        <a href="mailto:davide.brdgn@gmail.com?subject=EPC%20Briefing%20Request" class="collab-cta" data-i18n="collab.4.cta">Book a 60-min briefing</a>
+      </div>
+    </div>
+    <!-- Savings by segment -->
+    <div class="card" style="margin-top:18px">
+      <h3 data-i18n="savings.title">Modelled Annual Savings by Industrial Segment</h3>
+      <p class="muted" style="font-size:13px;margin-bottom:16px" data-i18n="savings.note">Model outputs at design-target system performance. ~65% of savings from demand-charge reduction; ~35% from time-of-use arbitrage.</p>
+      <div style="display:grid;gap:10px">
+        <div class="tco-row"><span class="tco-label"><strong>Steel rolling</strong> &nbsp;<span class="muted" style="font-size:12px">15 MW · €8M bill</span></span><div class="tco-bar-wrap"><div class="tco-bar ionve" style="width:100%"></div></div><span class="tco-val" style="color:var(--accent2)">€1,140k/yr</span></div>
+        <div class="tco-row"><span class="tco-label"><strong>Cement plant</strong> &nbsp;<span class="muted" style="font-size:12px">8 MW · €6.5M bill</span></span><div class="tco-bar-wrap"><div class="tco-bar ionve" style="width:61%"></div></div><span class="tco-val" style="color:var(--accent2)">€690k/yr</span></div>
+        <div class="tco-row"><span class="tco-label"><strong>Foundry / EAF</strong> &nbsp;<span class="muted" style="font-size:12px">5 MW · €3.2M bill</span></span><div class="tco-bar-wrap"><div class="tco-bar ionve" style="width:41%"></div></div><span class="tco-val" style="color:var(--accent2)">€470k/yr</span></div>
+        <div class="tco-row"><span class="tco-label"><strong>Recycling</strong> &nbsp;<span class="muted" style="font-size:12px">5 MW · €2.5M bill</span></span><div class="tco-bar-wrap"><div class="tco-bar ionve" style="width:33%"></div></div><span class="tco-val" style="color:var(--accent2)">€378k/yr</span></div>
+        <div class="tco-row"><span class="tco-label"><strong>Heavy metalwork</strong> &nbsp;<span class="muted" style="font-size:12px">2 MW · €1.8M bill</span></span><div class="tco-bar-wrap"><div class="tco-bar ionve" style="width:15%"></div></div><span class="tco-val" style="color:var(--accent2)">€166k/yr</span></div>
+      </div>
+    </div>
+  </section>
 
-    const header = document.getElementById('site-header'); function onScroll(){ if (scrollY>40) header.classList.add('compact'); else header.classList.remove('compact'); } addEventListener('scroll', onScroll, {passive:true}); onScroll();
+  <!-- ══ TEAM ═══════════════════════════════════════════════════ -->
+  <section id="panel-team" class="panel">
+    <div class="card">
+      <div class="member">
+        <img class="portrait" src="assets/img/team-davide.png" alt="Davide Bordignon" onerror="this.style.display='none'">
+        <div>
+          <h3>Davide Bordignon — Co-Founder &amp; CTO</h3>
+          <p class="muted" data-i18n="team.bio">Electrochemical engineer specialised in numerical modelling of advanced systems. Graduated summa cum laude from Università di Padova (thesis: VRFB stack modelling with COMSOL). Experience at E&#8209;Storage (UniPD spin&#8209;off) and in Antoni Forner&#8209;Cuenca's group (TU/e, Eindhoven) on multiscale electrode models and engineered flow distribution. Since June 2025, PhD researcher at TU Delft (Process &amp; Energy) on CFD modelling of electrochemical reactors — two peer&#8209;reviewed publications in Year 1. <strong>Ermenegildo Zegna Scholar.</strong> Leads electrochemical design, simulation programme and IP development. Bridges deep physics with manufacturability to turn I–V curves into scalable, reliable products.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    const root = document.documentElement; const keyTheme='ionve-theme'; const savedTheme = localStorage.getItem(keyTheme); if(savedTheme==="light"||savedTheme==="dark"){ root.setAttribute('data-theme', savedTheme); } const themeBtn = document.getElementById('themeToggle'); function setTheme(t){ root.setAttribute('data-theme', t); localStorage.setItem(keyTheme,t); themeBtn.setAttribute('aria-pressed', String(t==='light')); } themeBtn.addEventListener('click', ()=> setTheme(root.getAttribute('data-theme')==='dark' ? 'light':'dark'));
+  <!-- ══ COMPANY ════════════════════════════════════════════════ -->
+  <section id="panel-company" class="panel">
+    <div class="card">
+      <h3 data-i18n="company.title">Company profile (startup)</h3>
+      <p class="muted" data-i18n="company.lead">Key regulatory &amp; transparency items. We keep this page updated as we incorporate; for documents we will link to the Chamber of Commerce/Registry or publish PDFs.</p>
+      <ul>
+        <li data-i18n="company.i1"><strong>Incorporation</strong>: date &amp; place — notary name/address (TBD).</li>
+        <li data-i18n="company.i2"><strong>Registered office</strong>: HQ (EU · NL/IT) and any secondary offices (TBD).</li>
+        <li data-i18n="company.i3"><strong>Corporate purpose</strong>: design &amp; prototyping of electrochemical reactors for flow batteries and related systems; model&#8209;driven optimization; materials and manufacturing development.</li>
+        <li data-i18n="company.i4"><strong>R&amp;D spend (year 1)</strong>: detailed plan (TBD).</li>
+        <li data-i18n="company.i5"><strong>Shareholders (equity)</strong>: founding team — Davide Bordignon, Co-Founder &amp; CTO (TBD%). No fiduciaries/holdings (TBD).</li>
+        <li data-i18n="company.i6"><strong>Participations</strong>: none at this stage.</li>
+        <li data-i18n="company.i7"><strong>Degrees &amp; qualifications</strong>: see Team.</li>
+        <li data-i18n="company.i8"><strong>Relations</strong>: universities, incubators, institutional investors (TBD).</li>
+        <li data-i18n="company.i9"><strong>Annual accounts (XBRL)</strong>: link after first filing (TBD).</li>
+        <li data-i18n="company.i10"><strong>IP</strong>: industrial and intellectual property portfolio (TBD).</li>
+      </ul>
+      <p class="muted" style="font-size:12px" data-i18n="company.note">For official filings we will reference the relevant registry pages or attach signed PDFs.</p>
+    </div>
+  </section>
 
-    const keyLang='ionve-lang';
-    const i18n = {
-      en: {
-        'header.tagline':'From ion transport to voltage efficiency.',
-        'hero.title':'Electrochemical reactors for <span style="background:linear-gradient(135deg,var(--accent1),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent">redox‑flow</span> systems',
-        'hero.lead':'Design, prototyping and validation of high‑performance cells and stacks: low ohmic resistance, optimized hydraulics and advanced materials integration.',
-        'hero.stage':'Pre-incorporation · MK1 in testing · PoC target: June 2026','tabs.what':'What we do','tabs.team':'Team','tabs.contact':'Contact','tabs.company':'Company',
-        'apps.title':'Where storage matters now','apps.intro':'Variable renewables dominate new generation. The next bottlenecks are flexibility, safety and life‑cycle cost. Long‑duration, safe storage smooths variability, avoids curtailment and unlocks new business models.',
-        'apps.usecases':'Application areas for redox‑flow storage',
-        'apps.btm':'PV self‑consumption (BTM): store daytime solar, dispatch later to cut grid purchases and flatten peaks.',
-        'apps.arb':'Price arbitrage & congestion: shift energy to high‑value hours and ride through grid constraints with cycle‑tolerant storage.',
-        'apps.co':'Co‑location with wind & solar: on‑site storage minimizes transport losses and scales modularly.',
-        'apps.grid':'Utility support: peak shaving, ramp‑rate control and capacity firming at grid bottlenecks.',
-        'why.title':'Why redox flow batteries?','why.body':'RFBs circulate liquid electrolytes through electrochemical cells. Energy (tank volume) and power (cell area/stack count) are decoupled, enabling tailored duration at constant stack design. Aqueous chemistry, deep cycling and easy refurbishment deliver long life, high safety and stable performance.',
-        'adv.title':'4 Architecture Innovations — engineered for cost, efficiency &amp; scale',
-        'adv.b1':'<strong>Conductive Polymer Frames</strong> — a single mouldable part integrates structural, electrical and sealing functions, replacing bipolar plate + flow frame + gasket. Enables injection & compression moulding at industrial volume.',
-        'adv.b2':'<strong>High Power Microstack — Modular Architecture</strong> — standardised 10-cell modules (ministacks) with defined hydraulic &amp; electrical interfaces. Hot-swap maintenance, automatable assembly. Target: 32–35% stack cost reduction, 3.4× fewer units at equivalent power.',
-        'adv.b3':'<strong>Selective Hydraulic Distribution</strong> — per-module manifolding eliminates shared electrolyte paths, suppressing parasitic shunt currents and reducing pressure drop. Estimated: +5 pp round-trip efficiency.',
-        'adv.b4':'<strong>IonVe VRFB System Platform</strong> — all three innovations integrated into a single, repeatable industrial product: cell design, stack architecture, hydraulics, electronics and control in one optimised system.',
-        ,
-        'g.capex':'installed cost*','g.eta':'round-trip efficiency*','g.parts':'fewer stacks at 500 kW*','g.rel':'LCOS at 6–8 h*',
-        'adv.note':'*Model-derived targets vs. published state-of-art (Poli et al., 2024; Noack et al., 2016). Experimental validation in progress through the structured PoC programme.',
-        'vision.title':'Vision','vision.body':'We merge deep theory with industrial and market awareness to tune and optimize electrochemical systems—turning I–V curves into reliable, scalable products. We prototype optimized electrochemical reactors for each application (focus on flow batteries), ready for integration into the energy‑storage market.',
-        'team.bio.short':'Electrochemical engineer specialised in numerical modelling of advanced systems. Graduated summa cum laude from Università di Padova (thesis: VRFB stack modelling with COMSOL). Experience at E‑Storage (UniPD spin‑off) and in Antoni Forner‑Cuenca’s group (TU/e, Eindhoven) on multiscale electrode models and engineered flow distribution. Since June 2025, PhD researcher at TU Delft (Process &amp; Energy) on CFD modelling of electrochemical reactors — two peer‑reviewed publications in Year 1. <strong>Ermenegildo Zegna Scholar.</strong> Leads electrochemical design, simulation programme and IP development. Bridges deep physics with manufacturability to turn I–V curves into scalable, reliable products.',
-        'company.title':'Company profile (startup)','company.lead':'Key regulatory & transparency items. We keep this page updated as we incorporate; for documents we will link to the Chamber of Commerce/Registry or publish PDFs.','company.i1':'<strong>Incorporation</strong>: date & place — notary name/address (TBD).','company.i2':'<strong>Registered office</strong>: HQ (EU · NL/IT) and any secondary offices (TBD).','company.i3':'<strong>Corporate purpose</strong>: design & prototyping of electrochemical reactors for flow batteries and related systems; model‑driven optimization; materials and manufacturing development.','company.i4':'<strong>R&D spend (year 1)</strong>: detailed plan (TBD).','company.i5':'<strong>Shareholders (equity)</strong>: founding team — Davide Bordignon, Co-Founder &amp; CTO (TBD %). No fiduciaries/holdings (TBD).','company.i6':'<strong>Participations</strong>: none at this stage.','company.i7':'<strong>Degrees & qualifications</strong>: see Team.','company.i8':'<strong>Relations</strong>: universities, incubators, institutional investors (TBD).','company.i9':'<strong>Annual accounts (XBRL)</strong>: link after first filing (TBD).','company.i10':'<strong>IP</strong>: industrial and intellectual property portfolio (TBD).','company.note':'For official filings we will reference the relevant registry pages or attach signed PDFs.','contact.title':'Get in touch','contact.lead':'For collaborations, prototypes or technical requests.','contact.name':'Name','contact.email':'Email','contact.msg':'Message','contact.send':'Send','info.title':'Information','info.loc':'HQ: EU · NL / IT','info.notes':'For legal, NDAs and industrial partnerships please reach us by email. Online and on‑site meetings available.','footer.terms':'Terms','footer.privacy':'Privacy','footer.cookie':'Cookie'
-      },
-      it: {
-        'header.tagline':'From ion transport to voltage efficiency.',
-        'hero.stage':'Pre-incorporazione · MK1 in fase di test · PoC previsto: giugno 2026',
-        'hero.title':'Reattori elettrochimici per sistemi <span style="background:linear-gradient(135deg,var(--accent1),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent">redox‑flow</span>',
-        'hero.lead':'Progettazione, prototipazione e validazione di celle e stack ad alte prestazioni: bassa resistenza ohmica, idraulica ottimizzata e integrazione di materiali avanzati.',
-        'tabs.what':'Cosa facciamo','tabs.team':'Team','tabs.contact':'Contatti','tabs.company':'Azienda',
-        'apps.title':'Dove lo storage conta oggi','apps.intro':'Le rinnovabili variabili dominano la nuova generazione. I colli di bottiglia sono flessibilità, sicurezza e costo lungo ciclo di vita. Uno storage sicuro e di lunga durata livella la variabilità, evita i curtailment e abilita nuovi modelli di business.',
-        'apps.usecases':'Ambiti applicativi dello storage redox‑flow',
-        'apps.btm':'Autoconsumo FV (BTM): immagazzina il solare diurno e usa l’energia quando serve, riducendo gli acquisti e appiattendo i picchi.',
-        'apps.arb':'Arbitraggio prezzi & congestioni: sposta l’energia verso ore ad alto valore e supera i vincoli di rete con storage tollerante ai cicli.',
-        'apps.co':'Co‑location con eolico & FV: lo storage on‑site minimizza le perdite di trasporto e scala in modo modulare.',
-        'apps.grid':'Supporto di rete: peak‑shaving, controllo rampe e capacity firming nei colli di bottiglia.',
-        'why.title':'Perché redox flow?','why.body':'Le RFB fanno circolare elettroliti liquidi attraverso celle elettrochimiche. Energia (serbatoi) e potenza (area cella/numero stack) sono disaccoppiate: durata su misura a progetto di stack costante. Chimica acquosa, ciclaggio profondo e ricondizionamento facile → lunga vita, alta sicurezza e prestazioni stabili.',
-        'adv.title':'4 Innovazioni Architetturali — per costo, efficienza e scalabilità',
-        'adv.b1':'<strong>Frame in Polimero Conduttivo</strong> — un singolo componente stampabile integra funzioni strutturali, elettriche e di tenuta, sostituendo bipolar plate + flow frame + guarnizione. Compatibile con stampaggio a iniezione e compressione a volumi industriali.',
-        'adv.b2':'<strong>High Power Microstack — Architettura Modulare</strong> — moduli da 10 celle standardizzati con interfacce idrauliche ed elettriche definite. Manutenzione hot-swap, assemblaggio automatizzabile. Target: riduzione costo stack 32–35%, 3,4× meno unità a parità di potenza.',
-        'adv.b3':'<strong>Distribuzione Idraulica Selettiva</strong> — manifolding per-modulo elimina i percorsi di elettrolita condivisi, sopprimendo le correnti di shunt parassite e riducendo le perdite di pressione. Stima: +5 pp di efficienza round-trip.',
-        'adv.b4':'<strong>Piattaforma Sistema IonVe VRFB</strong> — tutte e tre le innovazioni integrate in un unico prodotto industriale ripetibile: design della cella, architettura dello stack, idraulica, elettronica e controllo in un sistema ottimizzato.',
-        
-        'g.capex':'installed cost*','g.eta':'efficienza di sistema*','g.parts':'assemblaggio/O&M semplificati','g.rel':'materiali & design',
-        'adv.note':'*Target derivati da modello vs. stato dell’arte pubblicato (Poli et al., 2024; Noack et al., 2016). Validazione sperimentale in corso attraverso il programma PoC strutturato.',
-        'vision.title':'Visione','vision.body':'Uniamo teoria profonda e visione industriale/mercato per ottimizzare i sistemi elettrochimici—trasformando le curve I–V in prodotti affidabili e scalabili. Prototipizziamo reattori ottimizzati per ogni applicazione (focus flow battery), pronti per l’integrazione nel mercato dello storage.',
-        'team.bio.short':'Ingegnere elettrochimico specializzato in modellazione numerica di sistemi avanzati. Laureato summa cum laude all’Università di Padova (tesi: modellazione stack VRFB con COMSOL). Esperienza in E‑Storage (spin‑off UniPD) e nel gruppo di Antoni Forner‑Cuenca (TU/e, Eindhoven) su modelli multiscala e distribuzione di flusso ingegnerizzata. Da giugno 2025, ricercatore PhD al TU Delft (Process & Energy) su CFD per reattori elettrochimici — due pubblicazioni peer‑reviewed nel primo anno. <strong>Borsa Ermenegildo Zegna.</strong> Guida il design elettrochimico, il programma di simulazione e lo sviluppo IP. Collega la fisica profonda con la producibilità per trasformare le I–V in prodotti scalabili e affidabili.',
-        'company.title':'Profilo aziendale (startup)','company.lead':'Voci regolamentari e di trasparenza. Aggiorneremo questa pagina alla costituzione; i documenti saranno collegati al Registro Imprese o pubblicati in PDF.','company.i1':'<strong>Costituzione</strong>: data e luogo — notaio e indirizzo (TBD).','company.i2':'<strong>Sede legale</strong>: HQ (EU · NL/IT) ed eventuali sedi secondarie (TBD).','company.i3':'<strong>Oggetto sociale</strong>: progettazione e prototipazione di reattori elettrochimici per flow battery e sistemi correlati; ottimizzazione guidata da modelli; sviluppo materiali e processi.','company.i4':'<strong>Spese R&S (anno 1)</strong>: piano dettagliato (TBD).','company.i5':'<strong>Soci in equity</strong>: team fondatore — Davide Bordignon, Co-Fondatore & CTO (TBD %). Nessuna fiduciaria/holding (TBD).','company.i6':'<strong>Società partecipate</strong>: nessuna al momento.','company.i7':'<strong>Titoli e qualifiche</strong>: vedi Team.','company.i8':'<strong>Relazioni</strong>: università, incubatori, investitori istituzionali (TBD).','company.i9':'<strong>Bilancio (XBRL)</strong>: link dopo il primo deposito (TBD).','company.i10':'<strong>IP</strong>: diritti di proprietà industriale e intellettuale (TBD).','company.note':'Per gli atti ufficiali rimanderemo a pagine del Registro o alle copie firmate.','contact.title':'Contattaci','contact.lead':'Per collaborazioni, prototipi o richieste tecniche.','contact.name':'Nome','contact.email':'Email','contact.msg':'Messaggio','contact.send':'Invia','info.title':'Informazioni','info.loc':'Sede: EU · NL / IT','info.notes':'Per aspetti legali, NDA e partnership industriali contattaci via email. Disponibili meeting online e on‑site.','footer.terms':'Termini','footer.privacy':'Privacy','footer.cookie':'Cookie'
-      }
-    };
-    function applyI18n(lang){ const dict = i18n[lang] || i18n.en; document.querySelectorAll('[data-i18n]').forEach(el=>{ const key = el.getAttribute('data-i18n'); const txt = dict[key]; if(typeof txt === 'string') el.innerHTML = txt; }); localStorage.setItem(keyLang, lang); document.getElementById('langEn').setAttribute('aria-pressed', String(lang==='en')); document.getElementById('langIt').setAttribute('aria-pressed', String(lang==='it')); }
-    const savedLang = localStorage.getItem(keyLang) || 'en'; applyI18n(savedLang); document.getElementById('la
+  <!-- ══ CONTACT ════════════════════════════════════════════════ -->
+  <section id="panel-contact" class="panel">
+    <div class="grid-2">
+      <div class="card">
+        <h3 data-i18n="contact.title">Get in touch</h3>
+        <p class="muted" data-i18n="contact.lead">For collaborations, prototypes or technical requests.</p>
+        <form onsubmit="event.preventDefault();const n=this.querySelector('[name=name]').value,e=this.querySelector('[name=email]').value,m=this.querySelector('[name=message]').value,s=encodeURIComponent('Request from IonVe site'),b=encodeURIComponent('Name: '+n+'\nEmail: '+e+'\n\nMessage:\n'+m);window.location.href='mailto:davide.brdgn@gmail.com?subject='+s+'&body='+b">
+          <div class="grid-2" style="gap:10px">
+            <label><span data-i18n="contact.name">Name</span><br><input name="name" required></label>
+            <label><span data-i18n="contact.email">Email</span><br><input type="email" name="email" required></label>
+          </div>
+          <label><span data-i18n="contact.msg">Message</span><br><textarea name="message" rows="5" required></textarea></label>
+          <button class="btn" type="submit" data-i18n="contact.send">Send</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3 data-i18n="info.title">Information</h3>
+        <p class="muted">Email: <a href="mailto:davide.brdgn@gmail.com">davide.brdgn@gmail.com</a><br>Phone: <a href="tel:+393451724876">+39 345 172 4876</a><br><span data-i18n="info.loc">HQ: EU · NL / IT</span></p>
+        <p class="muted" style="font-size:13px" data-i18n="info.notes">For legal, NDAs and industrial partnerships please reach us by email. Online and on&#8209;site meetings available.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container row">
+    <div>© <span id="y"></span> IonVe — Electrochemical Reactors &nbsp;·&nbsp; <span data-i18n="footer.stage">IonVe (in formation), April 2026</span></div>
+    <div><a href="#" class="muted" data-i18n="footer.terms">Terms</a> · <a href="#" class="muted" data-i18n="footer.privacy">Privacy</a> · <a href="#" class="muted" data-i18n="footer.cookie">Cookie</a></div>
+  </div>
+</footer>
+
+<script>
+  // Tab navigation
+  const tabs = document.querySelectorAll('.tab');
+  const panelIds = ['what','products','collab','team','company','contact'];
+  const getPanels = () => Object.fromEntries(panelIds.map(k => [k, document.getElementById('panel-'+k)]));
+
+  function activate(key) {
+    const panels = getPanels();
+    Object.values(panels).forEach(p => p && p.classList.remove('active'));
+    const target = panels[key] || panels['what'];
+    if (target) target.classList.add('active');
+    tabs.forEach(b => b.setAttribute('aria-selected', String(b.dataset.target === key)));
+  }
+
+  function fromHash() {
+    const raw = (location.hash.replace('#','') || 'what').toLowerCase();
+    const aliases = {cosa:'what',prodotti:'products',collabora:'collab',contatti:'contact',azienda:'company'};
+    activate(panelIds.includes(raw) ? raw : (aliases[raw] || 'what'));
+  }
+
+  tabs.forEach(b => b.addEventListener('click', () => {
+    const k = b.dataset.target;
+    try { history.pushState(null,'','#'+k); } catch(e) { location.hash='#'+k; }
+    activate(k);
+    window.scrollTo({top:0, behavior:'smooth'});
+  }));
+  addEventListener('hashchange', fromHash);
+  fromHash();
+
+  // Compact header
+  const hdr = document.getElementById('site-header');
+  addEventListener('scroll', () => hdr.classList.toggle('compact', scrollY > 40), {passive:true});
+
+  // Theme
+  const root = document.documentElement;
+  const tBtn = document.getElementById('themeToggle');
+  const saved = localStorage.getItem('ionve-theme');
+  if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved);
+  tBtn.addEventListener('click', () => {
+    const t = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', t);
+    localStorage.setItem('ionve-theme', t);
+    tBtn.setAttribute('aria-pressed', String(t === 'light'));
+  });
+
+  // i18n
+  const i18n = {
+    en: {
+      'header.tagline':'From ion transport to voltage efficiency.',
+      'hero.stage':'Pre-incorporation \u00b7 MK1 in testing \u00b7 PoC target: June 2026',
+      'hero.title':'Electrochemical reactors for <span style="background:linear-gradient(135deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent">redox&#8209;flow</span> systems',
+      'hero.lead':'Design, prototyping and validation of high&#8209;performance cells and stacks: low ohmic resistance, optimized hydraulics and advanced materials integration.',
+      'kpi.capex':'Target installed cost (6 h)','kpi.cost':'vs. current VRFB systems','kpi.stacks':'fewer stacks at 500 kW','kpi.density':'target power density','kpi.life':'operating life, no degradation',
+      'tabs.what':'What we do','tabs.products':'Products','tabs.collab':'Collaborate','tabs.team':'Team','tabs.company':'Company','tabs.contact':'Contact',
+      'ctx.t1':'Long-duration storage is economically viable for industry today','ctx.b1':'Industrial sites with high demand charges and time-of-use contracts already generate a positive business case for 4\u201312 hour storage. The barrier is not economics \u2014 it is the absence of an affordable, reliable product.',
+      'ctx.t2':'Li-ion is not cost-effective beyond 4\u20136 hours','ctx.b2':'At durations of 6 hours or more, the 30-year total cost of ownership of Li-ion is significantly higher than VRFB, due to battery replacements every 10\u201312 years.',
+      'ctx.t3':'Existing RFB systems remain too expensive','ctx.b3':'Current products are priced at \u20ac450\u2013600/kWh installed \u2014 a result of an outdated stack architecture: high component count, machined graphite parts, and custom engineering for every installation.',
+      'tco.title':'30-YEAR TCO COMPARISON \u2014 500 kW / 3 MWh (MODEL OUTPUT AT DESIGN-TARGET PERFORMANCE)',
+      'tco.vrfb':'VRFB \u2014 current state of the art','tco.liion':'Li-ion (incl. 2\u00d7 replacements, 30 yr)',
+      'apps.title':'Where storage matters now','apps.intro':'Variable renewables dominate new generation. The next bottlenecks are flexibility, safety and life&#8209;cycle cost. Long&#8209;duration, safe storage smooths variability, avoids curtailment and unlocks new business models.',
+      'apps.usecases':'Application areas for redox&#8209;flow storage',
+      'apps.btm':'PV self&#8209;consumption (BTM): store daytime solar, dispatch later to cut grid purchases and flatten peaks.',
+      'apps.arb':'Price arbitrage & congestion: shift energy to high&#8209;value hours and ride through grid constraints with cycle&#8209;tolerant storage.',
+      'apps.co':'Co&#8209;location with wind & solar: on&#8209;site storage minimizes transport losses and scales modularly.',
+      'apps.grid':'Utility support: peak shaving, ramp&#8209;rate control and capacity firming at grid bottlenecks.',
+      'why.title':'Why redox flow batteries?','why.body':'RFBs circulate liquid electrolytes through electrochemical cells. <em>Energy</em> (tank volume) and <em>power</em> (cell area/stack count) are decoupled, enabling tailored duration at constant stack design. Aqueous chemistry, deep cycling and easy refurbishment deliver long life, high safety and stable performance.',
+      'adv.title':'4 Architecture Innovations \u2014 engineered for cost, efficiency & scale',
+      'adv.b1':'<strong>Conductive Polymer Frames</strong> \u2014 a single mouldable part integrates structural, electrical and sealing functions, replacing bipolar plate + flow frame + gasket. Enables injection & compression moulding at industrial volume.',
+      'adv.b2':'<strong>High Power Microstack \u2014 Modular Architecture</strong> \u2014 standardised 10-cell modules (ministacks) with defined hydraulic & electrical interfaces. Hot-swap maintenance, automatable assembly. Target: 32\u201335% stack cost reduction, 3.4\u00d7 fewer units at equivalent power.',
+      'adv.b3':'<strong>Selective Hydraulic Distribution</strong> \u2014 per-module manifolding eliminates shared electrolyte paths, suppressing parasitic shunt currents and reducing pressure drop. Estimated: +5 pp round-trip efficiency.',
+      'adv.b4':'<strong>IonVe VRFB System Platform</strong> \u2014 all innovations integrated into a single, repeatable industrial product: cell design, stack architecture, hydraulics, electronics and control in one co-designed system.',
+      'g.capex':'installed cost*','g.eta':'round-trip efficiency*','g.parts':'fewer stacks at 500 kW*','g.rel':'LCOS at 6\u20138 h*',
+      'adv.note':'*Model-derived targets vs. published state-of-art (Poli et al., 2024; Noack et al., 2016). Experimental validation in progress through the structured PoC programme.',
+      'img.ph':'Add Module_render.png to assets/img/',
+      'roadmap.title':'Development Roadmap','roadmap.here':'We are here',
+      'roadmap.p1':'Proof of Concept','roadmap.p1i1':'MK1/2: hydraulic & electrochemical tests','roadmap.p1i2':'PoC: 3 go/no-go criteria validated','roadmap.p1i3':'Patent filings (3 applications)','roadmap.p1i4':'Company incorporation',
+      'roadmap.p2':'Functional Prototypes','roadmap.p2i1':'2\u20133 functional prototypes','roadmap.p2i2':'250\u2013500 cycle endurance testing','roadmap.p2i3':'Independent external lab validation','roadmap.p2i4':'First pilot partner signed',
+      'roadmap.p3':'Industrial Pilot','roadmap.p3i1':'2\u20133 co-development pilots','roadmap.p3i2':'Independent performance data','roadmap.p3i3':'Supply-chain qualification','roadmap.p3i4':'Series A fundraise',
+      'roadmap.p4':'Commercial Scale','roadmap.p4i1':'15\u201330 systems/yr, 5 countries','roadmap.p4i2':'EPC channel partnerships','roadmap.p4i3':'LTSA recurring revenue','roadmap.p4i4':'Energy-as-a-Service model',
+      'vision.title':'Vision','vision.body':'We merge deep theory with industrial and market awareness to tune and optimize electrochemical systems\u2014turning I\u2013V curves into reliable, scalable products. We prototype optimized electrochemical reactors for each application (focus on flow batteries), ready for integration into the energy&#8209;storage market.',
+      'prod.notice':'IonVe is at development stage. No systems are currently available for sale. The configurations below are reference cases used in our techno-economic screening model, optimised for the target operating points of the architecture.',
+      'prod.100.tier':'ENTRY','prod.100.desc':'Mid-size industrial sites and pilot installations. Entry point for new customers and co-development partners.',
+      'prod.500.tier':'STANDARD \u00b7 PRIMARY TARGET','prod.500.desc':'Primary commercial target. Foundries, die-casting plants, cold chain, data centres. Reference case for all techno-economic modelling.',
+      'prod.1000.tier':'INDUSTRIAL','prod.1000.desc':'Heavy industry: steel, metalworking, cement, recycling. Same stack design, no re-engineering. Power range extends to 50 MW.',
+      'prod.power':'Power','prod.energy':'Energy (6 h)','prod.savings':'modelled savings*','prod.payback':'simple payback*','prod.img.ph':'Rendering coming soon',
+      'prod.ltsa.title':'Service & Support','prod.ltsa.body':'All systems include long-term service agreements (LTSA): remote monitoring, preventive maintenance, electrolyte management. IonVe can act as electrolyte procurement agent \u2014 the vanadium electrolyte is a permanent asset, never consumed.',
+      'prod.note':'*Savings figures are model outputs at design-target performance for a foundry reference case (500 kW / 3 MWh). Site-specific validation pending. IonVe recommends Li-ion for durations below 4 hours.',
+      'collab.intro.title':'How we work with partners','collab.intro.body':'IonVe is at development stage. We engage with industrial partners, EPCs, investors and research institutions at four levels \u2014 each matched to the current state of the technology and our validation programme.',
+      'collab.1.tag':'NO COST \u00b7 NO OBLIGATION \u00b7 NDA','collab.1.title':'Site-Specific Screening','collab.1.body':'We model annual savings from your 15-minute interval load data and electricity contract terms. Output: site-specific NPV, payback, and sensitivity report within 2 weeks of data receipt.','collab.1.cta':'Request site screening report',
+      'collab.2.tag':'ON REQUEST \u00b7 UNDER NDA','collab.2.title':'Access to Test Data','collab.2.body':'We share electrochemical test results and stack performance data as milestones are completed: MK1 hydraulics (done), electrochemical characterisation (in progress), MK2 results.','collab.2.cta':'Request technical data package',
+      'collab.3.tag':'POST-PoC \u00b7 Q3 2026 ONWARDS','collab.3.title':'Co-Development Pilot','collab.3.body':'2\u20133 pilot installations at cost-plus pricing in exchange for real operating data. Independently verified performance and cost accounting. Right of first negotiation on commercial supply.','collab.3.cta':'Discuss pilot term sheet',
+      'collab.4.tag':'OPEN \u00b7 NO PREREQUISITES','collab.4.title':'EPC & Integrator Briefings','collab.4.body':'Structured technology briefing for project developers and EPC contractors evaluating VRFB for their pipeline. Open to licensing and component supply discussions with parties at scale.','collab.4.cta':'Book a 60-min briefing',
+      'savings.title':'Modelled Annual Savings by Industrial Segment','savings.note':'Model outputs at design-target system performance. ~65% of savings from demand-charge reduction; ~35% from time-of-use arbitrage.',
+      'team.bio':'Electrochemical engineer specialised in numerical modelling of advanced systems. Graduated summa cum laude from Universit\u00e0 di Padova (thesis: VRFB stack modelling with COMSOL). Experience at E&#8209;Storage (UniPD spin&#8209;off) and in Antoni Forner&#8209;Cuenca\u2019s group (TU/e, Eindhoven) on multiscale electrode models and engineered flow distribution. Since June 2025, PhD researcher at TU Delft (Process & Energy) on CFD modelling of electrochemical reactors \u2014 two peer&#8209;reviewed publications in Year 1. <strong>Ermenegildo Zegna Scholar.</strong> Leads electrochemical design, simulation programme and IP development. Bridges deep physics with manufacturability to turn I\u2013V curves into scalable, reliable products.',
+      'company.title':'Company profile (startup)','company.lead':'Key regulatory & transparency items. We keep this page updated as we incorporate; for documents we will link to the Chamber of Commerce/Registry or publish PDFs.',
+      'company.i1':'<strong>Incorporation</strong>: date & place \u2014 notary name/address (TBD).','company.i2':'<strong>Registered office</strong>: HQ (EU \u00b7 NL/IT) and any secondary offices (TBD).','company.i3':'<strong>Corporate purpose</strong>: design & prototyping of electrochemical reactors for flow batteries; model&#8209;driven optimization; materials and manufacturing development.','company.i4':'<strong>R&D spend (year 1)</strong>: detailed plan (TBD).','company.i5':'<strong>Shareholders (equity)</strong>: founding team \u2014 Davide Bordignon, Co-Founder & CTO (TBD%). No fiduciaries/holdings (TBD).','company.i6':'<strong>Participations</strong>: none at this stage.','company.i7':'<strong>Degrees & qualifications</strong>: see Team.','company.i8':'<strong>Relations</strong>: universities, incubators, institutional investors (TBD).','company.i9':'<strong>Annual accounts (XBRL)</strong>: link after first filing (TBD).','company.i10':'<strong>IP</strong>: industrial and intellectual property portfolio (TBD).',
+      'company.note':'For official filings we will reference the relevant registry pages or attach signed PDFs.',
+      'contact.title':'Get in touch','contact.lead':'For collaborations, prototypes or technical requests.','contact.name':'Name','contact.email':'Email','contact.msg':'Message','contact.send':'Send',
+      'info.title':'Information','info.loc':'HQ: EU \u00b7 NL / IT','info.notes':'For legal, NDAs and industrial partnerships please reach us by email. Online and on&#8209;site meetings available.',
+      'footer.stage':'IonVe (in formation), April 2026','footer.terms':'Terms','footer.privacy':'Privacy','footer.cookie':'Cookie'
+    },
+    it: {
+      'header.tagline':'From ion transport to voltage efficiency.',
+      'hero.stage':'Pre-incorporazione \u00b7 MK1 in fase di test \u00b7 PoC previsto: giugno 2026',
+      'hero.title':'Reattori elettrochimici per sistemi <span style="background:linear-gradient(135deg,var(--accent1),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent">redox&#8209;flow</span>',
+      'hero.lead':'Progettazione, prototipazione e validazione di celle e stack ad alte prestazioni: bassa resistenza ohmica, idraulica ottimizzata e integrazione di materiali avanzati.',
+      'kpi.capex':'Costo installato target (6 h)','kpi.cost':'vs. sistemi VRFB attuali','kpi.stacks':'meno stack a 500 kW','kpi.density':'densit\u00e0 di potenza target','kpi.life':'vita operativa, senza degrado',
+      'tabs.what':'Cosa facciamo','tabs.products':'Prodotti','tabs.collab':'Collabora','tabs.team':'Team','tabs.company':'Azienda','tabs.contact':'Contatti',
+      'ctx.t1':'Lo storage di lunga durata \u00e8 economicamente conveniente per l\u2019industria oggi','ctx.b1':'I siti industriali con elevate demand charge e contratti time-of-use generano gi\u00e0 un business case positivo per 4\u201312 ore di storage. La barriera non \u00e8 economica \u2014 \u00e8 l\u2019assenza di un prodotto accessibile e affidabile.',
+      'ctx.t2':'Il Li-ion non \u00e8 conveniente oltre le 4\u20136 ore','ctx.b2':'Per durate di 6 ore o pi\u00f9, il TCO a 30 anni del Li-ion \u00e8 significativamente pi\u00f9 alto del VRFB, a causa delle sostituzioni delle batterie ogni 10\u201312 anni.',
+      'ctx.t3':'I sistemi RFB esistenti restano troppo costosi','ctx.b3':'I prodotti attuali sono prezzati a \u20ac450\u2013600/kWh installato \u2014 risultato di un\u2019architettura obsoleta: elevato numero di componenti, parti in grafite lavorate, ingegneria custom per ogni installazione.',
+      'tco.title':'CONFRONTO TCO A 30 ANNI \u2014 500 kW / 3 MWh (OUTPUT MODELLO A PRESTAZIONI TARGET)',
+      'tco.vrfb':'VRFB \u2014 stato dell\u2019arte attuale','tco.liion':'Li-ion (incl. 2\u00d7 sostituzioni, 30 anni)',
+      'apps.title':'Dove lo storage conta oggi','apps.intro':'Le rinnovabili variabili dominano la nuova generazione. I colli di bottiglia sono flessibilit\u00e0, sicurezza e costo lungo ciclo di vita. Uno storage sicuro e di lunga durata livella la variabilit\u00e0, evita i curtailment e abilita nuovi modelli di business.',
+      'apps.usecases':'Ambiti applicativi dello storage redox&#8209;flow',
+      'apps.btm':'Autoconsumo FV (BTM): immagazzina il solare diurno e usa l\u2019energia quando serve, riducendo gli acquisti e appiattendo i picchi.',
+      'apps.arb':'Arbitraggio prezzi & congestioni: sposta l\u2019energia verso ore ad alto valore e supera i vincoli di rete con storage tollerante ai cicli.',
+      'apps.co':'Co&#8209;location con eolico & FV: lo storage on&#8209;site minimizza le perdite di trasporto e scala in modo modulare.',
+      'apps.grid':'Supporto di rete: peak&#8209;shaving, controllo rampe e capacity firming nei colli di bottiglia.',
+      'why.title':'Perch\u00e9 le redox flow battery?','why.body':'Le RFB fanno circolare elettroliti liquidi attraverso celle elettrochimiche. <em>Energia</em> (serbatoi) e <em>potenza</em> (area cella/numero stack) sono disaccoppiate: durata su misura a progetto di stack costante. Chimica acquosa, ciclaggio profondo e ricondizionamento facile \u2192 lunga vita, alta sicurezza e prestazioni stabili.',
+      'adv.title':'4 Innovazioni Architetturali \u2014 per costo, efficienza e scalabilit\u00e0',
+      'adv.b1':'<strong>Frame in Polimero Conduttivo</strong> \u2014 un singolo componente stampabile integra funzioni strutturali, elettriche e di tenuta, sostituendo bipolar plate + flow frame + guarnizione. Compatibile con stampaggio a iniezione e compressione a volumi industriali.',
+      'adv.b2':'<strong>High Power Microstack \u2014 Architettura Modulare</strong> \u2014 moduli da 10 celle standardizzati con interfacce idrauliche ed elettriche definite. Manutenzione hot-swap, assemblaggio automatizzabile. Target: riduzione costo stack 32\u201335%, 3,4\u00d7 meno unit\u00e0 a parit\u00e0 di potenza.',
+      'adv.b3':'<strong>Distribuzione Idraulica Selettiva</strong> \u2014 manifolding per-modulo elimina i percorsi di elettrolita condivisi, sopprimendo le correnti di shunt parassite e riducendo le perdite di pressione. Stima: +5 pp di efficienza round-trip.',
+      'adv.b4':'<strong>Piattaforma Sistema IonVe VRFB</strong> \u2014 tutte le innovazioni integrate in un unico prodotto industriale ripetibile: design della cella, architettura dello stack, idraulica, elettronica e controllo in un sistema co-progettato.',
+      'g.capex':'costo installato*','g.eta':'efficienza round-trip*','g.parts':'meno stack a 500 kW*','g.rel':'LCOS a 6\u20138 h*',
+      'adv.note':'*Target derivati da modello vs. stato dell\u2019arte pubblicato (Poli et al., 2024; Noack et al., 2016). Validazione sperimentale in corso attraverso il programma PoC strutturato.',
+      'img.ph':'Aggiungi Module_render.png in assets/img/',
+      'roadmap.title':'Roadmap di sviluppo','roadmap.here':'Siamo qui',
+      'roadmap.p1':'Proof of Concept','roadmap.p1i1':'MK1/2: test idraulici ed elettrochimici','roadmap.p1i2':'PoC: 3 criteri go/no-go validati','roadmap.p1i3':'Deposito brevetti (3 domande)','roadmap.p1i4':'Costituzione societ\u00e0',
+      'roadmap.p2':'Prototipi Funzionali','roadmap.p2i1':'2\u20133 prototipi funzionali','roadmap.p2i2':'Test di durata 250\u2013500 cicli','roadmap.p2i3':'Validazione lab esterno indipendente','roadmap.p2i4':'Primo partner pilota firmato',
+      'roadmap.p3':'Pilota Industriale','roadmap.p3i1':'2\u20133 piloti in co-sviluppo','roadmap.p3i2':'Dati di performance indipendenti','roadmap.p3i3':'Qualifica supply chain','roadmap.p3i4':'Raccolta Series A',
+      'roadmap.p4':'Scala Commerciale','roadmap.p4i1':'15\u201330 sistemi/anno, 5 paesi','roadmap.p4i2':'Partnership con EPC','roadmap.p4i3':'Ricavi ricorrenti LTSA','roadmap.p4i4':'Modello Energy-as-a-Service',
+      'vision.title':'Visione','vision.body':'Uniamo teoria profonda e visione industriale/mercato per ottimizzare i sistemi elettrochimici\u2014trasformando le curve I\u2013V in prodotti affidabili e scalabili. Prototipizziamo reattori ottimizzati per ogni applicazione (focus flow battery), pronti per l\u2019integrazione nel mercato dello storage.',
+      'prod.notice':'IonVe \u00e8 in fase di sviluppo. Nessun sistema \u00e8 attualmente disponibile per la vendita. Le configurazioni di seguito sono casi di riferimento usati nel modello di screening tecno-economico, ottimizzati per i punti operativi target dell\u2019architettura.',
+      'prod.100.tier':'ENTRY','prod.100.desc':'Siti industriali di medie dimensioni e installazioni pilota. Punto d\u2019ingresso per nuovi clienti e partner in co-sviluppo.',
+      'prod.500.tier':'STANDARD \u00b7 TARGET PRIMARIO','prod.500.desc':'Target commerciale primario. Fonderie, pressofusione, cold chain, data centre. Caso di riferimento per tutta la modellazione tecno-economica.',
+      'prod.1000.tier':'INDUSTRIALE','prod.1000.desc':'Industria pesante: acciaio, metalmeccanica, cemento, riciclaggio. Stesso design dello stack, senza re-engineering. Gamma di potenza fino a 50 MW.',
+      'prod.power':'Potenza','prod.energy':'Energia (6 h)','prod.savings':'risparmi modellati*','prod.payback':'payback semplice*','prod.img.ph':'Rendering in arrivo',
+      'prod.ltsa.title':'Servizio & Supporto','prod.ltsa.body':'Tutti i sistemi includono contratti di servizio a lungo termine (LTSA): monitoraggio remoto, manutenzione preventiva, gestione dell\u2019elettrolita. IonVe pu\u00f2 agire come agente di approvvigionamento \u2014 l\u2019elettrolita al vanadio \u00e8 un asset permanente, mai consumato.',
+      'prod.note':'*Risparmi modellati a prestazioni target per un caso fonderia (500 kW / 3 MWh). Validazione sito-specifica in attesa. IonVe raccomanda Li-ion per durate inferiori a 4 ore.',
+      'collab.intro.title':'Come lavoriamo con i partner','collab.intro.body':'IonVe \u00e8 in fase di sviluppo. Collaboriamo con partner industriali, EPC, investitori e istituzioni di ricerca a quattro livelli \u2014 ciascuno calibrato sullo stato attuale della tecnologia e del nostro programma di validazione.',
+      'collab.1.tag':'GRATUITO \u00b7 SENZA IMPEGNO \u00b7 NDA','collab.1.title':'Screening Sito-Specifico','collab.1.body':'Modelliamo i risparmi annui dai tuoi dati di carico a intervalli di 15 minuti e dalle condizioni del contratto elettrico. Output: report NPV, payback e sensitivit\u00e0 entro 2 settimane dalla ricezione dei dati.','collab.1.cta':'Richiedi screening sito',
+      'collab.2.tag':'SU RICHIESTA \u00b7 SOTTO NDA','collab.2.title':'Accesso ai Dati di Test','collab.2.body':'Condividiamo i risultati dei test elettrochimici e i dati di performance dello stack man mano che i milestone vengono completati: idraulica MK1 (fatto), caratterizzazione elettrochimica (in corso), risultati MK2.','collab.2.cta':'Richiedi pacchetto dati tecnici',
+      'collab.3.tag':'POST-PoC \u00b7 DA Q3 2026','collab.3.title':'Pilota in Co-sviluppo','collab.3.body':'2\u20133 installazioni pilota a costo pi\u00f9 margine in cambio di dati operativi reali. Performance verificate in modo indipendente. Diritto di prima negoziazione per la fornitura commerciale.','collab.3.cta':'Discuti il term sheet pilota',
+      'collab.4.tag':'APERTO \u00b7 SENZA PREREQUISITI','collab.4.title':'Briefing EPC & Integratori','collab.4.body':'Briefing tecnologico strutturato per sviluppatori di progetti e appaltatori EPC che valutano VRFB per il proprio portafoglio. Aperti a discussioni su licenze e fornitura di componenti con soggetti a scala.','collab.4.cta':'Prenota un briefing da 60 min',
+      'savings.title':'Risparmi Annui Modellati per Segmento Industriale','savings.note':'Output del modello a prestazioni target. ~65% dei risparmi da riduzione demand charge; ~35% da arbitraggio time-of-use.',
+      'team.bio':'Ingegnere elettrochimico specializzato in modellazione numerica di sistemi avanzati. Laureato summa cum laude all\u2019Universit\u00e0 di Padova (tesi: modellazione stack VRFB con COMSOL). Esperienza in E&#8209;Storage (spin&#8209;off UniPD) e nel gruppo di Antoni Forner&#8209;Cuenca (TU/e, Eindhoven) su modelli multiscala e distribuzione di flusso ingegnerizzata. Da giugno 2025, ricercatore PhD al TU Delft (Process & Energy) su CFD per reattori elettrochimici \u2014 due pubblicazioni peer&#8209;reviewed nel primo anno. <strong>Borsa Ermenegildo Zegna.</strong> Guida il design elettrochimico, il programma di simulazione e lo sviluppo IP. Collega la fisica profonda con la producibilit\u00e0 per trasformare le I\u2013V in prodotti scalabili e affidabili.',
+      'company.title':'Profilo aziendale (startup)','company.lead':'Voci regolamentari e di trasparenza. Aggiorneremo questa pagina alla costituzione; i documenti saranno collegati al Registro Imprese o pubblicati in PDF.',
+      'company.i1':'<strong>Costituzione</strong>: data e luogo \u2014 notaio e indirizzo (TBD).','company.i2':'<strong>Sede legale</strong>: HQ (EU \u00b7 NL/IT) ed eventuali sedi secondarie (TBD).','company.i3':'<strong>Oggetto sociale</strong>: progettazione e prototipazione di reattori elettrochimici per flow battery; ottimizzazione guidata da modelli; sviluppo materiali e processi.','company.i4':'<strong>Spese R&S (anno 1)</strong>: piano dettagliato (TBD).','company.i5':'<strong>Soci in equity</strong>: team fondatore \u2014 Davide Bordignon, Co-Fondatore & CTO (TBD%). Nessuna fiduciaria/holding (TBD).','company.i6':'<strong>Societ\u00e0 partecipate</strong>: nessuna al momento.','company.i7':'<strong>Titoli e qualifiche</strong>: vedi Team.','company.i8':'<strong>Relazioni</strong>: universit\u00e0, incubatori, investitori istituzionali (TBD).','company.i9':'<strong>Bilancio (XBRL)</strong>: link dopo il primo deposito (TBD).','company.i10':'<strong>IP</strong>: diritti di propriet\u00e0 industriale e intellettuale (TBD).',
+      'company.note':'Per gli atti ufficiali rimanderemo a pagine del Registro o alle copie firmate.',
+      'contact.title':'Contattaci','contact.lead':'Per collaborazioni, prototipi o richieste tecniche.','contact.name':'Nome','contact.email':'Email','contact.msg':'Messaggio','contact.send':'Invia',
+      'info.title':'Informazioni','info.loc':'Sede: EU \u00b7 NL / IT','info.notes':'Per aspetti legali, NDA e partnership industriali contattaci via email. Disponibili meeting online e on&#8209;site.',
+      'footer.stage':'IonVe (in formazione), aprile 2026','footer.terms':'Termini','footer.privacy':'Privacy','footer.cookie':'Cookie'
+    }
+  };
+
+  function applyI18n(lang) {
+    const dict = i18n[lang] || i18n.en;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const txt = dict[el.getAttribute('data-i18n')];
+      if (typeof txt === 'string') el.innerHTML = txt;
+    });
+    localStorage.setItem('ionve-lang', lang);
+    document.getElementById('langEn').setAttribute('aria-pressed', String(lang === 'en'));
+    document.getElementById('langIt').setAttribute('aria-pressed', String(lang === 'it'));
+  }
+
+  const savedLang = localStorage.getItem('ionve-lang') || 'en';
+  applyI18n(savedLang);
+  document.getElementById('langEn').addEventListener('click', () => applyI18n('en'));
+  document.getElementById('langIt').addEventListener('click', () => applyI18n('it'));
+
+  document.getElementById('y').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
