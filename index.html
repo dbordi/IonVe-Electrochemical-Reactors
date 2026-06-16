@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html data-theme="light" lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>IonVe — Electrochemical Reactors</title>
-<meta content="IonVe develops electrochemical reactors and system architecture for redox-flow batteries aimed at industrial applications where lifetime, safety and 4–12 hour duration matter." name="description"/>
+<title>IonVe · Electrochemical Reactors</title>
+<meta content="IonVe develops next-generation Redox Flow Battery systems for industrial long-duration energy storage, combining four architectural innovations to reduce cost by 40%." name="description"/>
 <meta content="light dark" name="color-scheme"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -44,9 +44,6 @@
     header.compact .wordmark-wrap{height:46px;opacity:.88}
     header.compact .brand .logo img{transform:scale(0.375)}
     header.compact .brand .wordmark img{transform:scale(0.365)}
-    /* Normal: tagline in row 2, full width. Compact: moves to row 1 col 2 (centred between logo and actions) */
-    .tagline{color:var(--muted);font-size:15px;text-align:center;grid-column:1/-1;grid-row:2;transition:font-size .3s}
-    header.compact .tagline{grid-column:2;grid-row:1;font-size:13px}
     .actions{grid-column:3;justify-self:end;display:flex;gap:8px}
     header.compact .brand{grid-column:1;justify-self:start}
     .btn-sm{appearance:none;border:1px solid var(--line);background:var(--card);color:var(--text);padding:7px 11px;border-radius:10px;cursor:pointer;font-family:'Inter',sans-serif;font-size:13px;font-weight:600}
@@ -57,11 +54,13 @@
     .stage-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(13,94,168,.08);border:1px solid rgba(13,94,168,.16);border-radius:30px;padding:6px 14px;font-size:13px;color:var(--accent1);margin-bottom:16px;font-weight:600}
     .stage-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);animation:pulse 1.8s ease-in-out infinite}
     @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
-    .kpi-bar{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin:28px 0 0}
-    .kpi{background:var(--card2);padding:18px 14px 15px;text-align:center;transition:background .2s}
-    .kpi:hover{background:var(--card)}
-    .kpi-val{display:block;font-family:'Manrope',sans-serif;font-size:clamp(18px,2vw,24px);font-weight:700;letter-spacing:-.025em;line-height:1.05;margin-bottom:6px;color:var(--accent1)}
-    .kpi-lbl{font-size:11.5px;color:var(--muted);line-height:1.38;font-weight:600}
+    .kpi-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:30px 0 0}
+    .kpi{position:relative;background:linear-gradient(160deg,rgba(255,255,255,.96),rgba(238,243,249,.88));border:1px solid rgba(13,94,168,.14);border-radius:16px;padding:26px 16px 23px;text-align:center;box-shadow:0 10px 24px rgba(15,23,38,.06);overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s}
+    [data-theme="dark"] .kpi{background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.025));border-color:rgba(19,167,216,.18)}
+    .kpi::before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--accent1),var(--accent2))}
+    .kpi:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(15,23,38,.10);border-color:rgba(19,167,216,.28)}
+    .kpi-val{display:none}
+    .kpi-lbl{display:block;font-family:'Manrope',sans-serif;font-size:clamp(16px,2vw,21px);color:var(--text);line-height:1.18;font-weight:800;letter-spacing:-.01em}
     .hero-note{margin-top:12px;font-size:12px;color:var(--muted)}
     .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
     .btn-secondary{display:inline-flex;align-items:center;justify-content:center;padding:12px 18px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--text);font-family:'Manrope',sans-serif;font-weight:700;font-size:14px;text-decoration:none}
@@ -82,13 +81,24 @@
     [data-theme="dark"] .card{background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.025))}
     .card h3{margin:6px 0 12px;font-size:clamp(16px,2vw,21px)}
     .card+.card{margin-top:18px}
-    .context-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px}
+    #solution-intro{align-items:stretch}
+    #solution-intro .card{height:100%;min-height:360px;display:flex;flex-direction:column;overflow:hidden}
+    #solution-intro .card+.card{margin-top:0}
+    #solution-intro .card p{max-width:64ch}
+    .context-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:18px 0}
     .ctx-card{background:var(--card2);border:1px solid var(--line);border-radius:16px;padding:20px 18px}
     .ctx-num{font-family:'Inter',sans-serif;font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--accent1);margin-bottom:8px}
     .ctx-card h4{margin:0 0 8px;font-size:14.5px}
     .ctx-card p{margin:0;font-size:13px;color:var(--muted);line-height:1.55}
-    .hero-media, .media-box{background:var(--card2);border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;align-items:center;justify-content:center;min-height:260px}
-    .hero-media img, .media-box img{max-width:100%;height:auto;display:block;border-radius:12px}
+    .context-grid .ctx-card{position:relative;padding:20px 18px;background:linear-gradient(160deg,rgba(255,255,255,.98),rgba(238,243,249,.92));box-shadow:0 8px 22px rgba(15,23,38,.055);overflow:hidden}
+    [data-theme="dark"] .context-grid .ctx-card{background:linear-gradient(160deg,rgba(255,255,255,.065),rgba(255,255,255,.025))}
+    .context-grid .ctx-card::before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--accent1),var(--accent2));opacity:.85}
+    .ctx-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px}
+    .context-grid .ctx-num{flex:0 0 auto;margin:0;font-size:12px;letter-spacing:.04em;line-height:1;display:inline-flex;align-items:center;justify-content:center;width:34px;height:26px;border-radius:999px;background:rgba(13,94,168,.09);border:1px solid rgba(13,94,168,.14)}
+    .context-grid .ctx-card h4{margin:0;font-size:14.5px;line-height:1.24;letter-spacing:-.015em}
+    .context-grid .ctx-card p{font-size:12.75px;line-height:1.52}
+    .hero-media, .media-box{background:var(--card2);border:1px solid var(--line);border-radius:16px;padding:22px;display:flex;align-items:center;justify-content:center;min-height:220px;max-height:380px;overflow:hidden}
+    .hero-media img, .media-box img{max-width:100%;max-height:100%;height:auto;width:auto;display:block;border-radius:10px;object-fit:contain}
     .split{display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:center}
     .eyebrow{font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--accent1);text-transform:uppercase;margin-bottom:8px}
     .list-tight{margin:10px 0 0;padding-left:18px}
@@ -105,31 +115,36 @@
     .tco-bar.vrfb{background:#7b8ea5}
     .tco-bar.liion{background:#c78972}
     .tco-val{font-family:'Manrope',sans-serif;font-weight:700;font-size:13px;white-space:nowrap}
-    .innovation-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:18px}
-    .innovation-card{background:var(--card2);border:1px solid var(--line);border-radius:16px;padding:18px}
+    .innovation-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:18px;align-items:stretch}
+    .innovation-card{background:linear-gradient(160deg,rgba(255,255,255,.98),rgba(238,243,249,.92));border:1px solid var(--line);border-radius:16px;padding:18px;min-height:285px}
+    [data-theme="dark"] .innovation-card{background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.025))}
     .innovation-card .n{font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--accent1);margin-bottom:8px}
     .innovation-card h4{margin:0 0 10px;font-size:16px}
     .innovation-card p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.55}
-    .innovation-img{margin-top:14px;background:#fff;border:1px solid rgba(15,23,38,.08);border-radius:12px;min-height:170px;display:flex;align-items:center;justify-content:center;padding:16px}
-    .innovation-img img{max-width:100%;max-height:180px;display:block}
+    .innovation-img{width:100%;margin-top:14px;background:linear-gradient(160deg,#fff,var(--card2));border:1px solid var(--line);border-radius:12px;height:210px;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:16px}
+    [data-theme="dark"] .innovation-img{background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.025))}
+    .innovation-img img{width:auto;height:auto;max-width:100%;max-height:100%;display:block;object-fit:contain;object-position:center;transition:transform .3s}
+    .innovation-img:hover img{transform:scale(1.03)}
     .status-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:18px}
     .status-list{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:10px}
     .status-list li{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:flex-start}
     .status-list .tick{width:24px;height:24px;border-radius:50%;background:rgba(19,167,216,.12);border:1px solid rgba(19,167,216,.25);display:grid;place-items:center;color:var(--accent2);font-size:13px;font-weight:700}
-    .roadmap{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:6px}
-    .rmap-phase{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:16px 14px}
-    .rmap-phase.now{border-color:rgba(13,94,168,.35);background:rgba(13,94,168,.06)}
-    .rmap-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--muted);margin-bottom:4px}
+    .roadmap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:18px;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--card2)}
+    .roadmap::before{display:none}
+    .rmap-phase{position:relative;background:linear-gradient(160deg,rgba(255,255,255,.98),rgba(238,243,249,.90));border:none;border-right:1px solid var(--line);border-radius:0;padding:18px 17px 20px;box-shadow:none;min-height:190px}
+    .rmap-phase:last-child{border-right:none}
+    [data-theme="dark"] .rmap-phase{background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.025))}
+    .rmap-phase.now{background:linear-gradient(160deg,rgba(13,94,168,.12),rgba(19,167,216,.06))}
+    .rmap-step{position:static;transform:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--card);border:2px solid rgba(13,94,168,.26);color:var(--accent1);font-family:'Manrope',sans-serif;font-weight:800;font-size:14px;box-shadow:0 7px 16px rgba(15,23,38,.08);margin-bottom:12px}
+    .rmap-phase.now .rmap-step{background:linear-gradient(135deg,var(--accent1),var(--accent2));border-color:transparent;color:#fff}
+    .rmap-lbl{font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--muted);margin-bottom:6px}
     .rmap-phase.now .rmap-lbl{color:var(--accent2)}
-    .rmap-title{font-family:'Manrope',sans-serif;font-weight:700;font-size:14px;margin-bottom:6px}
-    .rmap-trl{display:inline-block;font-size:11px;font-weight:700;background:rgba(13,94,168,.12);color:var(--accent1);border-radius:6px;padding:2px 7px;margin-bottom:8px}
-    .rmap-phase.now .rmap-trl{background:rgba(19,167,216,.12);color:var(--accent2)}
-    .rmap-items{list-style:none;margin:0;padding:0;display:grid;gap:4px}
-    .rmap-items li{font-size:12px;color:var(--muted);display:flex;gap:6px}
-    .rmap-items li::before{content:"○";flex-shrink:0}
-    .rmap-phase.now .rmap-items li::before{content:"●";color:var(--accent2)}
-    .here{font-size:10px;font-weight:700;color:var(--accent2);margin-bottom:6px}
-    .here::before{content:"↑ "}
+    .rmap-title{font-family:'Manrope',sans-serif;font-weight:800;font-size:15px;line-height:1.25;margin-bottom:0}
+    .rmap-note{margin:8px 0 0;color:var(--muted);font-size:12.25px;line-height:1.45}
+    .rmap-bullets{margin:10px 0 0;padding-left:16px;color:var(--muted);font-size:12.2px;line-height:1.45}
+    .rmap-bullets li{margin:3px 0}
+    .here{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent2);margin-bottom:8px}
+    .here::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--accent2)}
     .collab-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
     .collab-card{background:linear-gradient(160deg,rgba(255,255,255,.98),rgba(255,255,255,.92));border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
     [data-theme="dark"] .collab-card{background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.025))}
@@ -140,7 +155,7 @@
     .collab-cta{font-size:12px;font-weight:700;color:var(--accent2);text-decoration:none;display:inline-flex;align-items:center;gap:5px}
     .collab-cta::after{content:"→"}
     .member{display:flex;gap:20px;align-items:flex-start}
-    .portrait{width:140px;height:140px;border-radius:20px;object-fit:cover;flex-shrink:0;box-shadow:0 6px 20px rgba(0,0,0,.16)}
+    .portrait{width:160px;height:194px;border-radius:16px;object-fit:cover;flex-shrink:0;box-shadow:0 6px 20px rgba(0,0,0,.16)}
     form{display:grid;gap:10px}
     input,textarea{width:100%;padding:12px 14px;border-radius:12px;border:1px solid rgba(15,23,38,.13);background:#fff;color:var(--text);font-family:'Inter',sans-serif;font-size:14px}
     [data-theme="dark"] input,[data-theme="dark"] textarea{background:#0e1627;border-color:rgba(255,255,255,.15)}
@@ -150,76 +165,89 @@
     footer{border-top:1px solid var(--line);padding:22px 0 56px;color:var(--muted);font-size:13px}
     footer .row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
     @media(max-width:1100px){.split,.status-grid{grid-template-columns:1fr} .roadmap{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:900px){.grid-2,.grid-3,.context-grid,.innovation-grid,.collab-grid{grid-template-columns:1fr} .kpi-bar{grid-template-columns:repeat(3,1fr)}}
-    @media(max-width:540px){.kpi-bar{grid-template-columns:repeat(2,1fr)} .roadmap{grid-template-columns:1fr} .member{flex-direction:column}}
+    @media(max-width:900px){.grid-2,.grid-3,.context-grid,.innovation-grid,.collab-grid{grid-template-columns:1fr}}
+    @media(max-width:540px){
+      .head{grid-template-columns:minmax(0,1fr) auto;gap:8px;padding:12px 0 10px}
+      .brand{grid-column:1;justify-self:start;gap:8px;min-width:0}
+      .actions{grid-column:2;gap:6px}
+      .btn-sm{padding:6px 8px;font-size:12px}
+      .logo-wrap{width:38px;height:44px}
+      .wordmark-wrap{width:112px;height:62px}
+      .brand .logo img{height:88px;transform:scale(.5)}
+      .brand .wordmark img{height:126px;transform:scale(.492)}
+      header.compact .logo-wrap{width:29px;height:33px}
+      header.compact .wordmark-wrap{width:84px;height:46px}
+      .kpi-bar{grid-template-columns:1fr}.roadmap{grid-template-columns:1fr}.rmap-phase{border-right:none;border-bottom:1px solid var(--line);min-height:auto}.rmap-phase:last-child{border-bottom:none} .member{flex-direction:column}
+    }
   
     .btn-sm[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--accent1);font-weight:700}
     .kpi-val{background:none !important;color:var(--accent1) !important}
-    .innovation-card{display:grid;grid-template-columns:1.2fr .8fr;align-items:center;column-gap:16px}
+    .innovation-card{display:grid;grid-template-columns:1.18fr .82fr;align-items:center;column-gap:18px}
     .innovation-card .n,.innovation-card h4,.innovation-card p{grid-column:1}
-    .innovation-card .innovation-img{grid-column:2;grid-row:1 / span 3;margin-top:0;min-height:156px}
-    .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .innovation-card .innovation-img{grid-column:2;grid-row:1 / span 4;margin-top:0}
     .member-card{display:flex;gap:20px;align-items:flex-start}
-    .portrait-placeholder{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--card2),var(--card));border:1px solid var(--line);color:var(--muted);font-family:'Manrope',sans-serif;text-align:center;padding:18px;line-height:1.2}.portrait-placeholder .placeholder-inner{display:flex;flex-direction:column;align-items:center;gap:6px}.portrait-placeholder .placeholder-title{font-size:18px;font-weight:700;letter-spacing:-.02em;color:var(--text)}.portrait-placeholder .placeholder-sub{font-size:11.5px;font-weight:600;color:var(--muted);max-width:100px}
-    .logo-wall{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:14px}
-    .logo-slot{background:var(--card2);border:1px solid var(--line);border-radius:14px;min-height:96px;display:flex;align-items:center;justify-content:center;padding:14px;overflow:hidden}
-    .logo-slot img{max-width:100%;max-height:46px;display:block;object-fit:contain}
-    .logo-fallback{width:100%;height:48px;display:flex;align-items:center;justify-content:center;border:1px dashed var(--line);border-radius:10px;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.12em}
-    @media(max-width:1100px){.innovation-card{grid-template-columns:1fr}.innovation-card .innovation-img{grid-column:1;grid-row:auto;margin-top:14px}.logo-wall{grid-template-columns:repeat(3,1fr)}}
-    @media(max-width:900px){.team-grid{grid-template-columns:1fr}.logo-wall{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:540px){.logo-wall{grid-template-columns:1fr}.member-card{flex-direction:column}}
+    #logo-grid{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:28px 36px;margin-top:14px;padding:22px;background:var(--card2);border:1px solid var(--line);border-radius:16px}
+    .partner-logo{height:50px;width:150px;object-fit:contain;filter:none;opacity:1;transition:transform .2s}
+    .partner-logo:hover{transform:translateY(-1px)}
+    .recognition-card .split{grid-template-columns:.8fr 1.2fr}
+    .award-list{margin:8px 0 0;padding-left:18px}
+    .award-list li{margin:6px 0}
+    .innovation-tag{display:inline-block;margin-top:12px;font-size:11.5px;font-weight:700;color:var(--accent2);background:rgba(19,167,216,.10);border-radius:8px;padding:4px 10px;letter-spacing:.02em}
+    .img-placeholder{display:flex;align-items:center;justify-content:center;width:100%;height:100%;min-height:120px;border:1px dashed var(--line);border-radius:12px;color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.06em;text-align:center;padding:12px;background:var(--card2)}
+    .media-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:0}
+    .media-thumb{aspect-ratio:4/3;border-radius:12px;overflow:hidden;border:1px solid var(--line);display:block;min-width:0}
+    .media-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .2s}
+    .media-thumb:hover img{transform:scale(1.04)}
+    @media(max-width:1100px){.innovation-card{grid-template-columns:1fr}.innovation-card .innovation-img{grid-column:1;grid-row:auto;margin-top:14px;aspect-ratio:16/9;min-height:180px}.roadmap{grid-template-columns:repeat(2,1fr)}.rmap-phase:nth-child(2){border-right:none}.rmap-phase:nth-child(-n+2){border-bottom:1px solid var(--line)}.recognition-card .split{grid-template-columns:1fr}.media-strip{margin-top:14px}}
+    @media(max-width:900px){#solution-intro{grid-auto-rows:auto}#solution-intro .card{height:auto;min-height:0;overflow:visible}}
+    @media(max-width:540px){.member-card{flex-direction:column}#logo-grid{gap:18px 24px;padding:16px}}
+    @media(max-width:540px){.innovation-card .innovation-img{height:190px;aspect-ratio:auto}.roadmap{grid-template-columns:1fr}.rmap-phase{border-right:none;border-bottom:1px solid var(--line);min-height:auto}.rmap-phase:nth-child(2){border-right:none}.rmap-phase:last-child{border-bottom:none}}
 </style>
 </head>
 <body>
 <header id="site-header">
 <div class="container head">
 <div class="brand">
-<div class="logo"><div class="logo-wrap"><img alt="IonVe logo" src="assets/img/IonveLogo.svg"/></div></div>
-<div class="wordmark"><div class="wordmark-wrap"><img alt="IonVe" src="assets/img/IonveText.svg"/></div></div>
+<div class="logo"><div class="logo-wrap"><img alt="IonVe logo icon" src="assets/img/IonveLogo.svg"/></div></div>
+<div class="wordmark"><div class="wordmark-wrap"><img alt="IonVe wordmark" src="assets/img/IonveText.svg"/></div></div>
 </div>
-<div class="tagline">Industrial long-duration energy storage</div>
 <div class="actions"><button aria-pressed="true" class="btn-sm" id="langEn" title="English">EN</button><button aria-pressed="false" class="btn-sm" id="langIt" title="Italiano">IT</button><button class="btn-sm" id="themeToggle" title="Theme">🌗</button></div>
 </div>
 </header>
 <section class="container hero">
-<div class="stage-badge"><span class="dot"></span><span>Pre-incorporation · PoC target: June 2026</span></div>
+<div class="stage-badge"><span class="dot"></span><span>Pre-incorporation</span></div>
 <h1>Redox-flow battery systems for industrial long-duration storage</h1>
 <p class="lead">IonVe develops electrochemical reactors and system architecture for redox-flow batteries aimed at industrial applications where lifetime, safety and 4–12 hour duration matter.</p>
 <div class="kpi-bar">
-<div class="kpi"><span class="kpi-val">297 €/kWh</span><span class="kpi-lbl">design-stage cost target · 6 h</span></div>
-<div class="kpi"><span class="kpi-val">−40%</span><span class="kpi-lbl">vs. current VRFB system cost</span></div>
-<div class="kpi"><span class="kpi-val">3.4×</span><span class="kpi-lbl">target stack count reduction at 500 kW</span></div>
-<div class="kpi"><span class="kpi-val">600 mA/cm²</span><span class="kpi-lbl">target current density</span></div>
-<div class="kpi"><span class="kpi-val">&gt;30 yr</span><span class="kpi-lbl">intended service-life objective</span></div>
+<div class="kpi"><span class="kpi-lbl">Lower system cost</span></div>
+<div class="kpi"><span class="kpi-lbl">Fewer components</span></div>
+<div class="kpi"><span class="kpi-lbl">More compact optimized design</span></div>
 </div>
 <div class="hero-note">Figures shown on this website are design-stage targets based on current engineering assumptions and modelling. Experimental validation is ongoing.</div>
 <div class="hero-cta"><a class="btn" download="IonVe_Overview.pdf" href="assets/doc/IonVe_Overview.pdf" id="downloadOverview">Download overview</a><a class="btn-secondary" href="#contact" id="heroContactBtn">Contact IonVe</a></div>
 <nav class="tabs" role="tablist">
-<button aria-selected="true" class="tab" data-target="what" role="tab">What we do</button>
-<button aria-selected="false" class="tab" data-target="technology" role="tab">Technology</button>
-<button aria-selected="false" class="tab" data-target="development" role="tab">Development</button>
-<button aria-selected="false" class="tab" data-target="partners" role="tab">Partners</button>
-<button aria-selected="false" class="tab" data-target="team" role="tab">Team</button>
-<button aria-selected="false" class="tab" data-target="contact" role="tab">Contact</button>
+<button aria-selected="true" class="tab" data-target="what" role="tab">Our Products</button>
+<button aria-selected="false" class="tab" data-target="technology" role="tab">Our Innovations</button>
+<button aria-selected="false" class="tab" data-target="development" role="tab">Where We Stand</button>
+<button aria-selected="false" class="tab" data-target="partners" role="tab">The Opportunity</button>
+<button aria-selected="false" class="tab" data-target="team" role="tab">Who We Are</button>
+<button aria-selected="false" class="tab" data-target="contact" role="tab">Get in Touch</button>
 </nav>
 </section>
 <main class="container">
 <section class="panel active" id="panel-what">
-<div class="context-grid">
-<div class="ctx-card">
-<div class="ctx-num">01</div>
-<h4>Long-duration storage is economically viable for industry today</h4>
-<p>Industrial sites with high demand charges and time-of-use contracts can already generate a positive business case for 4–12 hour storage. The barrier is the absence of an affordable, reliable product.</p>
+<div class="grid-2" id="solution-intro" style="margin-bottom:18px">
+<div class="card" id="reactors-card">
+<div class="eyebrow">The big picture</div>
+<h3>Electrochemical Reactors</h3>
+<p class="muted">Electrochemical reactors are devices that convert electrical energy into chemical energy, or the other way round, through controlled redox reactions at the cell level. They are the core hardware behind long-duration energy storage, green hydrogen production and industrial CO₂ conversion.</p>
+<p class="muted">IonVe designs the core architecture of these reactors, from single cells to full industrial systems, aiming for the performance and cost levels needed to make large-scale deployment viable.</p>
 </div>
-<div class="ctx-card">
-<div class="ctx-num">02</div>
-<h4>Lithium-ion is not cost-effective beyond 4–6 hours</h4>
-<p>At durations of 6 hours or more, the total cost of ownership of Li-ion over a 20–30 year industrial lifetime becomes significantly higher, mainly due to pack replacements.</p>
-</div>
-<div class="ctx-card">
-<div class="ctx-num">03</div>
-<h4>Existing RFB systems remain too expensive</h4>
-<p>Current products remain constrained by high component count, machined graphite parts and custom engineering. Standardised, catalogue-style industrial products are still missing.</p>
+<div class="card" id="focus-card">
+<div class="eyebrow">Current focus</div>
+<h3>Where We Focus</h3>
+<p class="muted">IonVe is currently focusing on its Redox Flow Battery (RFB) system, designed for industrial long-duration storage and now in prototype testing. We have demonstrated the proof of concept and are moving toward pilot plant development.</p>
+<p class="muted">In parallel, we are starting to look at water electrolyzer architectures and CO₂ reduction reactors as the next step for our cell-engineering platform.</p>
 </div>
 </div>
 <!-- RFB explainer box: left = description, right = flow battery image -->
@@ -230,14 +258,14 @@
 <h3 class="rfb-title">What is a flow battery?</h3>
 <p class="muted rfb-intro">Think of a liquid-filled tank that produces electricity as the fluid passes through an electrochemical cell.</p>
 <ul class="list-tight rfb-bullets">
-<li>More tank volume — more hours of autonomy</li>
+<li>More tank volume means more hours of autonomy</li>
 <li>Unlike lithium-ion, the chemistry does not degrade over time</li>
 <li>Capacity depends only on tank size</li>
 <li>Non-flammable, inherently safe and fully recyclable</li>
 </ul>
 </div>
 <div class="hero-media">
-<img alt="Redox flow battery diagram" src="assets/img/flow_battery_picture.png"/>
+<img alt="Diagram of a redox flow battery showing electrolyte storage tanks, pumps and an electrochemical cell stack with membrane and porous electrodes" loading="lazy" onerror="imgFallback(this)" src="assets/img/flow_battery_picture.png"/>
 </div>
 </div>
 </div>
@@ -246,21 +274,34 @@
 <div>
 <div class="eyebrow">Where IonVe fits</div>
 <h3>Built for industrial sites that cycle frequently and plan for the long term</h3>
-<p class="muted">IonVe is positioned for the part of the market where long lifetime, safety, and 4–12 hour duration matter. The target use case is the segment where industrial users need daily cycling, high power peak and a long term asset horizon.</p>
+<p class="muted">IonVe is positioned for energy-intensive industries and centers that need safe daily cycling, high peak power and a long-term asset horizon, including <strong>steel industries, foundries, cement plants and data centers</strong>.</p>
 <ul class="list-tight">
-<li>Peak shaving and electricity cost reduction at energy-intensive sites</li>
+<li>Peak shaving and electricity cost reduction for energy-intensive sites</li>
 <li>PV self-consumption and energy shifting in behind-the-meter applications</li>
-<li>Long-duration storage where Li-ion becomes less attractive on a full-life basis</li>
+<li>Industrial storage for steel industries, foundries, cement plants, data centers and similar high-consumption sites</li>
 </ul>
-<p class="note" style="margin-top:14px">IonVe is designed for storage durations above 4 hours. For shorter durations, Li-ion often remains the more appropriate choice.</p>
 </div>
 <div class="hero-media">
-<img alt="IonVe system rendering" src="assets/img/Rendering.png"/>
+<img alt="3D rendering of the IonVe containerized energy storage system installed on an industrial site" loading="lazy" onerror="imgFallback(this)" src="assets/img/Rendering.png"/>
 </div>
+</div>
+</div>
+<div class="context-grid">
+<div class="ctx-card">
+<div class="ctx-head"><div class="ctx-num">01</div><h4>Long-duration storage is economically viable for industry today</h4></div>
+<p>Industrial sites with high demand charges and time-of-use contracts can already generate a positive business case for 4–12 hour storage. The barrier is the absence of an affordable, reliable product.</p>
+</div>
+<div class="ctx-card">
+<div class="ctx-head"><div class="ctx-num">02</div><h4>Lithium-ion is not cost-effective beyond 4–6 hours</h4></div>
+<p>At durations of 6 hours or more, the total cost of ownership of Li-ion over a 20–30 year industrial lifetime becomes significantly higher, mainly due to pack replacements.</p>
+</div>
+<div class="ctx-card">
+<div class="ctx-head"><div class="ctx-num">03</div><h4>Existing RFB systems remain too expensive</h4></div>
+<p>Current products remain constrained by high component count, machined graphite parts and custom engineering. Standardised, catalogue-style industrial products are still missing.</p>
 </div>
 </div>
 <div class="card">
-<h3>30-year TCO comparison — 500 kW / 3 MWh reference case</h3>
+<h3>30-year TCO comparison for a 500 kW / 3 MWh reference case</h3>
 <div class="tco-block">
 <div class="tco-title">MODEL OUTPUT AT DESIGN-TARGET PERFORMANCE</div>
 <div class="tco-row">
@@ -269,7 +310,7 @@
 <span class="tco-val" style="color:var(--accent2)">€975k</span>
 </div>
 <div class="tco-row">
-<span class="tco-label">VRFB — current state of the art</span>
+<span class="tco-label">VRFB (current state of the art)</span>
 <div class="tco-bar-wrap"><div class="tco-bar vrfb" style="width:91%"></div></div>
 <span class="tco-val">~€1.5M</span>
 </div>
@@ -287,43 +328,47 @@
 <div class="split">
 <div>
 <div class="eyebrow">Architecture</div>
-<h3>Cell-to-system design aimed at cost, efficiency and manufacturability</h3>
-<p class="muted">IonVe's approach is architectural rather than chemistry-driven. The goal is to redesign the cell and stack platform so that redox-flow systems become more practical for industrial deployment: fewer units, simpler assembly, improved hydraulic control and a more repeatable product platform.</p>
-<p class="muted">The render shown here represents the current design direction of the module and system platform.</p>
+<h3>Three architectural innovations for scalable electrochemical flow systems</h3>
+<p class="muted">IonVe introduces three architectural innovations for electrochemical flow systems, starting from redox flow batteries and extending naturally to other flow-based electrochemical reactors.</p>
+<p class="muted">These innovations improve reactor architecture, module power density and system integration, creating a more efficient, lower cost and scalable platform that increases the competitiveness and economic value of the final product.</p>
 </div>
 <div class="media-box">
-<img alt="IonVe module render" src="assets/img/Module_render.png"/>
+<img alt="Exploded 3D render of the IonVe stack module showing internal cell layers and assembly" loading="lazy" onerror="imgFallback(this)" src="assets/img/Module_render.png"/>
 </div>
 </div>
 </div>
 <div class="innovation-grid">
 <div class="innovation-card">
 <div class="n">INNOVATION 01</div>
-<h4>Conductive Polymer Frame</h4>
-<p>A new bipolar plate, based on a new material and architecture aimed at increasing efficiency, facilitating assembly, reducing part count and opening a more scalable manufacturing.</p>
-<div class="innovation-img"><img alt="Conductive polymer frame" src="assets/img/Innovation1.png"/></div>
+<h4>Graphite-Free Reactors</h4>
+<p>We developed a new composite polymer material to replace expensive graphite components. It takes on multiple functions at once, so fewer parts are needed, and new design features become possible for higher efficiency.</p>
+<div class="innovation-tag">Estimated cost reduction: 30–40% per cell vs. current RFB cells</div>
+<div class="innovation-img innovation-img-wide"><img alt="Photo of the composite polymer component that replaces graphite parts in the reactor stack" loading="lazy" onerror="imgFallback(this)" src="assets/img/Innovation1-display.png"/></div>
 </div>
 <div class="innovation-card">
 <div class="n">INNOVATION 02</div>
 <h4>High-Power Ministack Module</h4>
-<p>A standardised module concept intended to raise power output per unit and reduce the number of stack modules required at system level, simplifying both manufacturing and field maintenance.</p>
-<div class="innovation-img"><img alt="High-power ministack module" src="assets/img/Innovation2.png"/></div>
+<p>A standardized ministack module triples power density, so the same system can use about three times fewer modules while improving efficiency, manufacturability and field maintenance.</p>
+<div class="innovation-tag">Higher power density with fewer modules and simpler field assembly</div>
+<div class="innovation-img innovation-img-wide"><img alt="Photo of the high-power ministack module unit" loading="lazy" onerror="imgFallback(this)" src="assets/img/Innovation2-display.png"/></div>
 </div>
 <div class="innovation-card">
 <div class="n">INNOVATION 03</div>
-<h4>Modular Stack Architecture</h4>
-<p>A repeatable architecture enabling improved scalability, easier maintenance and better electrical and hydraulic organisation across the full system platform.</p>
-<div class="innovation-img"><img alt="Modular stack architecture" src="assets/img/Innovation3.png"/></div>
+<h4>Modular Architecture</h4>
+<p>A modular architecture allows a higher level of scalability, flow distribution optimization, electrical reconfigurability and hot swap, simplifying power electronics and improving round-trip efficiency.</p>
+<div class="innovation-tag">-20% instalation costs</div>
+<div class="innovation-img innovation-img-tall"><img alt="Photo of the modular stack architecture showing multiple interconnected modules" loading="lazy" onerror="imgFallback(this)" src="assets/img/Innovation3-display.png"/></div>
 </div>
 <div class="innovation-card">
-<div class="n">INNOVATION 04</div>
+<div class="n">FINAL PRODUCT</div>
 <h4>Integrated System Platform</h4>
-<p>The four innovations are combined into a single codesigned product platform — cell, stack, hydraulics, power electronics, and control — enabling a repeatable, series-producible system.</p>
-<div class="innovation-img"><img alt="Integrated system platform" src="assets/img/Innovation4.png"/></div>
+<p>The four innovations come together in a single product platform: cell, stack, hydraulics, power electronics and control, designed as one system for repeatable, series production.</p>
+<div class="innovation-tag">Power range: 100 kW to 50 MW, same architecture, no re-engineering</div>
+<div class="innovation-img innovation-img-wide"><img alt="Render of the integrated IonVe system platform showing containerized stacks, hydraulics and power electronics" loading="lazy" onerror="imgFallback(this)" src="assets/img/Innovation4-display.png"/></div>
 </div>
 </div>
 <div class="card">
-<h3>Target performance direction</h3>
+<h3>Target performance direction for Redox flow batteries</h3>
 <div class="grid-3">
 <div class="ctx-card"><div class="ctx-num">COST</div><h4>Lower installed cost</h4><p>Target installed system cost of 297 €/kWh at 6 hours, using the current design-stage assumptions.</p></div>
 <div class="ctx-card"><div class="ctx-num">POWER</div><h4>Higher output per unit</h4><p>Target operating point of 600 mA/cm², with reduced stack count at the same power output.</p></div>
@@ -335,68 +380,52 @@
 <div class="status-grid">
 <div class="card">
 <div class="eyebrow">Current status</div>
-<h3>Risk-gated programme with near-term proof-of-concept milestones</h3>
-<p class="muted">IonVe is at development stage. The current objective is a proof-of-concept programme that tests the architecture against explicit go/no-go criteria before broader pilot-facing deployment.</p>
+<h3>Proof of concept demonstrated, moving toward pilot plant development</h3>
+<p class="muted">IonVe has demonstrated its proof of concept and is validating the resulting data. The next development phase focuses on pilot plant design, partner engagement and preparation for larger-scale testing over the coming months.</p>
 <ul class="status-list">
-<li><span class="tick">✓</span><div><strong>MK1 prototype in testing</strong><br/><span class="muted">Hydraulic and first system-level learning under evaluation.</span></div></li>
-<li><span class="tick">→</span><div><strong>MK2 prototype fabrication</strong><br/><span class="muted">Next development step focused on electrochemical performance and architecture validation.</span></div></li>
-<li><span class="tick">◎</span><div><strong>PoC target: June 2026</strong><br/><span class="muted">Structured proof point before pilot-facing engagement.</span></div></li>
-<li><span class="tick">IP</span><div><strong>Patent applications in preparation</strong><br/><span class="muted">Portfolio under definition around the main architectural innovations.</span></div></li>
+<li><span class="tick">✓</span><div><strong>RFB proof of concept demonstrated</strong><br/><span class="muted">Core architecture validated at proof-of-concept level for redox flow batteries.</span></div></li>
+<li><span class="tick">→</span><div><strong>Data validation underway</strong><br/><span class="muted">Test data are being consolidated to guide the next engineering decisions.</span></div></li>
+<li><span class="tick">◎</span><div><strong>RFB pilot plant development next</strong><br/><span class="muted">Pilot requirements and partner discussions are focused on the RFB platform.</span></div></li>
+<li><span class="tick">IP</span><div><strong>IP and industrialization</strong><br/><span class="muted">Protection and manufacturability work continue around the core architecture.</span></div></li>
 </ul>
 </div>
 <div class="card">
-<div class="media-box" style="min-height:100%;padding:18px">
-<img alt="IonVe technology render" src="assets/img/Module_render.png"/>
+<div class="media-box" style="padding:18px">
+<img alt="3D rendering of the IonVe containerized system platform for industrial pilot development" loading="lazy" onerror="imgFallback(this)" src="assets/img/Rendering.png"/>
 </div>
 </div>
 </div>
 <div class="card" style="margin-top:18px">
 <h3>Development roadmap</h3>
 <div class="roadmap">
+<div class="rmap-phase">
+<div class="rmap-step">1</div>
+<div class="rmap-lbl">H1 2026</div>
+<div class="rmap-title">RFB PoC achieved</div>
+<p class="rmap-note">Architecture demonstrated for redox flow batteries and now being extended to other electrochemical flow technologies.</p>
+<ul class="rmap-bullets"><li>RFB data review</li><li>Technology transfer checks</li></ul>
+</div>
 <div class="rmap-phase now">
+<div class="rmap-step">2</div>
 <div class="here">We are here</div>
-<div class="rmap-lbl">Jan–Jun 2026</div>
-<div class="rmap-title">Proof of Concept</div>
-<div class="rmap-trl">TRL 3→5</div>
-<ul class="rmap-items">
-<li>MK1/2 hydraulic and electrochemical tests</li>
-<li>Go/no-go criteria validated</li>
-<li>Patent filings prepared</li>
-<li>Company incorporation path defined</li>
-</ul>
+<div class="rmap-lbl">H2 2026</div>
+<div class="rmap-title">RFB pilot plant design and development</div>
+<p class="rmap-note">Pilot development is focused on the redox flow battery product platform.</p>
+<ul class="rmap-bullets"><li>Pilot sizing</li><li>Partner site screening</li></ul>
 </div>
 <div class="rmap-phase">
-<div class="rmap-lbl">Jul–Dec 2026</div>
-<div class="rmap-title">Functional Prototypes</div>
-<div class="rmap-trl">TRL 5→6</div>
-<ul class="rmap-items">
-<li>2–3 functional prototypes</li>
-<li>Cycle endurance testing</li>
-<li>External lab validation</li>
-<li>First pilot discussions</li>
-</ul>
-</div>
-<div class="rmap-phase">
+<div class="rmap-step">3</div>
 <div class="rmap-lbl">2027</div>
-<div class="rmap-title">Industrial Pilot</div>
-<div class="rmap-trl">TRL 6→7</div>
-<ul class="rmap-items">
-<li>Co-development pilot projects</li>
-<li>Independent performance data</li>
-<li>Supply-chain qualification</li>
-<li>Scale-up preparation</li>
-</ul>
+<div class="rmap-title">Commercial demonstration</div>
+<p class="rmap-note">Demonstration with industrial operating data.</p>
+<ul class="rmap-bullets"><li>Field validation</li><li>Operating data</li></ul>
 </div>
 <div class="rmap-phase">
-<div class="rmap-lbl">2028–2030</div>
-<div class="rmap-title">Commercial Scale</div>
-<div class="rmap-trl">TRL 7→9</div>
-<ul class="rmap-items">
-<li>Series-producible platform</li>
-<li>EPC channel partnerships</li>
-<li>Recurring service model</li>
-<li>Multi-country deployment</li>
-</ul>
+<div class="rmap-step">4</div>
+<div class="rmap-lbl">2028+</div>
+<div class="rmap-title">Market</div>
+<p class="rmap-note">Product scale-up and commercial deployment.</p>
+<ul class="rmap-bullets"><li>Product scale-up</li><li>Commercial rollout</li></ul>
 </div>
 </div>
 </div>
@@ -408,10 +437,9 @@
 <div class="eyebrow">Partnering</div>
 <h3>Structured engagement for industrial partners, EPCs and technical stakeholders</h3>
 <p class="muted">IonVe is currently focused in disciplined validation and partner engagement around site screening and partner dialogue around technical review and pilot preparation.</p>
-<p class="muted">This page is designed to help potential collaborators understand what can already be discussed today, and what is planned for later development stages.</p>
 </div>
 <div class="hero-media">
-<img alt="IonVe system platform" src="assets/img/Rendering.png"/>
+<img alt="3D rendering of the IonVe containerized system platform shown to industrial partners" loading="lazy" onerror="imgFallback(this)" src="assets/img/Rendering.png"/>
 </div>
 </div>
 </div>
@@ -447,40 +475,48 @@
 </div>
 </section>
 <section class="panel" id="panel-team">
-<div class="team-grid">
 <div class="card founder-card">
 <div class="member-card">
-<img alt="Davide Bordignon" class="portrait" src="assets/img/team-davide.png"/>
+<img alt="Portrait photo of Davide Bordignon, Project Lead at IonVe" class="portrait" loading="lazy" onerror="imgFallback(this)" src="assets/img/team-davide.png"/>
 <div>
-<div class="eyebrow">Founder</div>
-<h3>Davide Bordignon — Founder</h3>
-<p class="muted">Electrochemical engineer working at the intersection of modelling, electrochemical reactor design and industrial energy systems. Davide's background includes VRFB stack modelling, multiscale electrochemical research and advanced reactor simulation, with work spanning Università di Padova, TU/e and TU Delft.</p>
-<p class="muted">IonVe builds on this technical foundation to move from electrochemical design to a manufacturable industrial platform for long-duration storage.</p>
-</div>
-</div>
-</div>
-<div class="card cofounder-card">
-<div class="member-card">
-<div aria-hidden="true" class="portrait portrait-placeholder"><div class="placeholder-inner"><div class="placeholder-title">Leadership team<br/>expanding</div><div class="placeholder-sub">Additional profiles introduced as formation progresses</div></div></div>
-<div>
-<div class="eyebrow">Co-Founder</div>
-<h3>Co-Founder — Head of Product &amp; Operations</h3>
-<p class="muted">Profile focused on product definition, industrial execution and operational planning for taking complex technology into structured development pathways.</p>
-<p class="muted">Core areas include product roadmap, partner coordination, execution planning and translation of technical work into clear development priorities.</p>
-</div>
+<div class="eyebrow">Project Lead</div>
+<h3>Davide Bordignon</h3>
+<p class="muted">Energy engineer specialised in numerical modelling of advanced electrochemical systems. PhD researcher at TU Delft (Process &amp; Energy department), focused on CFD modelling and optimization of electrochemical reactors.</p>
 </div>
 </div>
 </div>
 <div class="card ecosystem-card" style="margin-top:18px">
-<div class="eyebrow">Ecosystem</div>
-<h3>Ecosystem &amp; Collaborators</h3>
-<p class="muted">Selected ecosystem, validation and collaboration relationships. The logo area below can be updated over time as formal relationships are confirmed.</p>
-<div class="logo-wall">
-<div class="logo-slot"><img alt="Partner logo 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="assets/loghi_partners/logo_1.png"/><div class="logo-fallback" style="display:none">LOGO 1</div></div>
-<div class="logo-slot"><img alt="Partner logo 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="assets/loghi_partners/logo_2.png"/><div class="logo-fallback" style="display:none">LOGO 2</div></div>
-<div class="logo-slot"><img alt="Partner logo 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="assets/loghi_partners/logo_3.png"/><div class="logo-fallback" style="display:none">LOGO 3</div></div>
-<div class="logo-slot"><img alt="Partner logo 4" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="assets/loghi_partners/logo_4.png"/><div class="logo-fallback" style="display:none">LOGO 4</div></div>
-<div class="logo-slot"><img alt="Partner logo 5" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" src="assets/loghi_partners/logo_5.png"/><div class="logo-fallback" style="display:none">LOGO 5</div></div>
+<div class="eyebrow">Ecosystem &amp; Partners</div>
+<h3>TU Delft Ecosystem &amp; Industry Supporters</h3>
+<p class="muted">IonVe is being developed within the TU Delft entrepreneurial and research ecosystem, while building a growing network of industrial and academic supporters across the energy transition.</p>
+<!-- To add a logo: place the file in assets/logos/ and add its filename to assets/logos/manifest.json -->
+<section id="partners">
+<div id="logo-grid">
+<img alt="Airo" class="partner-logo" loading="lazy" onerror="imgFallback(this)" src="assets/logos/airo.png"/>
+<img alt="Natura" class="partner-logo" loading="lazy" onerror="imgFallback(this)" src="assets/logos/natura.png"/>
+<img alt="Pistorello Group" class="partner-logo" loading="lazy" onerror="imgFallback(this)" src="assets/logos/pistorello-group.png"/>
+<img alt="Innovation System" class="partner-logo" loading="lazy" onerror="imgFallback(this)" src="assets/logos/innovation-system.png"/>
+<img alt="Graphite Masters" class="partner-logo" loading="lazy" onerror="imgFallback(this)" src="assets/logos/graphite-masters.png"/>
+<img alt="Politecnici" class="partner-logo" loading="lazy" onerror="imgFallback(this)" src="assets/logos/politecnici.png"/>
+<img alt="Moretto Group" class="partner-logo" loading="lazy" onerror="imgFallback(this)" src="assets/logos/moretto-group.png"/>
+</div>
+</section>
+</div>
+<div class="card recognition-card" style="margin-top:18px">
+<div class="eyebrow">Recognition</div>
+<h3>Awards &amp; Recognition</h3>
+<div class="split">
+<div>
+<h4>TU Delft Impact Contest</h4>
+<ul class="award-list muted">
+<li>Shell energy transition award for best startup case into energy transition</li>
+<li>2nd position for advanced category competition</li>
+</ul>
+</div>
+<div class="media-strip" id="award-media-strip">
+<a class="media-thumb" href="assets/media/561c2c4f-d2b9-4438-a9a3-e788c6d2bb68.jpg" target="_blank"><img alt="IonVe award and recognition photo" loading="lazy" onerror="imgFallback(this)" src="assets/media/561c2c4f-d2b9-4438-a9a3-e788c6d2bb68.jpg"/></a>
+<a class="media-thumb" href="assets/media/TUDIC-GrandFinale-2026-Watermerk-43.jpg" target="_blank"><img alt="IonVe award and recognition photo" loading="lazy" onerror="imgFallback(this)" src="assets/media/TUDIC-GrandFinale-2026-Watermerk-43.jpg"/></a>
+</div>
 </div>
 </div>
 </section>
@@ -500,21 +536,87 @@
 </div>
 <div class="card">
 <h3>Information</h3>
-<p class="muted">Email: <a href="mailto:davide.brdgn@gmail.com">davide.brdgn@gmail.com</a><br/>Phone: <a href="tel:+393451724876">+39 345 172 4876</a><br/>Location: EU · NL / IT</p>
+<p class="muted">Email: <a href="mailto:davide.brdgn@gmail.com">davide.brdgn@gmail.com</a><br/>TU Delft: <a href="mailto:d.bordignon@tudelft.nl">d.bordignon@tudelft.nl</a><br/>Phone: <a href="tel:+393451724876">+39 345 172 4876</a><br/>Location: EU · NL / IT</p>
 <p class="muted">IonVe is currently pre-incorporation. More detailed technical material can be shared separately where appropriate.</p>
 <div class="hero-cta" style="margin-top:14px"><a class="btn" download="IonVe_Overview.pdf" href="assets/doc/IonVe_Overview.pdf" id="contactDownloadOverview">Download IonVe Overview</a></div>
-<p class="note" style="margin-top:14px">Nothing on this website should be read as an offer of commercially available off-the-shelf systems.</p>
 </div>
 </div>
 </section>
 </main>
 <footer>
 <div class="container row">
-<div>© <span id="y"></span> IonVe — Electrochemical Reactors · Development-stage company</div>
+<div>© <span id="y"></span> IonVe Electrochemical Reactors · Development-stage company</div>
 <div><span class="muted">Industrial energy storage · redox-flow systems · architecture under development</span></div>
 </div>
 </footer>
 <script>
+function imgFallback(img){
+  const name = (img.getAttribute('src')||'').split('/').pop();
+  const ph = document.createElement('div');
+  ph.className = 'img-placeholder';
+  ph.textContent = 'Image not found: ' + name;
+  img.replaceWith(ph);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.getElementById('logo-grid');
+  if (!grid) return;
+  const renderLogos = (logos) => {
+    if (!logos || !logos.length) return;
+    grid.innerHTML = '';
+    logos.forEach(filename => {
+      const img = document.createElement('img');
+      img.src = 'assets/logos/' + filename;
+      img.alt = filename.replace(/\.[^/.]+$/, '').replace(/[-_]+/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+      img.className = 'partner-logo';
+      img.loading = 'lazy';
+      img.onerror = () => imgFallback(img);
+      grid.appendChild(img);
+    });
+  };
+  fetch('assets/logos/manifest.json')
+    .then(r => r.json())
+    .then(data => renderLogos(data.logos || []))
+    .catch(() => {});
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const strip = document.getElementById('award-media-strip');
+  if (!strip) return;
+  const isImage = (name) => /\.(png|jpe?g|webp|gif)$/i.test(name);
+  const cleanName = (name) => decodeURIComponent(name).split('/').pop();
+  const renderMedia = (files) => {
+    const unique = [...new Set((files || []).map(cleanName).filter(isImage))];
+    if (!unique.length) return;
+    strip.innerHTML = '';
+    unique.forEach((filename) => {
+      const href = 'assets/media/' + filename;
+      const link = document.createElement('a');
+      link.className = 'media-thumb';
+      link.href = href;
+      link.target = '_blank';
+      const img = document.createElement('img');
+      img.src = href;
+      img.alt = 'IonVe award and recognition photo';
+      img.loading = 'lazy';
+      img.onerror = () => imgFallback(img);
+      link.appendChild(img);
+      strip.appendChild(link);
+    });
+  };
+  fetch('assets/media/')
+    .then(r => r.ok ? r.text() : Promise.reject())
+    .then(html => {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const files = [...doc.querySelectorAll('a')].map(a => a.getAttribute('href') || '');
+      renderMedia(files);
+    })
+    .catch(() => fetch('assets/media/manifest.json')
+      .then(r => r.json())
+      .then(data => renderMedia(data.media || []))
+      .catch(() => {}));
+});
+
 const tabs = document.querySelectorAll('.tab');
 const panelIds = ['what','technology','development','partners','team','contact'];
 const getPanels = () => Object.fromEntries(panelIds.map(k => [k, document.getElementById('panel-'+k)]));
@@ -565,13 +667,143 @@ tBtn.addEventListener('click', () => {
   localStorage.setItem('ionve-theme', t);
 });
 
-const i18n = {"en": {"title": "IonVe — Electrochemical Reactors", "tagline": "Industrial long-duration energy storage", "stage": "Pre-incorporation · PoC target: June 2026", "heroTitle": "Redox-flow battery systems for industrial long-duration storage", "heroLead": "IonVe develops electrochemical reactors and system architecture for redox-flow batteries aimed at industrial applications where lifetime, safety and 4–12 hour duration matter.", "kpiLabels": ["design-stage cost target (6 h)", "vs. current VRFB system cost", "target stack count reduction at 500 kW", "target current density", "intended service-life objective"], "heroNote": "Figures shown on this website are design-stage targets based on current engineering assumptions and modelling. Experimental validation is ongoing.", "tabs": ["What we do", "Technology", "Development", "Partners", "Team", "Contact"], "what": {"ctxTitles": ["Long-duration storage is economically viable for industry today", "Lithium-ion is not cost-effective beyond 4–6 hours", "Existing RFB systems remain too expensive"], "ctxBodies": ["Industrial sites with high demand charges and time-of-use contracts can already generate a positive business case for 4–12 hour storage. The barrier is the absence of an affordable, reliable product.", "At durations of 6 hours or more, the total cost of ownership of Li-ion over a 20–30 year industrial lifetime becomes significantly higher, mainly due to pack replacements.", "Current products remain constrained by high component count, machined graphite parts and custom engineering. Standardised, catalogue-style industrial products are still missing."], "rfbEyebrow": "Technology primer", "rfbTitle": "What is a flow battery?", "rfbIntro": "Think of a liquid-filled tank that produces electricity as the fluid passes through an electrochemical cell.", "rfbBullets": ["More tank volume — more hours of autonomy", "Unlike lithium-ion, the chemistry does not degrade over time", "Capacity depends only on tank size", "Non-flammable, inherently safe and fully recyclable"], "fitEyebrow": "Where IonVe fits", "fitTitle": "Built for industrial sites that cycle frequently and plan for the long term", "fitBody": "IonVe is positioned for the part of the market where long lifetime, safety, and 4–12 hour duration matter. The target use case is the segment where industrial users need daily cycling, high power peak and a long term asset horizon.", "fitBullets": ["Peak shaving and electricity cost reduction at energy-intensive sites", "PV self-consumption and energy shifting in behind-the-meter applications", "Long-duration storage where Li-ion becomes less attractive on a full-life basis"], "fitNote": "IonVe is designed for storage durations above 4 hours. For shorter durations, Li-ion often remains the more appropriate choice.", "tcoTitle": "30-year TCO comparison — 500 kW / 3 MWh reference case", "tcoBlockTitle": "MODEL OUTPUT AT DESIGN-TARGET PERFORMANCE", "tcoLabels": ["IonVe (target)", "VRFB — current state of the art", "Li-ion (incl. 2× replacements, 30 yr)"], "tcoNote": "Reference case provided for positioning only. Actual economics depend on load profile, tariff structure, operating strategy and final system specification."}, "technology": {"eyebrow": "Architecture", "title": "Cell-to-system design aimed at cost, efficiency and manufacturability", "body1": "IonVe's approach is to engineer the actual Redox Flow Battery architecture. The goal is to redesign the cell and stack platform so that redox-flow systems become more practical for industrial deployment: fewer units, simpler assembly, improved hydraulic control and a more repeatable product platform.", "body2": "The render shown here represents the current design direction of the module and system platform.", "innovationTitles": ["Conductive Polymer Frame", "High-Power Ministack Module", "Modular Stack Architecture", "Integrated System Platform"], "innovationBodies": ["A new bipolar plate, based on a new material and architecture aimed at increasing efficiency, facilitating assembly, reducing part count and opening a more scalable manufacturing.", "A standardised module concept intended to raise power output per unit and reduce the number of stack modules required at system level, simplifying both manufacturing and field maintenance.", "A repeatable architecture enabling improved scalability, easier maintenance and better electrical and hydraulic organisation across the full system platform.", "The four innovations are combined into a single codesigned product platform \u2014 cell, stack, hydraulics, power electronics, and control \u2014 enabling a repeatable, series-producible system."], "perfTitle": "Target performance direction", "perfNums": ["COST", "POWER", "LIFETIME"], "perfTitles": ["Lower installed cost", "Higher output per unit", "Industrial asset horizon"], "perfBodies": ["Target installed system cost of 297 €/kWh at 6 hours, using the current design-stage assumptions.", "Target operating point of 600 mA/cm², with reduced stack count at the same power output.", "Long service life and stable cycling are central to the intended value proposition for industrial users."]}, "development": {"eyebrow": "Current status", "title": "Risk-gated programme with near-term proof-of-concept milestones", "body": "IonVe current objective is a proof-of-concept programme that tests the architecture against explicit go/no-go criteria before broader pilot-facing deployment.", "statusTitles": ["MK1 prototype in testing", "MK2 prototype fabrication", "PoC target: June 2026", "Patent applications in preparation"], "statusBodies": ["Hydraulic and first system-level learning under evaluation.", "Next development step focused on electrochemical performance and architecture validation.", "Structured proof point before pilot-facing engagement.", "Portfolio under definition around the main architectural innovations."], "roadmapTitle": "Development roadmap", "weAreHere": "We are here", "phaseTitles": ["Proof of Concept", "Functional Prototypes", "Industrial Pilot", "Commercial Scale"], "phaseItems": ["MK1/2 hydraulic and electrochemical tests", "Go/no-go criteria validated", "Patent filings prepared", "Company incorporation path defined", "2–3 functional prototypes", "Cycle endurance testing", "External lab validation", "First pilot discussions", "Co-development pilot projects", "Independent performance data", "Supply-chain qualification", "Scale-up preparation", "Series-producible platform", "EPC channel partnerships", "Recurring service model", "Multi-country deployment"]}, "partners": {"eyebrow": "Partnering", "title": "Structured engagement for industrial partners, EPCs and technical stakeholders", "intro": ["IonVe is currently focused in disciplined validation and partner engagement around site screening and partner dialogue around technical review and pilot preparation.", "This page is designed to clarify what can already be discussed today, and what is planned for later development stages."], "tags": ["NO COST · NDA BASIS", "ON REQUEST · UNDER NDA", "POST-PoC", "OPEN"], "titles": ["Site-Specific Screening", "Access to Technical Progress", "Co-Development Pilot", "EPC & Integrator Briefings"], "bodies": ["IonVe can review interval load data and electricity contract structure to assess whether a long-duration system is relevant for a specific industrial site, and where the economic drivers actually come from.", "As milestones are reached, IonVe can share selected technical information with serious counterparties, including test direction, validation logic and development-stage data packages.", "Following proof-of-concept validation, IonVe intends to work with a limited number of partners on pilot projects that generate real operating data and accelerate industrial learning.", "Technology briefings are available for project developers, EPCs and system integrators evaluating long-duration flow battery routes for their industrial or grid-facing pipeline."], "ctas": ["Request a screening conversation", "Request technical discussion", "Discuss pilot interest", "Book a briefing"]}, "team": {"eyebrows": ["Founder", "Co-Founder", "Ecosystem"], "founderTitle": "Davide Bordignon — Founder", "founderBody": ["Electrochemical engineer working at the intersection of modelling, electrochemical reactor design and industrial energy systems. Davide's background includes VRFB stack modelling, multiscale electrochemical research and advanced reactor simulation, with work spanning Università di Padova, TU/e and TU Delft.", "IonVe builds on this technical foundation to move from electrochemical design to a manufacturable industrial platform for long-duration storage."], "cofounderTitle": "Co-Founder — Head of Product & Operations", "cofounderBody": ["Profile focused on product definition, industrial execution and operational planning for taking complex technology into structured development pathways.", "Core areas include product roadmap, partner coordination, execution planning and translation of technical work into clear development priorities."], "ecoTitle": "Ecosystem & Collaborators", "ecoBody": "Selected ecosystem, validation and collaboration relationships."}, "contact": {"title": "Get in touch", "body": "For partnerships, technical discussions, site screening or general enquiries.", "labels": ["Name", "Email", "Message"], "send": "Send", "infoTitle": "Information", "infoBody": "Email: <a href=\"mailto:davide.brdgn@gmail.com\">davide.brdgn@gmail.com</a><br>Phone: <a href=\"tel:+393451724876\">+39 345 172 4876</a><br>Location: EU · NL / IT", "infoText": "IonVe is currently pre-incorporation. More detailed technical material can be shared separately where appropriate.", "note": "Nothing on this website should be read as an offer of commercially available off-the-shelf systems.", "downloadOverview": "Download IonVe Overview", "heroDownload": "Download overview", "heroContact": "Contact IonVe"}, "footer": {"left": "© <span id=\"y\"></span> IonVe — Electrochemical Reactors · Development-stage company", "right": "Industrial energy storage · redox-flow systems · architecture under development"}}, "it": {"title": "IonVe — Reattori Elettrochimici", "tagline": "Storage industriale di lunga durata", "stage": "Pre-incorporazione · target PoC: giugno 2026", "heroTitle": "Sistemi redox-flow per storage industriale di lunga durata", "heroLead": "IonVe sviluppa reattori elettrochimici e architetture di sistema per redox-flow battery destinate ad applicazioni industriali in cui contano vita utile, sicurezza e durate di 4–12 ore.", "kpiLabels": ["target di costo design-stage (6 h)", "vs. costo dei sistemi VRFB attuali", "riduzione target del numero di stack a 500 kW", "densità di corrente target", "obiettivo di vita utile"], "heroNote": "Le grandezze riportate in questo sito sono target di design-stage basati sulle attuali assunzioni ingegneristiche e di modellazione. La validazione sperimentale è in corso.", "tabs": ["Cosa facciamo", "Tecnologia", "Sviluppo", "Partner", "Team", "Contatti"], "what": {"ctxTitles": ["Lo storage di lunga durata è già economicamente valido per l’industria", "Il litio non è conveniente oltre 4–6 ore", "I sistemi RFB esistenti restano troppo costosi"], "ctxBodies": ["I siti industriali con demand charge elevate e contratti time-of-use possono già generare un business case positivo per 4–12 ore di storage. La barriera è l’assenza di un prodotto accessibile e affidabile.", "Per durate di 6 ore o superiori, il costo totale di possesso del Li-ion su un orizzonte industriale di 20–30 anni diventa sensibilmente più alto, soprattutto per via delle sostituzioni dei pacchi batteria.", "I prodotti attuali restano penalizzati da un alto numero di componenti, parti in grafite lavorate e ingegneria custom. Mancano ancora prodotti industriali standardizzati, in logica catalogo."], "rfbEyebrow": "Introduzione tecnologica", "rfbTitle": "Cos'è una flow battery?", "rfbIntro": "Immagina un serbatoio pieno di liquido che produce elettricità mentre il fluido attraversa una cella elettrochimica.", "rfbBullets": ["Più volume del serbatoio — più ore di autonomia", "A differenza del litio, la chimica non degrada nel tempo", "La capacità dipende solo dalla dimensione del serbatoio", "Non infiammabile, intrinsecamente sicura e completamente riciclabile"], "fitEyebrow": "Dove si posiziona IonVe", "fitTitle": "Pensato per siti industriali che ciclano spesso e ragionano sul lungo termine", "fitBody": "IonVe si posiziona nella parte di mercato in cui contano lunga vita utile, sicurezza e durate di 4–12 ore. Il caso d’uso target è il segmento in cui il cliente industriale ha cicli giornalieri, picchi di alta potenza e un orizzonte asset di lungo termine.", "fitBullets": ["Peak shaving e riduzione del costo elettrico in siti energy-intensive", "Autoconsumo FV ed energy shifting in applicazioni behind-the-meter", "Storage di lunga durata dove il Li-ion perde attrattività su base full-life"], "fitNote": "IonVe è pensato per durate superiori a 4 ore. Per durate più brevi, il Li-ion resta spesso la scelta più adatta.", "tcoTitle": "Confronto TCO a 30 anni — caso di riferimento 500 kW / 3 MWh", "tcoBlockTitle": "OUTPUT DEL MODELLO A PRESTAZIONI TARGET", "tcoLabels": ["IonVe (target)", "VRFB — stato dell’arte attuale", "Li-ion (incl. 2× replacement, 30 anni)"], "tcoNote": "Il caso mostrato ha sola funzione di posizionamento. L’economia reale dipende da profilo di carico, struttura tariffaria, strategia operativa e specifica finale del sistema."}, "technology": {"eyebrow": "Architettura", "title": "Design da cella a sistema orientato a costo, efficienza e producibilità", "body1": "L’approccio di IonVe è progettare l’architettura stessa della Redox Flow Battery. L’obiettivo è ripensare la piattaforma cella-stack in modo che i sistemi redox-flow diventino più pratici per l’uso industriale: meno unità, assemblaggio più semplice, migliore controllo idraulico e una piattaforma di prodotto più ripetibile.", "body2": "Il rendering mostrato rappresenta l’attuale direzione progettuale del modulo e della piattaforma di sistema. Va letto come engineering render, non come immagine finale di un prodotto commerciale.", "innovationTitles": ["Frame in polimero conduttivo", "Modulo ministack ad alta potenza", "Architettura stack modulare", "Piattaforma di sistema integrata"], "innovationBodies": ["Un componente stampabile pensato per integrare funzioni strutturali, elettriche e di tenuta in una cella semplificata, riducendo il numero di parti e aprendo una strada produttiva più scalabile.", "Un concetto di modulo standardizzato pensato per aumentare la potenza per unità e ridurre il numero di moduli stack richiesti a livello di sistema, semplificando sia produzione sia manutenzione sul campo.", "Un’architettura ripetibile che abilita migliore scalabilità, manutenzione più semplice e migliore organizzazione elettrica e idraulica dell’intera piattaforma.", "Cella, stack, idraulica e layout di sistema vengono sviluppati come un’unica piattaforma coordinata, con l’obiettivo di evitare re-ingegnerizzazione custom a ogni installazione."], "perfTitle": "Direzione delle prestazioni target", "perfNums": ["COSTO", "POTENZA", "DURATA"], "perfTitles": ["Costo installato più basso", "Maggiore output per unità", "Orizzonte asset industriale"], "perfBodies": ["Costo installato di sistema target pari a 297 €/kWh a 6 ore, secondo le attuali assunzioni di design stage.", "Punto operativo target di 600 mA/cm², con numero di stack ridotto a parità di potenza.", "Lunga vita utile e ciclaggio stabile sono centrali nella value proposition attesa per i clienti industriali."]}, "development": {"eyebrow": "Stato attuale", "title": "Programma risk-gated con milestone PoC nel breve termine", "body": "L’obiettivo attuale di IonVe è un programma di proof-of-concept che metta alla prova l’architettura rispetto a criteri go/no-go espliciti prima di un confronto più ampio con progetti pilota.", "statusTitles": ["Prototipo MK1 in test", "Fabbricazione prototipo MK2", "Target PoC: giugno 2026", "Domande di brevetto in preparazione"], "statusBodies": ["Valutazione in corso di apprendimento idraulico e di primo livello sistema.", "Step successivo focalizzato su prestazioni elettrochimiche e validazione architetturale.", "Proof point strutturato prima del confronto con partner pilota.", "Portafoglio in definizione attorno alle principali innovazioni architetturali."], "roadmapTitle": "Roadmap di sviluppo", "weAreHere": "Siamo qui", "phaseTitles": ["Proof of Concept", "Prototipi funzionali", "Pilota industriale", "Scala commerciale"], "phaseItems": ["Test idraulici ed elettrochimici MK1/2", "Criteri go/no-go validati", "Depositi brevetto preparati", "Percorso di costituzione definito", "2–3 prototipi funzionali", "Test di durata a cicli", "Validazione laboratorio esterno", "Prime discussioni pilota", "Progetti pilota in co-sviluppo", "Dati di performance indipendenti", "Qualifica supply chain", "Preparazione alla scala", "Piattaforma producibile in serie", "Partnership canale EPC", "Modello servizi ricorrenti", "Deploy multi-country"]}, "partners": {"eyebrow": "Collaborazioni", "title": "Interazione strutturata per partner industriali, EPC e stakeholder tecnici", "intro": ["IonVe è oggi focalizzata su una validazione disciplinata e su un confronto mirato con partner per screening sito-specifico, revisione tecnica e preparazione pilota.", "Questa pagina serve a chiarire cosa può essere discusso già oggi e cosa è previsto per le fasi successive di sviluppo."], "tags": ["GRATUITO · SU BASE NDA", "SU RICHIESTA · SOTTO NDA", "POST-PoC", "APERTO"], "titles": ["Screening sito-specifico", "Accesso al progresso tecnico", "Pilota in co-sviluppo", "Briefing per EPC e integratori"], "bodies": ["IonVe può analizzare dati di carico a intervalli e struttura del contratto elettrico per valutare se un sistema di lunga durata sia rilevante per uno specifico sito industriale e da dove derivino davvero i driver economici.", "Al raggiungimento delle milestone, IonVe può condividere informazioni tecniche selezionate con controparti serie, incluse direzione dei test, logica di validazione e pacchetti dati di sviluppo.", "Dopo la validazione proof-of-concept, IonVe intende lavorare con un numero limitato di partner su progetti pilota che generino dati operativi reali e accelerino l’apprendimento industriale.", "Sono disponibili briefing tecnologici per sviluppatori di progetto, EPC e integratori di sistema che stanno valutando percorsi flow battery di lunga durata per pipeline industriali o grid-facing."], "ctas": ["Richiedi uno screening", "Richiedi confronto tecnico", "Discuti interesse pilota", "Prenota un briefing"]}, "team": {"eyebrows": ["Founder", "Co-Founder", "Ecosistema"], "founderTitle": "Davide Bordignon — Founder", "founderBody": ["Ingegnere elettrochimico che lavora all’intersezione tra modellazione, design di reattori elettrochimici e sistemi energetici industriali. Il background di Davide include modellazione stack VRFB, ricerca elettrochimica multiscala e simulazione avanzata di reattori, tra Università di Padova, TU/e e TU Delft.", "IonVe nasce da questa base tecnica per passare dal design elettrochimico a una piattaforma industriale producibile per storage di lunga durata."], "cofounderTitle": "Co-Founder — Head of Product & Operations", "cofounderBody": ["Profilo focalizzato su definizione prodotto, esecuzione industriale e pianificazione operativa per portare tecnologie complesse dentro percorsi strutturati di sviluppo.", "Aree core: roadmap di prodotto, coordinamento partner, pianificazione esecutiva e traduzione del lavoro tecnico in priorità di sviluppo chiare."], "ecoTitle": "Ecosystem & Collaborators", "ecoBody": "Relazioni selezionate di ecosistema, validazione e collaborazione."}, "contact": {"title": "Contattaci", "body": "Per partnership, confronti tecnici, site screening o richieste generali.", "labels": ["Nome", "Email", "Messaggio"], "send": "Invia", "infoTitle": "Informazioni", "infoBody": "Email: <a href=\"mailto:davide.brdgn@gmail.com\">davide.brdgn@gmail.com</a><br>Telefono: <a href=\"tel:+393451724876\">+39 345 172 4876</a><br>Localizzazione: EU · NL / IT", "infoText": "IonVe è attualmente in fase pre-incorporation. Materiale tecnico più dettagliato può essere condiviso separatamente quando opportuno.", "note": "Nulla in questo sito va letto come offerta di sistemi commercialmente disponibili a catalogo.", "downloadOverview": "Scarica IonVe Overview", "heroDownload": "Scarica overview", "heroContact": "Contatta IonVe"}, "footer": {"left": "© <span id=\"y\"></span> IonVe — Reattori Elettrochimici · Azienda in fase di sviluppo", "right": "Storage energetico industriale · sistemi redox-flow · architettura in sviluppo"}}};
+const i18n = {"en": {"title": "IonVe · Electrochemical Reactors", "tagline": "Industrial long-duration energy storage", "stage": "Pre-incorporation", "heroTitle": "Redox-flow battery systems for industrial long-duration storage", "heroLead": "IonVe develops electrochemical reactors and system architecture for redox-flow batteries aimed at industrial applications where lifetime, safety and 4–12 hour duration matter.", "kpiLabels": ["lower system cost", "fewer components", "more compact design"], "heroNote": "Figures shown on this website are design-stage targets based on current engineering assumptions and modelling. Experimental validation is ongoing.", "tabs": ["Our Solution", "How It Works", "Where We Stand", "The Opportunity", "Who We Are", "Get in Touch"], "what": {"ctxTitles": ["Long-duration storage is economically viable for industry today", "Lithium-ion is not cost-effective beyond 4–6 hours", "Existing RFB systems remain too expensive"], "ctxBodies": ["Industrial sites with high demand charges and time-of-use contracts can already generate a positive business case for 4–12 hour storage. The barrier is the absence of an affordable, reliable product.", "At durations of 6 hours or more, the total cost of ownership of Li-ion over a 20–30 year industrial lifetime becomes significantly higher, mainly due to pack replacements.", "Current products remain constrained by high component count, machined graphite parts and custom engineering. Standardised, catalogue-style industrial products are still missing."], "introEyebrow1": "The big picture", "introTitle1": "Electrochemical Reactors", "introBody1": ["Electrochemical reactors are devices that convert electrical energy into chemical energy, or the other way round, through controlled redox reactions at the cell level. They are the core hardware behind long-duration energy storage, green hydrogen production and industrial CO₂ conversion.", "IonVe designs the core architecture of these reactors, from single cells to full industrial systems, aiming for the performance and cost levels needed to make large-scale deployment viable."], "introEyebrow2": "Current focus", "introTitle2": "Where We Focus", "introBody2": ["Our most advanced platform today is the Redox Flow Battery (RFB) system, designed for industrial long-duration storage and currently in prototype testing: MK1 validated, MK2 in fabrication, PoC target June 2026.", "In parallel, we are starting to look at electrolyzer architectures and CO₂ reduction reactors as the next step for our cell-engineering platform."], "rfbEyebrow": "Technology primer", "rfbTitle": "What is a flow battery?", "rfbIntro": "Think of a liquid-filled tank that produces electricity as the fluid passes through an electrochemical cell.", "rfbBullets": ["More tank volume means more hours of autonomy", "Unlike lithium-ion, the chemistry does not degrade over time", "Capacity depends only on tank size", "Non-flammable, inherently safe and fully recyclable"], "fitEyebrow": "Where IonVe fits", "fitTitle": "Built for industrial sites that cycle frequently and plan for the long term", "fitBody": "IonVe is positioned for the part of the market where long lifetime, safety, and 4–12 hour duration matter. The target use case is the segment where industrial users need daily cycling, high power peak and a long term asset horizon.", "fitBullets": ["Peak shaving and electricity cost reduction at energy-intensive sites", "PV self-consumption and energy shifting in behind-the-meter applications", "Long-duration storage where Li-ion becomes less attractive on a full-life basis"], "fitNote": "IonVe is designed for storage durations above 4 hours. For shorter durations, Li-ion often remains the more appropriate choice.", "tcoTitle": "30-year TCO comparison for a 500 kW / 3 MWh reference case", "tcoBlockTitle": "MODEL OUTPUT AT DESIGN-TARGET PERFORMANCE", "tcoLabels": ["IonVe (target)", "VRFB (current state of the art)", "Li-ion (incl. 2× replacements, 30 yr)"], "tcoNote": "Reference case provided for positioning only. Actual economics depend on load profile, tariff structure, operating strategy and final system specification."}, "technology": {"eyebrow": "Architecture", "title": "Cell-to-system design aimed at cost, efficiency and manufacturability", "body1": "IonVe's approach is to engineer the actual Redox Flow Battery architecture. The goal is to redesign the cell and stack platform so that redox-flow systems become more practical for industrial deployment: fewer units, simpler assembly, improved hydraulic control and a more repeatable product platform.", "body2": "The render shown here represents the current design direction of the module and system platform.", "innovationLabels": ["INNOVATION 01", "INNOVATION 02", "INNOVATION 03", "FINAL PRODUCT"], "innovationTitles": ["Graphite-Free Reactors", "High-Power Ministack Module", "Modular Architecture", "Integrated System Platform"], "innovationBodies": ["We developed a new composite polymer material to replace expensive graphite components. It takes on multiple functions at once, so fewer parts are needed, and new design features become possible for higher efficiency.", "A standardized ministack unit achieves +20% power output per module, with 7% higher efficiency. At 500 kW, the IonVe system uses 63 versus 212 modules of a conventional RFB, improving manufacturing and simplifying field maintenance.", "A modular architecture allows a higher level of scalability, flow distribution optimization, electrical reconfigurability and hot swap, simplifying power electronics and improving round-trip efficiency.", "The four innovations come together in a single product platform: cell, stack, hydraulics, power electronics and control, designed as one system for repeatable, series production."], "innovationTags": ["Estimated cost reduction: 30\u201340% per cell vs. current RFB cells", "Same power in 8x less volume vs state of art", "-20% instalation costs", "Power range: 100 kW to 50 MW, same architecture, no re-engineering"], "perfTitle": "Target performance direction", "perfNums": ["COST", "POWER", "LIFETIME"], "perfTitles": ["Lower installed cost", "Higher output per unit", "Industrial asset horizon"], "perfBodies": ["Target installed system cost of 297 €/kWh at 6 hours, using the current design-stage assumptions.", "Target operating point of 600 mA/cm², with reduced stack count at the same power output.", "Long service life and stable cycling are central to the intended value proposition for industrial users."]}, "development": {"eyebrow": "Current status", "title": "Risk-gated programme with near-term proof-of-concept milestones", "body": "IonVe current objective is a proof-of-concept programme that tests the architecture against explicit go/no-go criteria before broader pilot-facing deployment.", "statusTitles": ["MK1 prototype in testing", "MK2 prototype fabrication", "PoC target: June 2026", "Patent applications in preparation"], "statusBodies": ["Hydraulic and first system-level learning under evaluation.", "Next development step focused on electrochemical performance and architecture validation.", "Structured proof point before pilot-facing engagement.", "Portfolio under definition around the main architectural innovations."], "roadmapTitle": "Development roadmap", "weAreHere": "We are here", "phaseTitles": ["PoC achieved", "Pilot & plant design and development", "Commercial demonstration", "Market"]}, "partners": {"eyebrow": "Partnering", "title": "Structured engagement for industrial partners, EPCs and technical stakeholders", "intro": ["IonVe is currently focused in disciplined validation and partner engagement around site screening and partner dialogue around technical review and pilot preparation.", "This page is designed to clarify what can already be discussed today, and what is planned for later development stages."], "tags": ["NO COST · NDA BASIS", "ON REQUEST · UNDER NDA", "POST-PoC", "OPEN"], "titles": ["Site-Specific Screening", "Access to Technical Progress", "Co-Development Pilot", "EPC & Integrator Briefings"], "bodies": ["IonVe can review interval load data and electricity contract structure to assess whether a long-duration system is relevant for a specific industrial site, and where the economic drivers actually come from.", "As milestones are reached, IonVe can share selected technical information with serious counterparties, including test direction, validation logic and development-stage data packages.", "Following proof-of-concept validation, IonVe intends to work with a limited number of partners on pilot projects that generate real operating data and accelerate industrial learning.", "Technology briefings are available for project developers, EPCs and system integrators evaluating long-duration flow battery routes for their industrial or grid-facing pipeline."], "ctas": ["Request a screening conversation", "Request technical discussion", "Discuss pilot interest", "Book a briefing"]}, "team": {"eyebrows": ["Project Lead", "Ecosystem & Partners", "Recognition"], "founderTitle": "Davide Bordignon", "founderBody": ["Energy engineer specialised in numerical modelling of advanced electrochemical systems. PhD researcher at TU Delft (Process & Energy department), focused on CFD modelling and optimization of electrochemical reactors."], "ecoTitle": "TU Delft Collaboration & Industry Partners", "ecoBody": "IonVe's core technology is developed in close collaboration with TU Delft. The project also engages a growing network of industrial and academic partners across the energy transition ecosystem."}, "recognition": {"title": "Awards & Recognition", "cardLabel": "TU Delft Impact Contest", "cardValue": "Shell energy transition award for best startup case into energy transition. Overall 2nd position for advanced category competition."}, "contact": {"title": "Get in touch", "body": "For partnerships, technical discussions, site screening or general enquiries.", "labels": ["Name", "Email", "Message"], "send": "Send", "infoTitle": "Information", "infoBody": "Email: <a href=\"mailto:davide.brdgn@gmail.com\">davide.brdgn@gmail.com</a><br>Phone: <a href=\"tel:+393451724876\">+39 345 172 4876</a><br>Location: EU · NL / IT", "infoText": "IonVe is currently pre-incorporation. More detailed technical material can be shared separately where appropriate.", "note": "", "downloadOverview": "Download IonVe Overview", "heroDownload": "Download overview", "heroContact": "Contact IonVe"}, "footer": {"left": "© <span id=\"y\"></span> IonVe Electrochemical Reactors · Development-stage company", "right": "Industrial energy storage · redox-flow systems · architecture under development"}}, "it": {"title": "IonVe · Reattori Elettrochimici", "tagline": "Storage industriale di lunga durata", "stage": "Pre-incorporazione", "heroTitle": "Sistemi redox-flow per storage industriale di lunga durata", "heroLead": "IonVe sviluppa reattori elettrochimici e architetture di sistema per redox-flow battery destinate ad applicazioni industriali in cui contano vita utile, sicurezza e durate di 4–12 ore.", "kpiLabels": ["costo di sistema più basso", "meno componenti", "design più compatto"], "heroNote": "Le grandezze riportate in questo sito sono target di design-stage basati sulle attuali assunzioni ingegneristiche e di modellazione. La validazione sperimentale è in corso.", "tabs": ["La Nostra Soluzione", "Come Funziona", "A Che Punto Siamo", "L’Opportunità", "Chi Siamo", "Contattaci"], "what": {"ctxTitles": ["Lo storage di lunga durata è già economicamente valido per l’industria", "Il litio non è conveniente oltre 4–6 ore", "I sistemi RFB esistenti restano troppo costosi"], "ctxBodies": ["I siti industriali con demand charge elevate e contratti time-of-use possono già generare un business case positivo per 4–12 ore di storage. La barriera è l’assenza di un prodotto accessibile e affidabile.", "Per durate di 6 ore o superiori, il costo totale di possesso del Li-ion su un orizzonte industriale di 20–30 anni diventa sensibilmente più alto, soprattutto per via delle sostituzioni dei pacchi batteria.", "I prodotti attuali restano penalizzati da un alto numero di componenti, parti in grafite lavorate e ingegneria custom. Mancano ancora prodotti industriali standardizzati, in logica catalogo."], "introEyebrow1": "Il quadro generale", "introTitle1": "Reattori Elettrochimici", "introBody1": ["I reattori elettrochimici sono dispositivi che convertono energia elettrica in energia chimica, o viceversa, attraverso reazioni redox controllate a livello di cella. Sono l’hardware alla base dello storage energetico di lunga durata, della produzione di idrogeno verde e della conversione industriale della CO₂.", "IonVe progetta l’architettura centrale di questi reattori, dalla singola cella ai sistemi industriali completi, puntando ai livelli di prestazione e costo necessari per rendere il deployment sostenibile su scala."], "introEyebrow2": "Focus attuale", "introTitle2": "Dove ci Concentriamo", "introBody2": ["La nostra piattaforma più avanzata oggi è il sistema Redox Flow Battery (RFB), progettata per lo storage industriale di lunga durata e attualmente in fase di test prototipale: MK1 validato, MK2 in fabbricazione, target PoC giugno 2026.", "In parallelo, iniziamo a guardare alle architetture di elettrolizzatori e ai reattori di riduzione della CO₂ come prossimo passo per la nostra piattaforma di cell-engineering."], "rfbEyebrow": "Introduzione tecnologica", "rfbTitle": "Cos'è una flow battery?", "rfbIntro": "Immagina un serbatoio pieno di liquido che produce elettricità mentre il fluido attraversa una cella elettrochimica.", "rfbBullets": ["Più volume del serbatoio significa più ore di autonomia", "A differenza del litio, la chimica non degrada nel tempo", "La capacità dipende solo dalla dimensione del serbatoio", "Non infiammabile, intrinsecamente sicura e completamente riciclabile"], "fitEyebrow": "Dove si posiziona IonVe", "fitTitle": "Pensato per siti industriali che ciclano spesso e ragionano sul lungo termine", "fitBody": "IonVe si posiziona nella parte di mercato in cui contano lunga vita utile, sicurezza e durate di 4–12 ore. Il caso d’uso target è il segmento in cui il cliente industriale ha cicli giornalieri, picchi di alta potenza e un orizzonte asset di lungo termine.", "fitBullets": ["Peak shaving e riduzione del costo elettrico in siti energy-intensive", "Autoconsumo FV ed energy shifting in applicazioni behind-the-meter", "Storage di lunga durata dove il Li-ion perde attrattività su base full-life"], "fitNote": "IonVe è pensato per durate superiori a 4 ore. Per durate più brevi, il Li-ion resta spesso la scelta più adatta.", "tcoTitle": "Confronto TCO a 30 anni per un caso di riferimento 500 kW / 3 MWh", "tcoBlockTitle": "OUTPUT DEL MODELLO A PRESTAZIONI TARGET", "tcoLabels": ["IonVe (target)", "VRFB (stato dell’arte attuale)", "Li-ion (incl. 2× replacement, 30 anni)"], "tcoNote": "Il caso mostrato ha sola funzione di posizionamento. L’economia reale dipende da profilo di carico, struttura tariffaria, strategia operativa e specifica finale del sistema."}, "technology": {"eyebrow": "Architettura", "title": "Design da cella a sistema orientato a costo, efficienza e producibilità", "body1": "L’approccio di IonVe è progettare l’architettura stessa della Redox Flow Battery. L’obiettivo è ripensare la piattaforma cella-stack in modo che i sistemi redox-flow diventino più pratici per l’uso industriale: meno unità, assemblaggio più semplice, migliore controllo idraulico e una piattaforma di prodotto più ripetibile.", "body2": "Il rendering mostrato rappresenta l’attuale direzione progettuale del modulo e della piattaforma di sistema. Va letto come engineering render, non come immagine finale di un prodotto commerciale.", "innovationLabels": ["INNOVAZIONE 01", "INNOVAZIONE 02", "INNOVAZIONE 03", "PRODOTTO FINALE"], "innovationTitles": ["Reattori senza grafite", "Modulo ministack ad alta potenza", "Architettura modulare", "Piattaforma di sistema integrata"], "innovationBodies": ["Abbiamo sviluppato un nuovo materiale polimerico composito per sostituire i costosi componenti in grafite. Integra più funzioni in un unico pezzo, riducendo il numero di componenti e abilitando nuove soluzioni di design per una maggiore efficienza.", "Un’unità ministack standardizzata raggiunge +20% di potenza per modulo, con un’efficienza superiore del 7%. A 500 kW, il sistema IonVe utilizza 63 moduli contro 212 di un RFB convenzionale, migliorando la produzione e semplificando la manutenzione sul campo.", "Un’architettura modulare consente un livello superiore di scalabilità, ottimizzazione della distribuzione di flusso, riconfigurabilità elettrica e hot swap, semplificando l’elettronica di potenza e migliorando l’efficienza di round-trip.", "Le quattro innovazioni convergono in un’unica piattaforma di prodotto: cella, stack, idraulica, elettronica di potenza e controllo, progettati insieme per un sistema ripetibile e producibile in serie."], "innovationTags": ["Riduzione di costo stimata: 30–40% per cella vs. celle RFB attuali", "Stessa potenza in un volume 8 volte inferiore rispetto allo stato dell’arte", "-20% costi di installazione", "Range di potenza: da 100 kW a 50 MW, stessa architettura, nessuna re-ingegnerizzazione"], "perfTitle": "Direzione delle prestazioni target", "perfNums": ["COSTO", "POTENZA", "DURATA"], "perfTitles": ["Costo installato più basso", "Maggiore output per unità", "Orizzonte asset industriale"], "perfBodies": ["Costo installato di sistema target pari a 297 €/kWh a 6 ore, secondo le attuali assunzioni di design stage.", "Punto operativo target di 600 mA/cm², con numero di stack ridotto a parità di potenza.", "Lunga vita utile e ciclaggio stabile sono centrali nella value proposition attesa per i clienti industriali."]}, "development": {"eyebrow": "Stato attuale", "title": "Programma risk-gated con milestone PoC nel breve termine", "body": "L’obiettivo attuale di IonVe è un programma di proof-of-concept che metta alla prova l’architettura rispetto a criteri go/no-go espliciti prima di un confronto più ampio con progetti pilota.", "statusTitles": ["Prototipo MK1 in test", "Fabbricazione prototipo MK2", "Target PoC: giugno 2026", "Domande di brevetto in preparazione"], "statusBodies": ["Valutazione in corso di apprendimento idraulico e di primo livello sistema.", "Step successivo focalizzato su prestazioni elettrochimiche e validazione architetturale.", "Proof point strutturato prima del confronto con partner pilota.", "Portafoglio in definizione attorno alle principali innovazioni architetturali."], "roadmapTitle": "Roadmap di sviluppo", "weAreHere": "Siamo qui", "phaseTitles": ["PoC raggiunta", "Pilota e progettazione dell’impianto", "Dimostrazione commerciale", "Mercato"]}, "partners": {"eyebrow": "Collaborazioni", "title": "Interazione strutturata per partner industriali, EPC e stakeholder tecnici", "intro": ["IonVe è oggi focalizzata su una validazione disciplinata e su un confronto mirato con partner per screening sito-specifico, revisione tecnica e preparazione pilota.", "Questa pagina serve a chiarire cosa può essere discusso già oggi e cosa è previsto per le fasi successive di sviluppo."], "tags": ["GRATUITO · SU BASE NDA", "SU RICHIESTA · SOTTO NDA", "POST-PoC", "APERTO"], "titles": ["Screening sito-specifico", "Accesso al progresso tecnico", "Pilota in co-sviluppo", "Briefing per EPC e integratori"], "bodies": ["IonVe può analizzare dati di carico a intervalli e struttura del contratto elettrico per valutare se un sistema di lunga durata sia rilevante per uno specifico sito industriale e da dove derivino davvero i driver economici.", "Al raggiungimento delle milestone, IonVe può condividere informazioni tecniche selezionate con controparti serie, incluse direzione dei test, logica di validazione e pacchetti dati di sviluppo.", "Dopo la validazione proof-of-concept, IonVe intende lavorare con un numero limitato di partner su progetti pilota che generino dati operativi reali e accelerino l’apprendimento industriale.", "Sono disponibili briefing tecnologici per sviluppatori di progetto, EPC e integratori di sistema che stanno valutando percorsi flow battery di lunga durata per pipeline industriali o grid-facing."], "ctas": ["Richiedi uno screening", "Richiedi confronto tecnico", "Discuti interesse pilota", "Prenota un briefing"]}, "team": {"eyebrows": ["Project Lead", "Ecosistema e Partner", "Riconoscimenti"], "founderTitle": "Davide Bordignon", "founderBody": ["Ingegnere energetico specializzato in modellazione numerica di sistemi elettrochimici avanzati. Ricercatore di dottorato alla TU Delft (dipartimento Process & Energy), focalizzato su modellazione CFD e ottimizzazione di reattori elettrochimici."], "ecoTitle": "Collaborazione con TU Delft e Partner Industriali", "ecoBody": "La tecnologia di IonVe è sviluppata in stretta collaborazione con la TU Delft. Il progetto coinvolge inoltre una rete crescente di partner industriali e accademici nell’ecosistema della transizione energetica."}, "recognition": {"title": "Premi e Riconoscimenti", "cardLabel": "TU Delft Impact Contest", "cardValue": "Premio Shell per la transizione energetica per il miglior caso di startup nella transizione energetica. 2° posizione complessiva nella categoria avanzata."}, "contact": {"title": "Contattaci", "body": "Per partnership, confronti tecnici, site screening o richieste generali.", "labels": ["Nome", "Email", "Messaggio"], "send": "Invia", "infoTitle": "Informazioni", "infoBody": "Email: <a href=\"mailto:davide.brdgn@gmail.com\">davide.brdgn@gmail.com</a><br>Telefono: <a href=\"tel:+393451724876\">+39 345 172 4876</a><br>Localizzazione: EU · NL / IT", "infoText": "IonVe è attualmente in fase pre-incorporation. Materiale tecnico più dettagliato può essere condiviso separatamente quando opportuno.", "note": "", "downloadOverview": "Scarica IonVe Overview", "heroDownload": "Scarica overview", "heroContact": "Contatta IonVe"}, "footer": {"left": "© <span id=\"y\"></span> IonVe Reattori Elettrochimici · Azienda in fase di sviluppo", "right": "Storage energetico industriale · sistemi redox-flow · architettura in sviluppo"}}};
 
 function q(sel){ return document.querySelector(sel); }
 function qa(sel){ return Array.from(document.querySelectorAll(sel)); }
 function setText(sel, val){ const el=q(sel); if(el && typeof val==='string') el.textContent=val; }
 function setHTML(sel, val){ const el=q(sel); if(el && typeof val==='string') el.innerHTML=val; }
 function setTexts(sel, arr){ qa(sel).forEach((el,i)=>{ if(arr && arr[i] != null) el.textContent = arr[i]; }); }
+
+Object.assign(i18n.en, {
+  tagline: "",
+  kpiLabels: ["Lower system cost", "Fewer components", "More compact optimized design"],
+  tabs: ["Our Products", "Our Innovations", "Where We Stand", "The Opportunity", "Who We Are", "Get in Touch"]
+});
+Object.assign(i18n.en.what, {
+  introBody2: [
+    "IonVe is currently focusing on its Redox Flow Battery (RFB) system, designed for industrial long-duration storage and now in prototype testing. We have demonstrated the proof of concept and are moving toward pilot plant development.",
+    "In parallel, we are starting to look at water electrolyzer architectures and CO₂ reduction reactors as the next step for our cell-engineering platform."
+  ],
+  fitBodyHtml: "IonVe is positioned for energy-intensive industries and centers that need safe daily cycling, high peak power and a long-term asset horizon, including <strong>steel industries, foundries, cement plants and data centers</strong>.",
+  fitBody: "IonVe is positioned for energy-intensive industries and centers that need safe daily cycling, high peak power and a long-term asset horizon, including steel industries, foundries, cement plants and data centers.",
+  fitBullets: [
+    "Peak shaving and electricity cost reduction for energy-intensive sites",
+    "PV self-consumption and energy shifting in behind-the-meter applications",
+    "Industrial storage for steel industries, foundries, cement plants, data centers and similar high-consumption sites"
+  ],
+  fitNote: ""
+});
+Object.assign(i18n.en.technology, {
+  title: "Three architectural innovations for scalable electrochemical flow systems",
+  body1: "IonVe introduces three architectural innovations for electrochemical flow systems, starting from redox flow batteries and extending naturally to other flow-based electrochemical reactors.",
+  body2: "These innovations improve reactor architecture, module power density and system integration, creating a more efficient, lower cost and scalable platform that increases the competitiveness and economic value of the final product.",
+  perfTitle: "Target performance direction for Redox flow batteries"
+});
+i18n.en.technology.innovationBodies[1] = "A standardized ministack module triples power density, so the same system can use about three times fewer modules while improving efficiency, manufacturability and field maintenance.";
+i18n.en.technology.innovationTags[1] = "Higher power density with fewer modules and simpler field assembly";
+Object.assign(i18n.en.development, {
+  title: "Proof of concept demonstrated, moving toward pilot plant development",
+  body: "IonVe has demonstrated its proof of concept and is validating the resulting data. The next development phase focuses on pilot plant design, partner engagement and preparation for larger-scale testing over the coming months.",
+  statusTitles: ["RFB proof of concept demonstrated", "Data validation underway", "RFB pilot plant development next", "IP and industrialization"],
+  statusBodies: [
+    "Core architecture validated at proof-of-concept level for redox flow batteries.",
+    "Test data are being consolidated to guide the next engineering decisions.",
+    "Pilot requirements and partner discussions are focused on the RFB platform.",
+    "Protection and manufacturability work continue around the core architecture."
+  ],
+  phaseTitles: ["RFB PoC achieved", "RFB pilot plant design and development", "Commercial demonstration", "Market"],
+  phaseNotes: [
+    "Architecture demonstrated for redox flow batteries and now being extended to other electrochemical flow technologies.",
+    "Pilot development is focused on the redox flow battery product platform.",
+    "Demonstration with industrial operating data.",
+    "Product scale-up and commercial deployment."
+  ],
+  phaseBullets: [
+    ["RFB data review", "Technology transfer checks"],
+    ["Pilot sizing", "Partner site screening"],
+    ["Field validation", "Operating data"],
+    ["Product scale-up", "Commercial rollout"]
+  ]
+});
+i18n.en.partners.intro = ["IonVe is currently focused in disciplined validation and partner engagement around site screening and partner dialogue around technical review and pilot preparation."];
+Object.assign(i18n.en.team, {
+  ecoTitle: "TU Delft Ecosystem & Industry Supporters",
+  ecoBody: "IonVe is being developed within the TU Delft entrepreneurial and research ecosystem, while building a growing network of industrial and academic supporters across the energy transition."
+});
+i18n.en.recognition.cardValue = [
+  "Shell energy transition award for best startup case into energy transition",
+  "2nd position for advanced category competition"
+];
+Object.assign(i18n.en.contact, {
+  infoBody: "Email: <a href=\"mailto:davide.brdgn@gmail.com\">davide.brdgn@gmail.com</a><br>TU Delft: <a href=\"mailto:d.bordignon@tudelft.nl\">d.bordignon@tudelft.nl</a><br>Phone: <a href=\"tel:+393451724876\">+39 345 172 4876</a><br>Location: EU · NL / IT",
+  note: ""
+});
+
+Object.assign(i18n.it, {
+  tagline: "",
+  kpiLabels: ["Costo di sistema più basso", "Meno componenti", "Design più compatto e ottimizzato"],
+  tabs: ["I Nostri Prodotti", "Le Nostre Innovazioni", "A Che Punto Siamo", "L’Opportunità", "Chi Siamo", "Contattaci"]
+});
+Object.assign(i18n.it.what, {
+  introBody2: [
+    "IonVe si concentra oggi sul sistema Redox Flow Battery (RFB), progettato per lo storage industriale di lunga durata e attualmente in test prototipale. Abbiamo dimostrato il proof of concept e stiamo passando allo sviluppo del pilot plant.",
+    "In parallelo, stiamo iniziando a guardare alle architetture di elettrolizzatori ad acqua e ai reattori di riduzione della CO₂ come prossimo passo per la nostra piattaforma di cell-engineering."
+  ],
+  fitBodyHtml: "IonVe si posiziona per industrie e centri energy-intensive che richiedono ciclaggio giornaliero sicuro, alta potenza di picco e un orizzonte asset di lungo termine, inclusi <strong>acciaierie, fonderie, cementifici e data center</strong>.",
+  fitBody: "IonVe si posiziona per industrie e centri energy-intensive che richiedono ciclaggio giornaliero sicuro, alta potenza di picco e un orizzonte asset di lungo termine, inclusi acciaierie, fonderie, cementifici e data center.",
+  fitBullets: [
+    "Peak shaving e riduzione del costo elettrico per siti energy-intensive",
+    "Autoconsumo FV ed energy shifting in applicazioni behind-the-meter",
+    "Storage industriale per acciaierie, fonderie, cementifici, data center e siti simili ad alto consumo"
+  ],
+  fitNote: ""
+});
+Object.assign(i18n.it.technology, {
+  title: "Tre innovazioni architetturali per sistemi elettrochimici a flusso scalabili",
+  body1: "IonVe introduce tre innovazioni architetturali per sistemi elettrochimici a flusso, partendo dalle redox flow battery ed estendendosi in modo naturale ad altri reattori elettrochimici basati su flussi.",
+  body2: "Queste innovazioni migliorano architettura del reattore, densità di potenza del modulo e integrazione di sistema, creando una piattaforma più efficiente, più economica e scalabile che aumenta competitività e valore economico del prodotto finale.",
+  perfTitle: "Direzione delle prestazioni target per le Redox flow batteries"
+});
+i18n.it.technology.innovationBodies[1] = "Un modulo ministack standardizzato triplica la densità di potenza, quindi lo stesso sistema può usare circa tre volte meno moduli migliorando efficienza, producibilità e manutenzione sul campo.";
+i18n.it.technology.innovationTags[1] = "Maggiore densità di potenza con meno moduli e assemblaggio più semplice";
+Object.assign(i18n.it.development, {
+  title: "Proof of concept dimostrato, verso lo sviluppo del pilot plant",
+  body: "IonVe ha dimostrato il proof of concept e sta validando i dati ottenuti. La prossima fase di sviluppo si concentra su design del pilot plant, confronto con partner e preparazione dei test su scala più ampia nei prossimi mesi.",
+  statusTitles: ["Proof of concept RFB dimostrato", "Validazione dati in corso", "Sviluppo pilot plant RFB come prossimo step", "IP e industrializzazione"],
+  statusBodies: [
+    "Architettura centrale validata a livello proof of concept per redox flow batteries.",
+    "I dati di test vengono consolidati per guidare le prossime decisioni ingegneristiche.",
+    "Requisiti pilota e discussioni con partner sono focalizzati sulla piattaforma RFB.",
+    "Proseguono le attività di protezione e producibilità attorno all'architettura centrale."
+  ],
+  phaseTitles: ["PoC RFB raggiunta", "Design e sviluppo pilot plant RFB", "Dimostrazione commerciale", "Mercato"],
+  phaseNotes: [
+    "Architettura dimostrata per redox flow batteries e ora in estensione ad altre tecnologie elettrochimiche a flusso.",
+    "Lo sviluppo pilota è focalizzato sulla piattaforma prodotto redox flow battery.",
+    "Dimostrazione con dati operativi industriali.",
+    "Scale-up prodotto e deployment commerciale."
+  ],
+  phaseBullets: [
+    ["Revisione dati RFB", "Verifica trasferimento tecnologico"],
+    ["Dimensionamento pilota", "Screening siti partner"],
+    ["Validazione in campo", "Dati operativi"],
+    ["Scale-up prodotto", "Rollout commerciale"]
+  ]
+});
+i18n.it.partners.intro = ["IonVe è oggi focalizzata su una validazione disciplinata e su un confronto mirato con partner per screening sito-specifico, revisione tecnica e preparazione pilota."];
+Object.assign(i18n.it.team, {
+  ecoTitle: "Ecosistema TU Delft e Supporter Industriali",
+  ecoBody: "IonVe si sta sviluppando all'interno dell'ecosistema imprenditoriale e di ricerca della TU Delft, costruendo al tempo stesso una rete crescente di supporter industriali e accademici nella transizione energetica."
+});
+i18n.it.recognition.cardValue = [
+  "Shell energy transition award per il miglior caso startup nella transizione energetica",
+  "2° posizione nella advanced category competition"
+];
+Object.assign(i18n.it.contact, {
+  infoBody: "Email: <a href=\"mailto:davide.brdgn@gmail.com\">davide.brdgn@gmail.com</a><br>TU Delft: <a href=\"mailto:d.bordignon@tudelft.nl\">d.bordignon@tudelft.nl</a><br>Telefono: <a href=\"tel:+393451724876\">+39 345 172 4876</a><br>Localizzazione: EU · NL / IT",
+  note: ""
+});
 
 function applyI18n(lang){
   const t = i18n[lang] || i18n.en;
@@ -590,6 +822,12 @@ function applyI18n(lang){
 
   setTexts('#panel-what .ctx-card h4', t.what.ctxTitles);
   setTexts('#panel-what .ctx-card p', t.what.ctxBodies);
+  setText('#reactors-card .eyebrow', t.what.introEyebrow1);
+  setText('#reactors-card h3', t.what.introTitle1);
+  const reactorsP = qa('#reactors-card p.muted'); reactorsP.forEach((el,i)=>{ if(t.what.introBody1[i]) el.textContent=t.what.introBody1[i]; });
+  setText('#focus-card .eyebrow', t.what.introEyebrow2);
+  setText('#focus-card h3', t.what.introTitle2);
+  const focusP = qa('#focus-card p.muted'); focusP.forEach((el,i)=>{ if(t.what.introBody2[i]) el.textContent=t.what.introBody2[i]; });
   // Populate RFB explainer box
   setText('#rfb-explainer .rfb-eyebrow', t.what.rfbEyebrow);
   setText('#rfb-explainer .rfb-title', t.what.rfbTitle);
@@ -597,7 +835,7 @@ function applyI18n(lang){
   setTexts('#rfb-explainer .rfb-bullets li', t.what.rfbBullets);
   setText('#ionve-fits-card .eyebrow', t.what.fitEyebrow);
   setText('#ionve-fits-card h3', t.what.fitTitle);
-  const whatSplitMuted = qa('#ionve-fits-card p.muted'); if(whatSplitMuted[0]) whatSplitMuted[0].textContent = t.what.fitBody;
+  const whatSplitMuted = qa('#ionve-fits-card p.muted'); if(whatSplitMuted[0]) whatSplitMuted[0].innerHTML = t.what.fitBodyHtml || t.what.fitBody;
   setTexts('#ionve-fits-card li', t.what.fitBullets);
   const whatFitNote = q('#ionve-fits-card .note'); if(whatFitNote) whatFitNote.textContent = t.what.fitNote;
   const whatTcoNote = q('#panel-what > .card:last-of-type .note'); if(whatTcoNote) whatTcoNote.textContent = t.what.tcoNote;
@@ -608,8 +846,10 @@ function applyI18n(lang){
   setText('#panel-technology .split .eyebrow', t.technology.eyebrow);
   const techH3 = qa('#panel-technology h3'); if(techH3[0]) techH3[0].textContent = t.technology.title; if(techH3[1]) techH3[1].textContent = t.technology.perfTitle;
   const techMuted = qa('#panel-technology .split p.muted'); if(techMuted[0]) techMuted[0].textContent = t.technology.body1; if(techMuted[1]) techMuted[1].textContent = t.technology.body2;
+  setTexts('#panel-technology .innovation-card .n', t.technology.innovationLabels);
   setTexts('#panel-technology .innovation-card h4', t.technology.innovationTitles);
   setTexts('#panel-technology .innovation-card p', t.technology.innovationBodies);
+  setTexts('#panel-technology .innovation-tag', t.technology.innovationTags);
   setTexts('#panel-technology .ctx-card .ctx-num', t.technology.perfNums);
   setTexts('#panel-technology .ctx-card h4', t.technology.perfTitles);
   const techCtxP = qa('#panel-technology .ctx-card p'); techCtxP.forEach((el,i)=>{ if(t.technology.perfBodies[i]) el.textContent=t.technology.perfBodies[i]; });
@@ -621,7 +861,11 @@ function applyI18n(lang){
   setTexts('#panel-development .status-list .muted', t.development.statusBodies);
   const here = q('#panel-development .here'); if(here) here.textContent = t.development.weAreHere;
   setTexts('#panel-development .rmap-title', t.development.phaseTitles);
-  setTexts('#panel-development .rmap-items li', t.development.phaseItems);
+  setTexts('#panel-development .rmap-note', t.development.phaseNotes);
+  qa('#panel-development .rmap-bullets').forEach((list,i)=>{
+    const bullets = (t.development.phaseBullets && t.development.phaseBullets[i]) || [];
+    list.querySelectorAll('li').forEach((li,j)=>{ if(bullets[j]) li.textContent = bullets[j]; });
+  });
 
   setText('#panel-partners .eyebrow', t.partners.eyebrow);
   const partnersH3 = q('#panel-partners > .card h3'); if(partnersH3) partnersH3.textContent = t.partners.title;
@@ -634,10 +878,13 @@ function applyI18n(lang){
   setTexts('#panel-team .eyebrow', t.team.eyebrows);
   setText('#panel-team .founder-card h3', t.team.founderTitle);
   const founderP = qa('#panel-team .founder-card p.muted'); founderP.forEach((el,i)=>{ if(t.team.founderBody[i]) el.textContent=t.team.founderBody[i]; });
-  setText('#panel-team .cofounder-card h3', t.team.cofounderTitle);
-  const coP = qa('#panel-team .cofounder-card p.muted'); coP.forEach((el,i)=>{ if(t.team.cofounderBody[i]) el.textContent=t.team.cofounderBody[i]; });
   setText('#panel-team .ecosystem-card h3', t.team.ecoTitle);
   setHTML('#panel-team .ecosystem-card p.muted', t.team.ecoBody);
+  setText('#panel-team .recognition-card h3', t.recognition.title);
+  setText('#panel-team .recognition-card h4', t.recognition.cardLabel);
+  const awards = Array.isArray(t.recognition.cardValue) ? t.recognition.cardValue : [t.recognition.cardValue];
+  setTexts('#panel-team .recognition-card .award-list li', awards);
+  const awardP = q('#panel-team .recognition-card p.muted'); if(awardP) awardP.textContent = awards.join('. ');
 
   const contactCards = qa('#panel-contact .card');
   if(contactCards[0]){ const h=contactCards[0].querySelector('h3'); if(h) h.textContent=t.contact.title; const p=contactCards[0].querySelector('p.muted'); if(p) p.textContent=t.contact.body; }
